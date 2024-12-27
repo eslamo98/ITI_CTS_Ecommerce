@@ -21,3 +21,5 @@ export let loggedUser = UsersRepo.getLoggedUserDataBySessionKey(
     country: "U.S.A",
   },
 };
+
+export const countriesApiKey = "4JsaxIpiYmkgpGmHxmRgXIR1t4n8Du84Wq6WSWdU";
