@@ -1,5 +1,5 @@
 export class Helpers {
-  isNegative(num) {
+  static isNegative(num) {
     return num < 0;
   }
 

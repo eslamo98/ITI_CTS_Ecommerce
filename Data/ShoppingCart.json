@@ -1,0 +1,70 @@
+[
+  {
+    "cartId": 12345,
+    "userId": 1,
+    "items": [
+      {
+        "productId": 101,
+        "name": "Wireless Mouse",
+        "quantity": 2,
+        "price": 20.0,
+        "totalPrice": 40.0
+      },
+      {
+        "productId": 102,
+        "name": "Bluetooth Headphones",
+        "quantity": 1,
+        "price": 59.99,
+        "totalPrice": 59.99
+      }
+    ],
+    "totalItems": 3,
+    "totalPrice": 99.99,
+    "shippingAddress": {
+      "street": "123 Main St",
+      "city": "New York",
+      "state": "NY",
+      "zipCode": "10001",
+      "country": "U.S.A"
+    },
+    "paymentInfo": {
+      "method": "Credit Card",
+      "transactionId": "TXN123456789",
+      "paymentStatus": "Pending"
+    }
+  },
+  {
+    "cartId": 67890,
+    "userId": 2,
+    "items": [
+      {
+        "productId": 103,
+        "name": "Laptop",
+        "quantity": 1,
+        "price": 1299.99,
+        "totalPrice": 1299.99
+      },
+      {
+        "productId": 104,
+        "name": "Smartphone",
+        "quantity": 1,
+        "price": 699.99,
+        "totalPrice": 699.99
+      }
+    ],
+    "totalItems": 3,
+    "totalPrice": 99.99,
+    "shippingAddress": {
+      "street": "123 Main St",
+      "city": "New York",
+      "state": "NY",
+      "zipCode": "10001",
+      "country": "U.S.A"
+    },
+    "paymentInfo": {
+      "method": "Credit Card",
+      "transactionId": "TXN123456789",
+      "paymentStatus": "Pending"
+    }
+  }
+]

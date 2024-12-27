@@ -6,7 +6,8 @@
     },
     {
       "id": 2,
-      "name": "Clothes"
+      "name": "Clothes",
+      "deleted": 0
     }
   ]
 }
