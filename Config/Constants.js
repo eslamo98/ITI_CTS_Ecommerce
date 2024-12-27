@@ -1,5 +1,10 @@
+import { UsersRepo } from "../Repository/UsersRepo.js";
+
 export const userLoggedSessionKey = "loggedUserData";
-export let testUserObject = {
+// if i want to get the logged user data i wil import this variable loggedUser
+export let loggedUser = UsersRepo.getLoggedUserDataBySessionKey(
+  userLoggedSessionKey
+) || {
   id: 1,
   name: "John Doe",
   firstName: "first name",
