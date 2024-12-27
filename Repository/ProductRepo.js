@@ -1,4 +1,4 @@
-export default class ProductRepo {
+export class ProductRepo {
   static GetProductById(productId) {
     let products = this.GetAllProducts();
     if (products) {

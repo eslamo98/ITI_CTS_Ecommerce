@@ -1,0 +1,70 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "firstName": "first name",
+    "lastName": "last name",
+    "phone": 1234567,
+    "email": "john.doe@example.com",
+    "roleId": 1,
+    "password": "645yuyub",
+    "address": {
+      "street": "123 Main St",
+      "city": "New York",
+      "state": "NY",
+      "zipCode": "10001",
+      "country": "U.S.A"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "firstName": "first name",
+    "lastName": "last name",
+    "phone": 1234567,
+    "email": "jane.smith@example.com",
+    "roleId": 2,
+    "password": "645yuyub",
+    "address": {
+      "street": "456 Elm St",
+      "city": "Los Angeles",
+      "state": "CA",
+      "zipCode": "90001",
+      "country": "U.S.A"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Bob Johnson",
+    "firstName": "first name",
+    "lastName": "last name",
+    "phone": 1234567,
+    "email": "bob.johnson@example.com",
+    "roleId": 3,
+    "password": "645yuyub",
+    "address": {
+      "street": "789 Oak St",
+      "city": "Chicago",
+      "state": "IL",
+      "zipCode": "60601",
+      "country": "U.S.A"
+    }
+  },
+  {
+    "id": 44,
+    "name": "Jane Smith",
+    "firstName": "first name",
+    "lastName": "last name",
+    "phone": 1234567,
+    "email": "jane.smith@example.com",
+    "roleId": 2,
+    "password": "645yuyub",
+    "address": {
+      "street": "456 Elm St",
+      "city": "Los Angeles",
+      "state": "CA",
+      "zipCode": "90001",
+      "country": "U.S.A"
+    }
+  }
+]

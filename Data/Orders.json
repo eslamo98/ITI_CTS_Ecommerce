@@ -1,0 +1,93 @@
+[
+  {
+    "id": 1,
+    "userId": 1,
+    "orderDate": "2024-12-25T10:30:00Z",
+    "status": "Pending",
+    "totalAmount": 99.99,
+    "products": [
+      {
+        "productId": 101,
+        "name": "Wireless Mouse",
+        "quantity": 2,
+        "price": 20.0,
+        "totalPrice": 40.0
+      },
+      {
+        "productId": 102,
+        "name": "Bluetooth Headphones",
+        "quantity": 1,
+        "price": 59.99,
+        "totalPrice": 59.99
+      }
+    ],
+    "shippingAddress": {
+      "street": "123 Main St",
+      "city": "New York",
+      "state": "NY",
+      "zipCode": "10001",
+      "country": "U.S.A"
+    },
+    "paymentInfo": {
+      "method": "Credit Card",
+      "transactionId": "TXN123456789",
+      "paymentStatus": "Completed"
+    }
+  },
+  {
+    "id": 2,
+    "userId": 2,
+    "orderDate": "2024-12-24T14:15:00Z",
+    "status": "Shipped",
+    "totalAmount": 149.99,
+    "products": [
+      {
+        "productId": 103,
+        "name": "Smartphone",
+        "quantity": 1,
+        "price": 149.99,
+        "totalPrice": 149.99
+      }
+    ],
+    "shippingAddress": {
+      "street": "456 Elm St",
+      "city": "Los Angeles",
+      "state": "CA",
+      "zipCode": "90001",
+      "country": "U.S.A"
+    },
+    "paymentInfo": {
+      "method": "PayPal",
+      "transactionId": "TXN987654321",
+      "paymentStatus": "Completed"
+    }
+  },
+  {
+    "id": 3,
+    "userId": 3,
+    "orderDate": "2024-12-20T08:45:00Z",
+    "status": "Delivered",
+    "totalAmount": 39.99,
+    "products": [
+      {
+        "productId": 104,
+        "name": "Portable Charger",
+        "quantity": 1,
+        "price": 39.99,
+        "totalPrice": 39.99
+      }
+    ],
+    "shippingAddress": {
+      "street": "789 Oak St",
+      "city": "Chicago",
+      "state": "IL",
+      "zipCode": "60601",
+      "country": "U.S.A"
+    },
+    "paymentInfo": {
+      "method": "Credit Card",
+      "transactionId": "TXN1122334455",
+      "paymentStatus": "Completed"
+    }
+  }
+]
