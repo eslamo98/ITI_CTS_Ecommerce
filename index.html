@@ -6,4 +6,17 @@
     <title>Document</title>
   </head>
   <body></body>
+
+  <script type="module">
+    import {
+      userLoggedSessionKey,
+      testUserObject,
+    } from "./Config/Constants.js";
+    import { UsersRepo } from "./Repository/UsersRepo.js";
+    let loggedUser =
+      UsersRepo.getLoggedUserDataBySessionKey(userLoggedSessionKey) ||
+      testUserObject;
+
+    console.log(loggedUser);
+  </script>
 </html>
