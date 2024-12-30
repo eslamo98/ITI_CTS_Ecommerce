@@ -1,2 +1,6 @@
 @import url("general_styles.css");
 @import url("checkout.css");
+
+p {
+  text-size: 12px
+}
