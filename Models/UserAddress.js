@@ -1,7 +1,8 @@
 import { Helpers } from "../Utils/Helpers.js";
 
-export class Address {
+export class UserAddress {
   //private fields
+  #id;
   #street;
   #city;
   #state;
@@ -9,15 +10,15 @@ export class Address {
   #country;
 
   constructor(street, city, state, zipCode, country) {
-    this.street = street;
-    this.city = city;
-    this.state = state;
-    this.zipCode = zipCode;
-    this.country = country;
+    this.Street = street;
+    this.City = city;
+    this.State = state;
+    this.ZipCode = zipCode;
+    this.Country = country;
   }
 
   get addressDetails() {
-    return `Street: ${this.street}, City: ${this.city}, State: ${this.state}, Zip Code: ${this.zipCode}, Country: ${this.country}`;
+    return `Street: ${this.Street}, City: ${this.City}, State: ${this.State}, Zip Code: ${this.ZipCode}, Country: ${this.Country}`;
   }
 
   //getters & setters
@@ -69,9 +70,13 @@ export class Address {
     }
   }
 
-  //"street": "456 Elm St",
-  //"city": "Los Angeles",
-  //"state": "CA",
-  //"zipCode": "90001",
-  //"country": "U.S.A"
+  toJSON() {
+    return {
+      street: this.Street,
+      city: this.City,
+      state: this.State,
+      zipCode: this.ZipCode,
+      country: this.Country,
+    };
+  }
 }

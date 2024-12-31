@@ -2,12 +2,13 @@
   "Categories": [
     {
       "id": 1,
-      "name": "Electronics"
+      "name": "Electronics",
+      "sellerId": 1
     },
     {
       "id": 2,
       "name": "Clothes",
-      "deleted": 0
+      "sellerId": 2
     }
   ]
 }

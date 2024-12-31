@@ -7,24 +7,25 @@ export class Product {
   #quantity;
   #description;
   #categoryId;
-  constructor(_id, _name, _price, _quantity, _desc, _catId) {
-    this.ID = _id;
+  #imgPath;
+
+  static #autoIncrement = 1;
+
+  constructor(_name, _price, _quantity, _desc, _catId, _imgPath) {
+    this.ID = Product.#autoIncrement++;
     this.Name = _name;
     this.Price = _price;
     this.Quantity = _quantity;
     this.Description = _desc;
     this.CategoryID = _catId;
+    this.ImgPath = _imgPath;
   }
 
   get ID() {
     return this.#id;
   }
   set ID(value) {
-    if (Helpers.isNumber(value) && Helpers.isPositive()) {
-      this.#id = value;
-    } else {
-      throw new Error("Invalid ID. ID must be a positive number.");
-    }
+    throw new Error("You can't set product id directly");
   }
 
   get Name() {
@@ -91,5 +92,25 @@ export class Product {
         "Invalid category ID. Category ID must be a positive number."
       );
     }
+  }
+
+  get ImgPath() {
+    return this.#imgPath;
+  }
+
+  set ImgPath(value) {
+    this.#imgPath = value;
+  }
+
+  toJSON() {
+    return {
+      ID: this.ID,
+      Name: this.Name,
+      Price: this.Price,
+      Quantity: this.Quantity,
+      Description: this.Description,
+      CategoryID: this.CategoryId,
+      ImgPath: this.ImgPath,
+    };
   }
 }
