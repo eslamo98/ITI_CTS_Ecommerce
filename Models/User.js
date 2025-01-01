@@ -39,7 +39,11 @@ export class User {
     return this.#id;
   }
   set ID(value) {
-    throw new Error("You can't set user ID directly.");
+    if (value.constructor.name === "Number" && value > 0) {
+      this.#id = value;
+    } else {
+      throw new Error("Invalid ID. ID must be a positive integer.");
+    }
   }
 
   get Name() {
@@ -132,7 +136,7 @@ export class User {
     return this.#address;
   }
   set Address(value) {
-    if (value && value.constructor.name === "Address") {
+    if (value && value.constructor.name === "UserAddress") {
       this.#address = value;
     } else {
       throw new Error(

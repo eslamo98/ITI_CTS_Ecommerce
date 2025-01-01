@@ -1,6 +1,7 @@
 import { CategoryRepo } from "./CategoryRepo.js";
 import { ProductRepo } from "./ProductRepo.js";
 import { CountryRepo } from "./CountryRepo.js";
+import { ShoppingCartRepo } from "./ShoppingCartRepo.js";
 import { OrderRepo } from "./OrderRepo.js";
 import { PaymentInfoRepo } from "./PaymentInfoRepo.js";
 import { RoleRepo } from "./RoleRepo.js";
@@ -10,380 +11,340 @@ import { Category } from "../Models/Category.js";
 import { Product } from "../Models/Product.js";
 import { User } from "../Models/User.js";
 import { Role } from "../Models/Role.js";
+import { ShoppingCart } from "../Models/ShoppingCart.js";
+import { ShoppingCartItem } from "../Models/ShoppingCartItem.js";
+import { UserAddress } from "../Models/UserAddress.js";
+import { Country } from "../Models/Country.js";
 
 export class DbRepo {
+  static saveIndex(index) {
+    localStorage.setItem("index", JSON.stringify(index));
+  }
+  static getIndex() {
+    return JSON.parse(localStorage.getItem("index"));
+  }
   static SeedLocalStorage() {
     localStorage.clear();
     CategoryRepo.saveCategories([
+      new Category("All").toJSON(),
       new Category("Electronics").toJSON(),
       new Category("Clothes").toJSON(),
       new Category("Furnture").toJSON(),
       new Category("Fashion").toJSON(),
       new Category("MakeUp").toJSON(),
+      new Category("Test").toJSON(),
     ]);
 
-    ProductRepo.saveProducts([
+    const productsData = [
       new Product(
-        "Samsung Galaxy S21 Ultra",
+        "Annibale Colombo Bed",
         1199.99,
         50,
-        "A premium smartphone with a high-resolution camera and AMOLED display.",
+        "A luxurious bed designed for ultimate comfort.",
         1,
-        "https://example.com/images/samsung-galaxy-s21-ultra.jpg"
-      ),
+        "Images/Products/Annibale Colombo Bed.jpg"
+      ).toJSON(),
       new Product(
-        "Apple iPhone 13 Pro Max",
-        1099.99,
-        40,
-        "The latest iPhone with advanced camera features and improved performance.",
-        1,
-        "https://example.com/images/apple-iphone-13-pro-max.jpg"
-      ),
-      new Product(
-        "Sony WH-1000XM5 Headphones",
-        349.99,
-        100,
-        "Noise-canceling wireless headphones with superior sound quality.",
-        1,
-        "https://example.com/images/sony-wh-1000xm5.jpg"
-      ),
-      new Product(
-        "HP Pavilion Gaming Laptop",
-        899.99,
+        "Annibale Colombo Sofa",
+        799.99,
         30,
-        "High-performance gaming laptop with dedicated graphics.",
+        "A stylish and comfortable sofa for any living space.",
         1,
-        "https://example.com/images/hp-pavilion-gaming-laptop.jpg"
-      ),
+        "Images/Products/Annibale Colombo Sofa.jpg"
+      ).toJSON(),
       new Product(
-        "Asus ROG Zephyrus G14",
-        1499.99,
-        20,
-        "Compact gaming laptop with powerful specifications.",
-        1,
-        "https://example.com/images/asus-rog-zephyrus-g14.jpg"
-      ),
-      new Product(
-        "Nike Air Max 270",
-        129.99,
-        200,
-        "Stylish and comfortable running shoes with a signature air unit.",
-        2,
-        "https://example.com/images/nike-air-max-270.jpg"
-      ),
-      new Product(
-        "Adidas Ultraboost 22",
-        159.99,
-        150,
-        "Performance running shoes with responsive cushioning.",
-        2,
-        "https://example.com/images/adidas-ultraboost-22.jpg"
-      ),
-      new Product(
-        "Levi's 501 Original Jeans",
-        59.99,
-        300,
-        "Classic fit jeans with timeless style.",
-        2,
-        "https://example.com/images/levis-501-original-jeans.jpg"
-      ),
-      new Product(
-        "Tommy Hilfiger Polo Shirt",
-        49.99,
-        250,
-        "Premium polo shirt with iconic logo embroidery.",
-        2,
-        "https://example.com/images/tommy-hilfiger-polo.jpg"
-      ),
-      new Product(
-        "Gucci Leather Belt",
-        399.99,
+        "Apple",
+        1.99,
         100,
-        "Luxury leather belt with signature Gucci design.",
+        "Fresh and organic apples, perfect for a healthy snack.",
         2,
-        "https://example.com/images/gucci-leather-belt.jpg"
-      ),
+        "Images/Products/Apple.jpg"
+      ).toJSON(),
       new Product(
-        "Ikea Billy Bookcase",
-        79.99,
-        400,
-        "Versatile and affordable bookcase with adjustable shelves.",
-        3,
-        "https://example.com/images/ikea-billy-bookcase.jpg"
-      ),
-      new Product(
-        "Wayfair Modern Coffee Table",
-        119.99,
-        150,
-        "Sleek and modern coffee table for your living room.",
-        3,
-        "https://example.com/images/wayfair-coffee-table.jpg"
-      ),
-      new Product(
-        "West Elm Sofa",
-        899.99,
-        20,
-        "Comfortable and stylish sofa for modern interiors.",
-        3,
-        "https://example.com/images/west-elm-sofa.jpg"
-      ),
-      new Product(
-        "Ashley Furniture Bed Frame",
-        499.99,
-        50,
-        "Durable and elegant bed frame for a cozy bedroom.",
-        3,
-        "https://example.com/images/ashley-furniture-bed-frame.jpg"
-      ),
-      new Product(
-        "Pottery Barn Dining Table",
-        1099.99,
-        15,
-        "Elegant dining table made with high-quality materials.",
-        3,
-        "https://example.com/images/pottery-barn-dining-table.jpg"
-      ),
-      new Product(
-        "MAC Lipstick Ruby Woo",
-        19.99,
-        500,
-        "Classic red lipstick with a matte finish.",
-        5,
-        "https://example.com/images/mac-lipstick-ruby-woo.jpg"
-      ),
-      new Product(
-        "Fenty Beauty Foundation",
-        34.99,
-        400,
-        "Long-lasting foundation for all skin tones.",
-        5,
-        "https://example.com/images/fenty-beauty-foundation.jpg"
-      ),
-      new Product(
-        "Maybelline Mascara",
-        7.99,
-        800,
-        "Affordable and effective mascara for voluminous lashes.",
-        5,
-        "https://example.com/images/maybelline-mascara.jpg"
-      ),
-      new Product(
-        "L'Oréal Paris Eyeliner",
-        8.99,
-        700,
-        "Precise eyeliner for a bold look.",
-        5,
-        "https://example.com/images/loreal-eyeliner.jpg"
-      ),
-      new Product(
-        "Estée Lauder Night Cream",
-        79.99,
-        150,
-        "Rejuvenating night cream for radiant skin.",
-        5,
-        "https://example.com/images/estee-lauder-night-cream.jpg"
-      ),
-      new Product(
-        "Samsung 65-inch QLED TV",
-        999.99,
-        30,
-        "Large QLED TV with stunning picture quality.",
-        1,
-        "https://example.com/images/samsung-65-inch-qled.jpg"
-      ),
-      new Product(
-        "Apple MacBook Pro 14-inch",
-        1999.99,
-        15,
-        "High-performance laptop for professionals.",
-        1,
-        "https://example.com/images/macbook-pro-14.jpg"
-      ),
-      new Product(
-        "Bose SoundLink Revolve",
-        179.99,
-        100,
-        "Portable Bluetooth speaker with immersive sound.",
-        1,
-        "https://example.com/images/bose-soundlink-revolve.jpg"
-      ),
-      new Product(
-        "Dell XPS 15 Laptop",
-        1499.99,
+        "Beef Steak",
+        15.99,
         25,
-        "Premium laptop with stunning display and power.",
+        "Premium quality beef steak, perfect for grilling.",
+        3,
+        "Images/Products/Beef Steak.jpg"
+      ).toJSON(),
+      new Product(
+        "Bedside Table African Cherry",
+        199.99,
+        20,
+        "A bedside table crafted from African Cherry wood.",
         1,
-        "https://example.com/images/dell-xps-15.jpg"
-      ),
+        "Images/Products/Bedside Table African Cherry.jpg"
+      ).toJSON(),
       new Product(
-        "Fitbit Versa 4",
-        229.99,
-        200,
-        "Advanced fitness tracker with heart rate monitoring.",
-        1,
-        "https://example.com/images/fitbit-versa-4.jpg"
-      ),
-      new Product(
-        "Under Armour Running Shoes",
-        89.99,
-        180,
-        "Durable and comfortable running shoes.",
-        2,
-        "https://example.com/images/under-armour-shoes.jpg"
-      ),
-      new Product(
-        "H&M Cotton T-Shirt",
-        14.99,
-        600,
-        "Affordable and comfortable T-shirt for everyday wear.",
-        2,
-        "https://example.com/images/hm-cotton-tshirt.jpg"
-      ),
-      new Product(
-        "Zara Blazer Jacket",
-        129.99,
-        120,
-        "Elegant blazer jacket for formal occasions.",
-        2,
-        "https://example.com/images/zara-blazer.jpg"
-      ),
-      new Product(
-        "Ray-Ban Aviator Sunglasses",
-        159.99,
-        300,
-        "Stylish aviator sunglasses with UV protection.",
-        2,
-        "https://example.com/images/rayban-aviator.jpg"
-      ),
-      new Product(
-        "Louis Vuitton Wallet",
-        499.99,
+        "Calvin Klein CK One",
+        39.99,
         50,
-        "Luxury leather wallet with iconic branding.",
+        "A unisex fragrance that exudes elegance and freshness.",
+        4,
+        "Images/Products/Calvin Klein CK One.jpg"
+      ).toJSON(),
+      new Product(
+        "Camera",
+        499.99,
+        15,
+        "A high-performance camera for capturing stunning images.",
+        4,
+        "Images/Products/camera.jpg"
+      ).toJSON(),
+      new Product(
+        "Cat Food",
+        19.99,
+        40,
+        "Nutritious and delicious food for your feline friends.",
+        3,
+        "Images/Products/Cat Food.jpg"
+      ).toJSON(),
+      new Product(
+        "Chicken Meat",
+        8.99,
+        30,
+        "Fresh and tender chicken meat, ideal for cooking.",
+        3,
+        "Images/Products/Chicken Meat.jpg"
+      ).toJSON(),
+      new Product(
+        "Cooking Oil",
+        5.99,
+        100,
+        "High-quality cooking oil for everyday use.",
+        3,
+        "Images/Products/Cooking Oil.jpg"
+      ).toJSON(),
+      new Product(
+        "Cucumber",
+        1.49,
+        80,
+        "Crisp and refreshing cucumbers for salads and snacks.",
         2,
-        "https://example.com/images/lv-wallet.jpg"
-      ),
-      // Add more here up to 50 products
-    ]);
+        "Images/Products/Cucumber.jpg"
+      ).toJSON(),
+      new Product(
+        "Dog Food",
+        24.99,
+        50,
+        "Healthy and nutritious food for your dogs.",
+        3,
+        "Images/Products/Dog Food.jpg"
+      ).toJSON(),
+      new Product(
+        "Dolce Shine Eau de Parfum",
+        59.99,
+        30,
+        "A vibrant fragrance that embodies sunshine and joy.",
+        4,
+        "Images/Products/Dolce Shine Eau de.jpg"
+      ).toJSON(),
+      new Product(
+        "Dior J'adore",
+        89.99,
+        20,
+        "A classic fragrance with floral and fruity notes.",
+        4,
+        "Images/Products/Dior J'adore.jpg"
+      ).toJSON(),
+      new Product(
+        "Eggs",
+        3.99,
+        60,
+        "Farm-fresh eggs, ideal for breakfast and baking.",
+        3,
+        "Images/Products/Eggs.jpg"
+      ).toJSON(),
+      new Product(
+        "Essence Mascara Lash Princess",
+        9.99,
+        40,
+        "A mascara that gives your lashes a stunning look.",
+        4,
+        "Images/Products/Essence Mascara Lash Princess.jpg"
+      ).toJSON(),
+      new Product(
+        "Eyeshadow Palette with Mirror",
+        29.99,
+        20,
+        "A versatile eyeshadow palette with a built-in mirror.",
+        4,
+        "Images/Products/Eyeshadow Palette with Mirror.jpg"
+      ).toJSON(),
+      new Product(
+        "Fish Steak",
+        12.99,
+        25,
+        "Fresh fish steak, perfect for a gourmet meal.",
+        3,
+        "Images/Products/Fish Steak.jpg"
+      ).toJSON(),
+      new Product(
+        "Green Bell Pepper",
+        2.49,
+        70,
+        "Fresh and crisp green bell peppers, perfect for cooking.",
+        2,
+        "Images/Products/Green Bell Pepper.jpg"
+      ).toJSON(),
+      new Product(
+        "Green Chili Pepper",
+        1.99,
+        50,
+        "Hot and spicy green chili peppers for flavor.",
+        2,
+        "Images/Products/Green Chili Pepper.jpg"
+      ).toJSON(),
+      new Product(
+        "Gucci Bloom Eau de Parfum",
+        69.99,
+        25,
+        "A sophisticated fragrance inspired by a blooming garden.",
+        4,
+        "Images/Products/Gucci Bloom Eau de.jpg"
+      ).toJSON(),
+      new Product(
+        "Honey Jar",
+        6.99,
+        40,
+        "Pure and natural honey in a convenient jar.",
+        3,
+        "Images/Products/Honey Jar.jpg"
+      ).toJSON(),
+      new Product(
+        "Ice Cream",
+        4.99,
+        50,
+        "Creamy and delicious ice cream, perfect for dessert.",
+        3,
+        "Images/Products/Ice Cream.jpg"
+      ).toJSON(),
+      new Product(
+        "Juice",
+        3.49,
+        100,
+        "Refreshing and healthy juice for any time of day.",
+        3,
+        "Images/Products/Juice.jpg"
+      ).toJSON(),
+      new Product(
+        "Knoll Saarinen Executive Conference Chair",
+        349.99,
+        10,
+        "A stylish and comfortable chair for your workspace.",
+        1,
+        "Images/Products/Knoll Saarinen Executive Conference Chair.jpg"
+      ).toJSON(),
+      new Product(
+        "Mobile",
+        299.99,
+        20,
+        "A smartphone with advanced features and capabilities.",
+        4,
+        "Images/Products/mobile.jpg"
+      ).toJSON(),
+      new Product(
+        "Powder Canister",
+        14.99,
+        30,
+        "A versatile powder canister for kitchen storage.",
+        3,
+        "Images/Products/Powder Canister.jpg"
+      ).toJSON(),
+      new Product(
+        "Red Lipstick",
+        12.99,
+        50,
+        "A vibrant red lipstick for a bold look.",
+        4,
+        "Images/Products/Red Lipstick.jpg"
+      ).toJSON(),
+      new Product(
+        "Red Nail Polish",
+        7.99,
+        40,
+        "A long-lasting red nail polish for stylish nails.",
+        4,
+        "Images/Products/Red Nail Polish.jpg"
+      ).toJSON(),
+      new Product(
+        "TV",
+        899.99,
+        10,
+        "A high-definition TV for an exceptional viewing experience.",
+        4,
+        "Images/Products/TV.jpg"
+      ).toJSON(),
+      new Product(
+        "Wooden Bathroom Sink with Mirror",
+        499.99,
+        5,
+        "A stylish wooden sink with an attached mirror for bathrooms.",
+        1,
+        "Images/Products/Wooden Bathroom Sink with Mirror.jpg"
+      ).toJSON(),
+    ];
+
+    ProductRepo.saveProducts(productsData);
 
     RoleRepo.saveRoles([
-      new Role("Admin"),
-      new Role("Seller"),
-      new Role("Customer"),
+      new Role("Admin").toJSON(),
+      new Role("Seller").toJSON(),
+      new Role("Customer").toJSON(),
     ]);
 
-    UsersRepo.saveUser([
-      new User(
-        "John Doe",
-        "John",
-        "Doe",
-        1234567,
-        "john.doe@example.com",
-        1,
+    // List of first names from the images in the screenshot
+    const firstNames = [
+      "Abigail",
+      "Addison",
+      "Alexander",
+      "Avat",
+      "Avery",
+      "Charlotte",
+      "Chloe",
+      "Daniel",
+      "Elijah",
+      "Emily",
+      "Evelyn",
+      "Evelyn",
+      "Harper",
+      "Henry",
+      "Isabella",
+      "Jackson",
+      "James",
+      "Liam",
+      "Emma",
+      "Ethan",
+      "Evelyn",
+      "Lily",
+      "Logan",
+      "Madison",
+      "Mateo",
+      "Miar",
+      "Michael",
+      "Noah",
+      "Olivia",
+      "Sophia",
+      "William",
+    ];
+    // Generating users with the corresponding images
+    const users = firstNames.map((firstName, index) => {
+      return new User(
+        `${firstName} User`,
+        firstName,
+        "User",
+        1000000 + index,
+        `${firstName.toLowerCase()}@example.com`,
+        index === 0 ? 1 : index <= 2 ? 2 : 3, // Admin for the first, Seller for the next two, Customer for the rest
         "password123",
-        new UserAddress("123 Main St", "New York", "NY", 10001, "U.S.A"),
-        "https://example.com/img/john.jpg"
-      ),
-      new User(
-        "Jane Smith",
-        "Jane",
-        "Smith",
-        9876543,
-        "jane.smith@example.com",
-        2,
-        "securepass",
-        new UserAddress("456 Elm St", "Los Angeles", "CA", 90001, "U.S.A"),
-        "https://example.com/img/jane.jpg"
-      ),
-      new User(
-        "Mike Johnson",
-        "Mike",
-        "Johnson",
-        5678901,
-        "mike.johnson@example.com",
-        3,
-        "mypassword",
-        new UserAddress("789 Pine St", "Chicago", "IL", 60601, "U.S.A"),
-        "https://example.com/img/mike.jpg"
-      ),
-      new User(
-        "Emily Davis",
-        "Emily",
-        "Davis",
-        2345678,
-        "emily.davis@example.com",
-        1,
-        "emilypass",
-        new UserAddress("101 Oak St", "Houston", "TX", 77001, "U.S.A"),
-        "https://example.com/img/emily.jpg"
-      ),
-      new User(
-        "Chris Brown",
-        "Chris",
-        "Brown",
-        3456789,
-        "chris.brown@example.com",
-        2,
-        "chrispassword",
-        new UserAddress("202 Maple St", "Phoenix", "AZ", 85001, "U.S.A"),
-        "https://example.com/img/chris.jpg"
-      ),
-      new User(
-        "Sophia Wilson",
-        "Sophia",
-        "Wilson",
-        8765432,
-        "sophia.wilson@example.com",
-        3,
-        "sophiapass",
-        new UserAddress("303 Birch St", "Philadelphia", "PA", 19101, "U.S.A"),
-        "https://example.com/img/sophia.jpg"
-      ),
-      new User(
-        "David Martinez",
-        "David",
-        "Martinez",
-        4567890,
-        "david.martinez@example.com",
-        1,
-        "davidpass",
-        new UserAddress("404 Cedar St", "San Antonio", "TX", 78201, "U.S.A"),
-        "https://example.com/img/david.jpg"
-      ),
-      new User(
-        "Olivia Garcia",
-        "Olivia",
-        "Garcia",
-        3456789,
-        "olivia.garcia@example.com",
-        2,
-        "oliviapass",
-        new UserAddress("505 Walnut St", "San Diego", "CA", 92101, "U.S.A"),
-        "https://example.com/img/olivia.jpg"
-      ),
-      new User(
-        "Daniel Thomas",
-        "Daniel",
-        "Thomas",
-        2345678,
-        "daniel.thomas@example.com",
-        3,
-        "danielpass",
-        new UserAddress("606 Cherry St", "Dallas", "TX", 75201, "U.S.A"),
-        "https://example.com/img/daniel.jpg"
-      ),
-      new User(
-        "Isabella Lee",
-        "Isabella",
-        "Lee",
-        1234567,
-        "isabella.lee@example.com",
-        1,
-        "isabellapass",
-        new UserAddress("707 Spruce St", "Austin", "TX", 73301, "U.S.A"),
-        "https://example.com/img/isabella.jpg"
-      ),
-    ]);
+        new UserAddress("123 Main St", "City", "State", 10001, "Country"),
+        `UsersImages/${firstName.toLowerCase()}.jpg` // Path to the user's image
+      ).toJSON();
+    });
+
+    // Save users to the repository
+    UsersRepo.saveUsers(users);
 
     let countriesJson = [
       { name: "Afghanistan", code: "AF" },
@@ -631,11 +592,41 @@ export class DbRepo {
       { name: "Zimbabwe", code: "ZW" },
     ];
     // Convert countries data to an array of Country instances
-    const countriesArray = countriesData.map(
+    const countriesArray = countriesJson.map(
       (data) => new Country(data["name"], data["code"])
     );
 
     // Save the array of Country instances
     CountryRepo.saveCountries(countriesArray);
+
+    // Create shopping carts using classes
+    const shoppingCartsData = [
+      new ShoppingCart(1, [
+        new ShoppingCartItem(1, "Annibale Colombo Bed", 2, 1199.99),
+        new ShoppingCartItem(4, "Beef Steak", 1, 15.99),
+      ]).toJSON(),
+      new ShoppingCart(2, [
+        new ShoppingCartItem(7, "Camera", 1, 499.99),
+        new ShoppingCartItem(8, "Cat Food", 2, 19.99),
+      ]).toJSON(),
+      new ShoppingCart(3, [
+        new ShoppingCartItem(3, "Apple", 3, 1.99),
+        new ShoppingCartItem(9, "Chicken Meat", 1, 8.99),
+      ]).toJSON(),
+    ];
+
+    // Now shoppingCartsData contains instances of ShoppingCart and ShoppingCartItem
+    console.log(shoppingCartsData);
+
+    ShoppingCartRepo.saveShopingCarts(shoppingCartsData);
+  }
+
+  static setUpLocalStorage() {
+    let index = this.getIndex() || 0;
+    if (index == 0) {
+      console.log("Hi i am supposed to be called only one time");
+      this.SeedLocalStorage();
+      this.saveIndex(1);
+    }
   }
 }

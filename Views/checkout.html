@@ -6,6 +6,10 @@
     <title>Checkout Process</title>
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/main.css" />
+    <script type="module">
+      import { DbRepo } from "../Repository/DbRepo.js";
+      DbRepo.setUpLocalStorage();
+    </script>
   </head>
   <body>
     <div class="container checkout-container" id="checkoutContainer">
@@ -38,13 +42,13 @@
         <!-- Deviding the checkout into two rows -->
         <div class="col-12 col-md-6">
           <!-- billing row -->
-          <div class="part1 part">
+          <div class="part1 part d-block">
             <h3>Billing Details</h3>
             <div class="row">
               <div class="col-12 col-md-6">
                 <label for="firstName" class="form-label">First name</label>
                 <input
-                  placeholder=""
+                  placeholder="Jhon"
                   type="text"
                   class="form-control"
                   id="firstName"
@@ -61,6 +65,7 @@
                   id="lastName"
                   name="lastName"
                   required
+                  placeholder="Doe"
                 />
                 <div class="valid-feedback">Looks good!</div>
               </div>
@@ -72,6 +77,7 @@
                   id="email"
                   name="email"
                   required
+                  placeholder="example@gmail.com"
                 />
                 <div class="invalid-feedback">Please select a valid Email.</div>
               </div>
@@ -83,22 +89,28 @@
                   id="phone"
                   required
                   name="phone"
+                  placeholder="+20 010 170-67321"
                 />
-                <div class="invalid-feedback">Please select a valid phone.</div>
+                <div class="invalid-feedback">
+                  Please input a valid phone.formatted like (+20 010 170-67321)
+                  or (+20 010 17067321)
+                </div>
               </div>
             </div>
-            <button
-              type="button"
-              id="ProceedToPart2"
-              data-move-to="2"
-              class="btn btn-primary mt-3 traverse-btn"
-            >
-              Continue to Shipping Details
-            </button>
+            <div class="d-none d-md-flex">
+              <button
+                type="button"
+                id="part1Next"
+                data-move-to="2"
+                class="btn btn-primary mt-3 traverse-btn"
+              >
+                Continue to Shipping Details
+              </button>
+            </div>
           </div>
           <!-- End of part 1-->
 
-          <div class="part2 part d-md-none">
+          <div class="part2 part d-md-none d-block">
             <h3>Billing Details</h3>
             <div class="row">
               <div class="col-12 d-flex align-items-center" style="gap: 15px">
@@ -133,6 +145,7 @@
                   id="state"
                   required
                   name="state"
+                  placeholder="Cairo"
                 />
                 <div class="invalid-feedback">Please select a valid State.</div>
               </div>
@@ -144,6 +157,7 @@
                   id="city"
                   name="city"
                   required
+                  placeholder="Ain Shams"
                 />
                 <div class="invalid-feedback">Please select a valid City.</div>
               </div>
@@ -155,6 +169,7 @@
                   id="street"
                   required
                   name="street"
+                  placeholder="e.g., 123 Main Street, Apartment 4B"
                 />
                 <div class="invalid-feedback">
                   Please select a valid street.
@@ -171,11 +186,12 @@
                   id="zipcode"
                   required
                   name="zipcode"
+                  placeholder="e.g 12345"
                 />
                 <div class="invalid-feedback">Please select a valid phone.</div>
               </div>
             </div>
-            <div class="col-12 d-flex justify-content-between mt-3">
+            <div class="col-12 d-md-flex justify-content-between mt-3 d-none">
               <button
                 type="button"
                 id="BackToPart1"
@@ -197,7 +213,7 @@
           </div>
           <!-- End of part 2 -->
 
-          <div class="part3 part d-md-none">
+          <div class="part3 part d-md-none d-block">
             <h3>Payment Info</h3>
             <div class="row">
               <div class="col-12 d-flex align-items-center" style="gap: 15px">
@@ -237,8 +253,11 @@
                 />
                 <label for="cash">Cash On Delivery</label>
               </div>
+              <div class="invalid-feedback">
+                Please select a payment method.
+              </div>
             </div>
-            <div class="col-12 d-flex justify-content-between">
+            <div class="col-12 d-md-flex justify-content-between d-none">
               <button
                 type="button"
                 id="BackToPart2"
@@ -247,7 +266,6 @@
               >
                 Back To Shipping Details
               </button>
-              <button class="btn btn-success" type="submit">Submit form</button>
             </div>
           </div>
           <!-- End of part 3 -->
@@ -256,76 +274,15 @@
         <div class="col-12 col-md-6">
           <div class="row">
             <div class="col-12" id="checkoutProducts"></div>
+            <button class="btn btn-success col-12" type="submit">
+              Submit form
+            </button>
           </div>
         </div>
       </form>
     </div>
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script type="module">
-      import { ShoppingCart } from "../Models/ShoppingCart.js";
-      import { ShoppingCartItem } from "../Models/ShoppingCartItem.js";
-      import { ShoppingCartRepo } from "../Repository/ShoppingCartRepo.js";
 
-      localStorage.setItem(
-        "Products",
-        JSON.stringify([
-          {
-            id: 1,
-            name: "Camera",
-            price: 10.99,
-            quantity: 5,
-            description: "This is Product 1.",
-            categoryId: 1,
-            imgPath: "Images/Products/camera.jpeg",
-          },
-          {
-            id: 2,
-            name: "Friedge",
-            price: 15.99,
-            quantity: 3,
-            description: "This is Product 2.",
-            categoryId: 2,
-            imgPath: "Images/Products/Fiedge.jpeg",
-          },
-          {
-            id: 3,
-            name: "TV",
-            price: 20.99,
-            quantity: 7,
-            description: "This is Product 3.",
-            categoryId: 1,
-            imgPath: "Images/Products/TV.jpeg",
-          },
-
-          {
-            id: 4,
-            name: "mobile",
-            price: 20.99,
-            quantity: 7,
-            description: "This is Product 3.",
-            categoryId: 1,
-            imgPath: "Images/Products/mobile.jpeg",
-          },
-        ])
-      );
-      let shoppingCarts = [
-        new ShoppingCart(1, [
-          new ShoppingCartItem(1, "Camera", 1, 60),
-          new ShoppingCartItem(2, "TV", 1, 160),
-          new ShoppingCartItem(3, "Mobile", 1, 120),
-          new ShoppingCartItem(4, "Friedge", 1, 130),
-        ]),
-        new ShoppingCart(2, [
-          new ShoppingCartItem(1, "Camera", 1, 60),
-          new ShoppingCartItem(2, "TV", 1, 160),
-          new ShoppingCartItem(3, "Mobile", 1, 120),
-          new ShoppingCartItem(4, "Friedge", 1, 130),
-        ]),
-      ];
-      let jsonShoppingCarts = shoppingCarts.map((cart) => cart.toJSON());
-
-      ShoppingCartRepo.saveShopingCarts(jsonShoppingCarts);
-    </script>
     <script>
       // Example starter JavaScript for disabling form submissions if there are invalid fields
       (() => {
@@ -388,25 +345,86 @@
       import { ShoppingCartRepo } from "../Repository/ShoppingCartRepo.js";
 
       let checkoutProducts = document.getElementById("checkoutProducts");
-      let cartItems = ShoppingCartRepo.getCartById(1).items;
-      console.log(cartItems);
-      let productsRows = cartItems.map(
-        (item) => `
-      <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center" style="gap: 20px">
-                  <img
-                    src="${ProductRepo.getProductImgPathById(item.productId)}"
-                    width="50"
-                    alt="camera"
-                  />
-                  <span class="product-title">${item.name}</span>
-                </div>
-                <span class="product-price">$${item.totalPrice}</span>
-              </div>
-      `
-      );
 
-      checkoutProducts.innerHTML = productsRows.join("");
+      let cartItems = ShoppingCartRepo.getCartById(2).items;
+      console.log(cartItems);
+      let productsRows = cartItems
+        .map((item) => {
+          return `
+            <div class="checkout-product d-flex align-items-center mb-3">
+              <img src="${ProductRepo.getProductImgPathById(
+                item.productId
+              )}" alt="${
+            item.name
+          }" class="img-thumbnail" style="width: 100px;" />
+              <div class="ms-3">
+                <h5>${item.name}</h5>
+                <p>Quantity: ${item.quantity}</p>
+                <p>Price: $${item.price.toFixed(2)}</p>
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+
+      checkoutProducts.innerHTML = productsRows;
+    </script>
+    <script type="module">
+      import { Helpers } from "../Utils/helpers.js";
+      function CheckValidationStep1() {
+        let firstName = document.getElementById("firstName");
+        let lastName = document.getElementById("lastName");
+        let email = document.getElementById("email");
+        let phone = document.getElementById("phone");
+        let part1Next = document.getElementById("part1Next");
+
+        function checkNameInput(value) {
+          if (Helpers.isNotNullOrEmpty(value)) {
+            return {
+              result: false,
+              message: "Name is required it can't be empty string.",
+            };
+          } else if (Helpers.isOnlyText(value)) {
+            return { result: false, message: "Name can't contain numbers" };
+          } else if (!Helpers.stringLengthGOrEqual(value, 3)) {
+            return {
+              result: false,
+              message: "Name should be at least 3 characters long.",
+            };
+          } else {
+            return { result: true, message: "Name is valid" };
+          }
+        }
+
+        function checkPhoneInput(value) {
+          if (Helpers.isPhoneNumber(value)) {
+            return { result: true, message: "Phone number is valid" };
+          } else {
+            return { result: false, message: "Phone number is not valid" };
+          }
+        }
+
+        function checkEmailInput(value) {
+          if (Helpers.isEmail(value)) {
+            return { result: true, message: "Email is valid" };
+          } else {
+            return { result: false, message: "Email is not valid" };
+          }
+        }
+
+        let firstNameResult = checkNameInput(firstName.value);
+        let lastNameResult = checkNameInput(lastName.value);
+        let emailResult = checkEmailInput(email.value);
+        let phoneResult = checkPhoneInput(phone.value);
+      }
+
+      function CheckValidationStep2() {}
+      function CheckValidationStep3() {
+        let paymentMethod = document.querySelector(
+          'input[name="paymentMethod"]:checked'
+        );
+        let part3Next = document.getElementById("part3Next");
+      }
     </script>
   </body>
 </html>

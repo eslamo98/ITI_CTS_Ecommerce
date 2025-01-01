@@ -26,4 +26,19 @@ export class Helpers {
   static isBetween(lower, upper) {
     return num >= lower && num <= upper;
   }
+
+  static stringLengthGOrEqual(str, len) {
+    return str.length >= len;
+  }
+
+  static isEmail(email) {
+    // regular expression to test the email format
+    // example@example.com
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  static isNotNullOrEmpty(value) {
+    if (value?.trim() === "") return false;
+    return value !== null && value !== undefined && value !== "";
+  }
 }

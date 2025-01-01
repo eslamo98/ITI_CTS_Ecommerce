@@ -28,4 +28,8 @@ export class Role {
   toString() {
     return `Role {Id: ${this.#id}, Name: ${this.#name}}`;
   }
+
+  toJSON() {
+    return { Id: this.#id, Name: this.#name };
+  }
 }

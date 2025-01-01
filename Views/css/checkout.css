@@ -94,6 +94,11 @@
   opacity: 0;
 }
 
+.part.d-block {
+  opacity: 1;
+  height: auto;
+}
+
 .part button {
   height: 30px;
   font-size: 16px !important;

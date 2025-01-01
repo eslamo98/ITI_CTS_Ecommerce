@@ -13,18 +13,17 @@ export class ProductRepo {
   }
 
   static saveProducts(products) {
-    return JSON.parse(
-      localStorage.setItem("Products", JSON.stringify(products))
-    );
+    localStorage.setItem("Products", JSON.stringify(products));
   }
 
   static getProductImgPathById(productId) {
     let allProducts = this.GetAllProducts();
+    console.log(allProducts);
     if (allProducts) {
-      let product = allProducts.find((product) => product.id === productId);
-
-      if (product && product.imgPath) {
-        return product.imgPath;
+      let product = allProducts.find((product) => product.ID === productId);
+      console.log(productId);
+      if (product && product.ImgPath) {
+        return product.ImgPath;
       }
     }
   }

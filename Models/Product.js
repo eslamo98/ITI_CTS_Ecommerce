@@ -25,7 +25,11 @@ export class Product {
     return this.#id;
   }
   set ID(value) {
-    throw new Error("You can't set product id directly");
+    if (value.constructor.name === "Number" && value > 0) {
+      this.#id = value;
+    } else {
+      throw new Error("Invalid ID. ID must be a positive number.");
+    }
   }
 
   get Name() {
@@ -109,7 +113,7 @@ export class Product {
       Price: this.Price,
       Quantity: this.Quantity,
       Description: this.Description,
-      CategoryID: this.CategoryId,
+      CategoryID: this.CategoryID,
       ImgPath: this.ImgPath,
     };
   }
