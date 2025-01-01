@@ -1,0 +1,15 @@
+D:\Iti\CTS\CTS Ecommerce Project\saveImages\saveImages\bin\Debug\net8.0\saveImages.exe
+D:\Iti\CTS\CTS Ecommerce Project\saveImages\saveImages\bin\Debug\net8.0\saveImages.deps.json
+D:\Iti\CTS\CTS Ecommerce Project\saveImages\saveImages\bin\Debug\net8.0\saveImages.runtimeconfig.json
+D:\Iti\CTS\CTS Ecommerce Project\saveImages\saveImages\bin\Debug\net8.0\saveImages.dll
+D:\Iti\CTS\CTS Ecommerce Project\saveImages\saveImages\bin\Debug\net8.0\saveImages.pdb
+D:\Iti\CTS\CTS Ecommerce Project\saveImages\saveImages\obj\Debug\net8.0\saveImages.GeneratedMSBuildEditorConfig.editorconfig
+D:\Iti\CTS\CTS Ecommerce Project\saveImages\saveImages\obj\Debug\net8.0\saveImages.AssemblyInfoInputs.cache
+D:\Iti\CTS\CTS Ecommerce Project\saveImages\saveImages\obj\Debug\net8.0\saveImages.AssemblyInfo.cs
+D:\Iti\CTS\CTS Ecommerce Project\saveImages\saveImages\obj\Debug\net8.0\saveImages.csproj.CoreCompileInputs.cache
+D:\Iti\CTS\CTS Ecommerce Project\saveImages\saveImages\obj\Debug\net8.0\saveImages.sourcelink.json
+D:\Iti\CTS\CTS Ecommerce Project\saveImages\saveImages\obj\Debug\net8.0\saveImages.dll
+D:\Iti\CTS\CTS Ecommerce Project\saveImages\saveImages\obj\Debug\net8.0\refint\saveImages.dll
+D:\Iti\CTS\CTS Ecommerce Project\saveImages\saveImages\obj\Debug\net8.0\saveImages.pdb
+D:\Iti\CTS\CTS Ecommerce Project\saveImages\saveImages\obj\Debug\net8.0\saveImages.genruntimeconfig.cache
+D:\Iti\CTS\CTS Ecommerce Project\saveImages\saveImages\obj\Debug\net8.0\ref\saveImages.dll
