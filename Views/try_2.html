@@ -12,6 +12,21 @@
             border-radius: 1rem;
             overflow: hidden;
         }
+
+        /* Add more padding on the left side of the table */
+        .table td, .table th {
+            padding-left: 2rem; /* Adjust this value to increase/decrease the left padding */
+        }
+
+        /* Apply hover effect to all rows except the last one */
+        .table tbody tr:not(:last-child):hover {
+            background-color: #f1f1f1; /* Or any color you want */
+        }
+
+        /* Disable hover effect on the last row */
+        .table tbody tr:last-child {
+            background-color: transparent; /* Keeps the background as is for the last row */
+        }
     </style>
 </head>
 <body class="bg-light">
