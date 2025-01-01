@@ -6,236 +6,425 @@
     <title>Checkout Process</title>
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/main.css" />
+    <script type="module">
+      import { DbRepo } from "../Repository/DbRepo.js";
+      DbRepo.setUpLocalStorage();
+    </script>
   </head>
   <body>
-    <div class="container">
-      <h2>Checkout</h2>
-      <form class="row g-3 needs-validation" novalidate>
+    <div class="container checkout-container" id="checkoutContainer">
+      <div class="container p-5 Steps-bar">
+        <div
+          class="progress"
+          role="progressbar"
+          aria-label="Checkout Steps bar"
+          aria-valuenow="25"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          <div class="step">
+            <span class="bg-success text-light stepNumber" id="step1">1</span>
+            <h4>Billing Details</h4>
+          </div>
+          <div class="step">
+            <span class="myBg-secondary stepNumber" id="step2">2</span>
+            <h4>Shipping Method</h4>
+          </div>
+
+          <div class="step">
+            <span class="myBg-secondary stepNumber" id="step3">3</span>
+            <h4>Payment Method</h4>
+          </div>
+          <div class="progress-bar bg-success" style="width: 33.3333%"></div>
+        </div>
+      </div>
+      <form class="row g-3 needs-validation checkout-form" novalidate>
         <!-- Deviding the checkout into two rows -->
         <div class="col-12 col-md-6">
           <!-- billing row -->
-          <h3>Billing Details</h3>
-          <div class="row">
-            <div class="col-12 col-md-6">
-              <label for="firstName" class="form-label">First name</label>
-              <input
-                placeholder=""
-                type="text"
-                class="form-control"
-                id="firstName"
-                name="firstName"
-                required
-              />
-              <div class="valid-feedback">Looks good!</div>
+          <div class="part1 part d-block">
+            <h3>Billing Details</h3>
+            <div class="row">
+              <div class="col-12 col-md-6">
+                <label for="firstName" class="form-label">First name</label>
+                <input
+                  placeholder="Jhon"
+                  type="text"
+                  class="form-control"
+                  id="firstName"
+                  name="firstName"
+                  required
+                />
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+              <div class="col-12 col-md-6">
+                <label for="lastName" class="form-label">Last name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lastName"
+                  name="lastName"
+                  required
+                  placeholder="Doe"
+                />
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+              <div class="col-12">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  required
+                  placeholder="example@gmail.com"
+                />
+                <div class="invalid-feedback">Please select a valid Email.</div>
+              </div>
+              <div class="col-12">
+                <label for="phone" class="form-label">Phone</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="phone"
+                  required
+                  name="phone"
+                  placeholder="+20 010 170-67321"
+                />
+                <div class="invalid-feedback">
+                  Please input a valid phone.formatted like (+20 010 170-67321)
+                  or (+20 010 17067321)
+                </div>
+              </div>
             </div>
-            <div class="col-12 col-md-6">
-              <label for="lastName" class="form-label">Last name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="lastName"
-                name="lastName"
-                required
-              />
-              <div class="valid-feedback">Looks good!</div>
-            </div>
-            <div class="col-12">
-              <label for="email" class="form-label">Email</label>
-              <input
-                type="email"
-                class="form-control"
-                id="email"
-                name="email"
-                required
-              />
-              <div class="invalid-feedback">Please select a valid Email.</div>
-            </div>
-            <div class="col-12">
-              <label for="country" class="form-label">Country</label>
-              <select class="form-select" id="country" required>
-                <option selected disabled value="Egypt">Egypt</option>
-                <option selected disabled value="Iraq">Iraq</option>
-                <option selected disabled value="Iran">Iran</option>
-                <option selected disabled value="Brazil">Brazil</option>
-                <option selected disabled value="Canda">Canda</option>
-                <option>...</option>
-              </select>
-              <div class="invalid-feedback">Please select a valid country.</div>
-            </div>
-            <div class="col-12">
-              <label for="state" class="form-label">State</label>
-              <input
-                type="text"
-                class="form-control"
-                id="state"
-                required
-                name="state"
-              />
-              <div class="invalid-feedback">Please select a valid State.</div>
-            </div>
-            <div class="col-12">
-              <label for="city" class="form-label">City</label>
-              <input
-                type="text"
-                class="form-control"
-                id="city"
-                name="city"
-                required
-              />
-              <div class="invalid-feedback">Please select a valid City.</div>
-            </div>
-            <div class="col-12">
-              <label for="street" class="form-label">Street</label>
-              <input
-                type="text"
-                class="form-control"
-                id="street"
-                required
-                name="street"
-              />
-              <div class="invalid-feedback">Please select a valid street.</div>
-            </div>
-
-            <div class="col-12">
-              <label for="phone" class="form-label">Phone</label>
-              <input
-                type="text"
-                class="form-control"
-                id="phone"
-                required
-                name="phone"
-              />
-              <div class="invalid-feedback">Please select a valid phone.</div>
-            </div>
-            <div class="col-12">
-              <label for="zipcode" class="form-label"
-                >Zipcode/ Postalcode</label
+            <div class="d-none d-md-flex">
+              <button
+                type="button"
+                id="part1Next"
+                data-move-to="2"
+                class="btn btn-primary mt-3 traverse-btn"
               >
-              <input
-                type="text"
-                class="form-control"
-                id="zipcode"
-                required
-                name="zipcode"
-              />
-              <div class="invalid-feedback">Please select a valid phone.</div>
+                Continue to Shipping Details
+              </button>
             </div>
           </div>
+          <!-- End of part 1-->
+
+          <div class="part2 part d-md-none d-block">
+            <h3>Billing Details</h3>
+            <div class="row">
+              <div class="col-12 d-flex align-items-center" style="gap: 15px">
+                <input
+                  type="checkbox"
+                  name="sameAddress"
+                  id="sameAddress"
+                  checked
+                />
+                <label for="sameAddress"
+                  >Do You want to use same address?</label
+                >
+              </div>
+              <div class="col-12">
+                <label for="country" class="form-label">Country</label>
+                <select class="form-select" id="country2" required>
+                  <option selected value="Egypt">Egypt</option>
+                  <option selected value="Iraq">Iraq</option>
+                  <option selected value="Iran">Iran</option>
+                  <option selected value="Brazil">Brazil</option>
+                  <option selected value="Canda">Canda</option>
+                </select>
+                <div class="invalid-feedback">
+                  Please select a valid country.
+                </div>
+              </div>
+              <div class="col-12 col-md-6">
+                <label for="state" class="form-label">State</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="state"
+                  required
+                  name="state"
+                  placeholder="Cairo"
+                />
+                <div class="invalid-feedback">Please select a valid State.</div>
+              </div>
+              <div class="col-12 col-md-6">
+                <label for="city" class="form-label">City</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="city"
+                  name="city"
+                  required
+                  placeholder="Ain Shams"
+                />
+                <div class="invalid-feedback">Please select a valid City.</div>
+              </div>
+              <div class="col-12">
+                <label for="street" class="form-label">Street</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="street"
+                  required
+                  name="street"
+                  placeholder="e.g., 123 Main Street, Apartment 4B"
+                />
+                <div class="invalid-feedback">
+                  Please select a valid street.
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label for="zipcode" class="form-label"
+                  >Zipcode/ Postalcode</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="zipcode"
+                  required
+                  name="zipcode"
+                  placeholder="e.g 12345"
+                />
+                <div class="invalid-feedback">Please select a valid phone.</div>
+              </div>
+            </div>
+            <div class="col-12 d-md-flex justify-content-between mt-3 d-none">
+              <button
+                type="button"
+                id="BackToPart1"
+                class="btn btn-primary traverse-btn"
+                data-move-to="1"
+              >
+                Back To Billing Details
+              </button>
+
+              <button
+                type="button"
+                id="ProceedToPart3"
+                class="btn btn-primary traverse-btn"
+                data-move-to="3"
+              >
+                Continue to Payment Details
+              </button>
+            </div>
+          </div>
+          <!-- End of part 2 -->
+
+          <div class="part3 part d-md-none d-block">
+            <h3>Payment Info</h3>
+            <div class="row">
+              <div class="col-12 d-flex align-items-center" style="gap: 15px">
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  id="BankTransfer"
+                  value="Bank Transfer"
+                />
+                <label for="bank">Bank Transfer</label>
+              </div>
+              <div class="col-12 d-flex align-items-center" style="gap: 15px">
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  id="paypal"
+                  value="paypal"
+                />
+                <label for="paypal">Paypal</label>
+              </div>
+              <div class="col-12 d-flex align-items-center" style="gap: 15px">
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  id="creditCard"
+                  value="credit Card"
+                />
+                <label for="creditCard">Credit Card</label>
+              </div>
+
+              <div class="col-12 d-flex align-items-center" style="gap: 15px">
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  id="cash"
+                  value="cash"
+                />
+                <label for="cash">Cash On Delivery</label>
+              </div>
+              <div class="invalid-feedback">
+                Please select a payment method.
+              </div>
+            </div>
+            <div class="col-12 d-md-flex justify-content-between d-none">
+              <button
+                type="button"
+                id="BackToPart2"
+                class="btn btn-primary traverse-btn"
+                data-move-to="2"
+              >
+                Back To Shipping Details
+              </button>
+            </div>
+          </div>
+          <!-- End of part 3 -->
         </div>
         <!-- End of billing col -->
-        <!-- Shipping col -->
         <div class="col-12 col-md-6">
-          <!-- billing row -->
-          <h3>Billing Details</h3>
           <div class="row">
-            <div class="col-12 col-md-12">
-              <label for="firstName" class="form-label">First name</label>
-              <input type="text" class="form-control" id="firstName" required />
-              <div class="valid-feedback">Looks good!</div>
-            </div>
-            <div class="col-12 col-md-12">
-              <label for="lastName" class="form-label">Last name</label>
-              <input type="text" class="form-control" id="lastName" required />
-              <div class="valid-feedback">Looks good!</div>
-            </div>
+            <div class="col-12" id="checkoutProducts"></div>
+            <button class="btn btn-success col-12" type="submit">
+              Submit form
+            </button>
           </div>
-        </div>
-
-        <!-- End of shipping col -->
-        <div class="col-12">
-          <button class="btn btn-primary" type="submit">Submit form</button>
         </div>
       </form>
-      <!-- <form class="row g-3 needs-validation" novalidate>
-        <div class="col-md-4">
-          <label for="validationCustom01" class="form-label">First name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="validationCustom01"
-            
-            required
-          />
-          <div class="valid-feedback">Looks good!</div>
-        </div>
-        <div class="col-md-4">
-          <label for="validationCustom02" class="form-label">Last name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="validationCustom02"
-            value="Otto"
-            required
-          />
-          <div class="valid-feedback">Looks good!</div>
-        </div>
-        <div class="col-md-4">
-          <label for="validationCustomUsername" class="form-label"
-            >Username</label
-          >
-          <div class="input-group has-validation">
-            <span class="input-group-text" id="inputGroupPrepend">@</span>
-            <input
-              type="text"
-              class="form-control"
-              id="validationCustomUsername"
-              aria-describedby="inputGroupPrepend"
-              required
-            />
-            <div class="invalid-feedback">Please choose a username.</div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <label for="validationCustom03" class="form-label">City</label>
-          <input
-            type="text"
-            class="form-control"
-            id="validationCustom03"
-            required
-          />
-          <div class="invalid-feedback">Please provide a valid city.</div>
-        </div>
-        <div class="col-md-3">
-          <label for="country" class="form-label">State</label>
-          <select class="form-select" id="country" required>
-            <option selected disabled value="">Choose...</option>
-            <option>...</option>
-          </select>
-          <div class="invalid-feedback">Please select a valid state.</div>
-        </div>
-        <div class="col-md-3">
-          <label for="validationCustom05" class="form-label">Zip</label>
-          <input
-            type="text"
-            class="form-control"
-            id="validationCustom05"
-            required
-          />
-          <div class="invalid-feedback">Please provide a valid zip.</div>
-        </div>
-        <div class="col-12">
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value=""
-              id="invalidCheck"
-              required
-            />
-            <label class="form-check-label" for="invalidCheck">
-              Agree to terms and conditions
-            </label>
-            <div class="invalid-feedback">
-              You must agree before submitting.
-            </div>
-          </div>
-        </div>
-        <div class="col-12">
-          <button class="btn btn-primary" type="submit">Submit form</button>
-        </div>
-      </form> -->
     </div>
     <script src="js/bootstrap.bundle.min.js"></script>
-    
+
+    <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (() => {
+        "use strict";
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll(".needs-validation");
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach((form) => {
+          form.addEventListener(
+            "submit",
+            (event) => {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+
+              form.classList.add("was-validated");
+            },
+            false
+          );
+        });
+      })();
+    </script>
+    <script src="js/stepsBar.js"></script>
+    <script>
+      let allCheckoutParts = document.querySelectorAll(".part");
+      let activeStep = document.querySelector(".step .bg-success");
+      let stepsBar = document.querySelector(".Steps-bar");
+      document.querySelector("form").addEventListener("click", (e) => {
+        if (e.target.classList.contains("traverse-btn")) {
+          let moveTo = +e.target.dataset.moveTo;
+          allCheckoutParts.forEach((part, index) => {
+            if (part.classList.contains(`part${moveTo}`)) {
+              part.classList.remove("d-md-none");
+            } else {
+              part.classList.add("d-md-none");
+            }
+          });
+
+          document.getElementById(`step${moveTo}`).click();
+        }
+      });
+      stepsBar.addEventListener("click", (e) => {
+        if (e.target.classList.contains("stepNumber")) {
+          let clickedStep = +e.target.innerText;
+          allCheckoutParts.forEach((part, index) => {
+            if (part.classList.contains(`part${clickedStep}`)) {
+              part.classList.remove("d-md-none");
+            } else {
+              part.classList.add("d-md-none");
+            }
+          });
+        }
+      });
+    </script>
+    <script type="module">
+      import { ProductRepo } from "../Repository/ProductRepo.js";
+      import { ShoppingCartRepo } from "../Repository/ShoppingCartRepo.js";
+
+      let checkoutProducts = document.getElementById("checkoutProducts");
+
+      let cartItems = ShoppingCartRepo.getCartById(2).items;
+      console.log(cartItems);
+      let productsRows = cartItems
+        .map((item) => {
+          return `
+            <div class="checkout-product d-flex align-items-center mb-3">
+              <img src="${ProductRepo.getProductImgPathById(
+                item.productId
+              )}" alt="${
+            item.name
+          }" class="img-thumbnail" style="width: 100px;" />
+              <div class="ms-3">
+                <h5>${item.name}</h5>
+                <p>Quantity: ${item.quantity}</p>
+                <p>Price: $${item.price.toFixed(2)}</p>
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+
+      checkoutProducts.innerHTML = productsRows;
+    </script>
+    <script type="module">
+      import { Helpers } from "../Utils/helpers.js";
+      function CheckValidationStep1() {
+        let firstName = document.getElementById("firstName");
+        let lastName = document.getElementById("lastName");
+        let email = document.getElementById("email");
+        let phone = document.getElementById("phone");
+        let part1Next = document.getElementById("part1Next");
+
+        function checkNameInput(value) {
+          if (Helpers.isNotNullOrEmpty(value)) {
+            return {
+              result: false,
+              message: "Name is required it can't be empty string.",
+            };
+          } else if (Helpers.isOnlyText(value)) {
+            return { result: false, message: "Name can't contain numbers" };
+          } else if (!Helpers.stringLengthGOrEqual(value, 3)) {
+            return {
+              result: false,
+              message: "Name should be at least 3 characters long.",
+            };
+          } else {
+            return { result: true, message: "Name is valid" };
+          }
+        }
+
+        function checkPhoneInput(value) {
+          if (Helpers.isPhoneNumber(value)) {
+            return { result: true, message: "Phone number is valid" };
+          } else {
+            return { result: false, message: "Phone number is not valid" };
+          }
+        }
+
+        function checkEmailInput(value) {
+          if (Helpers.isEmail(value)) {
+            return { result: true, message: "Email is valid" };
+          } else {
+            return { result: false, message: "Email is not valid" };
+          }
+        }
+
+        let firstNameResult = checkNameInput(firstName.value);
+        let lastNameResult = checkNameInput(lastName.value);
+        let emailResult = checkEmailInput(email.value);
+        let phoneResult = checkPhoneInput(phone.value);
+      }
+
+      function CheckValidationStep2() {}
+      function CheckValidationStep3() {
+        let paymentMethod = document.querySelector(
+          'input[name="paymentMethod"]:checked'
+        );
+        let part3Next = document.getElementById("part3Next");
+      }
+    </script>
   </body>
 </html>
