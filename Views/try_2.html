@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Detail</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        /* Additional style for rounded table */
+        .table-rounded {
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <div class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0">Transaction Detail</h2>
+            <div>
+                <button class="btn btn-light"><i class="bi bi-bell"></i></button>
+                <button class="btn btn-light"><i class="bi bi-person-circle"></i></button>
+            </div>
+        </div>
+        
+        <div class="d-flex justify-content-between mb-3">
+            <div class="input-group w-25">
+                <input type="text" class="form-control" placeholder="Search...">
+            </div>
+            <div>
+                <select class="form-select w-auto d-inline-block">
+                    <option selected>Status: All</option>
+                    <option value="1">Pending</option>
+                    <option value="2">Completed</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Table with rounded corners -->
+        <table class="table table-hover align-middle bg-white table-rounded">
+            <thead class="bg-white">
+                <tr>
+                    <th class="text-muted text-uppercase" style="font-weight: normal;">ID</th>
+                    <th class="text-muted text-uppercase" style="font-weight: normal;">Customer</th>
+                    <th class="text-muted text-uppercase" style="font-weight: normal;">Date</th>
+                    <th class="text-muted text-uppercase" style="font-weight: normal;">Total</th>
+                    <th class="text-muted text-uppercase" style="font-weight: normal;">Method</th>
+                    <th class="text-muted text-uppercase" style="font-weight: normal;">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Sample rows -->
+                <tr>
+                    <td>#5089</td>
+                    <td>Joseph Wheeler</td>
+                    <td>6 April, 2023</td>
+                    <td>$2,564</td>
+                    <td>CC</td>
+                    <td class="text-warning">Pending</td>
+                </tr>
+                <tr>
+                    <td>#5090</td>
+                    <td>Maria Lane</td>
+                    <td>7 April, 2023</td>
+                    <td>$1,234</td>
+                    <td>PayPal</td>
+                    <td class="text-success">Completed</td>
+                </tr>
+                <tr>
+                    <td>#5091</td>
+                    <td>Michael Smith</td>
+                    <td>8 April, 2023</td>
+                    <td>$3,500</td>
+                    <td>Bank</td>
+                    <td class="text-warning">Pending</td>
+                </tr>
+
+                <!-- Last row with pagination and showing information -->
+                <tr>
+                    <td colspan="6">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>Showing <strong>10</strong> of <strong>50</strong></div>
+                            <nav>
+                                <ul class="pagination mb-0">
+                                    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
