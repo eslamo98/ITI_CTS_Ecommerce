@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "method": "Credit Card"
+  },
+  {
+    "id": 2,
+    "method": "PayPal"
+  },
+  {
+    "id": 3,
+    "method": "Bank Transfer"
+  },
+  {
+    "id": 4,
+    "method": "On Delivery"
+  }
+]
