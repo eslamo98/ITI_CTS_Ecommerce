@@ -1,6 +1,6 @@
 import { Helpers } from "../Utils/Helpers.js";
 
-export class UserAddress {
+export class Address {
   //private fields
   #id;
   #street;

@@ -8,10 +8,11 @@ export class Product {
   #description;
   #categoryId;
   #imgPath;
+  #sellerId;
 
   static #autoIncrement = 1;
 
-  constructor(_name, _price, _quantity, _desc, _catId, _imgPath) {
+  constructor(_name, _price, _quantity, _desc, _catId, _imgPath, _sellerId) {
     this.ID = Product.#autoIncrement++;
     this.Name = _name;
     this.Price = _price;
@@ -19,6 +20,7 @@ export class Product {
     this.Description = _desc;
     this.CategoryID = _catId;
     this.ImgPath = _imgPath;
+    this.SellerId = _sellerId;
   }
 
   get ID() {
@@ -106,15 +108,30 @@ export class Product {
     this.#imgPath = value;
   }
 
+  get SellerId() {
+    return this.#sellerId;
+  }
+
+  set SellerId(value) {
+    if (Helpers.isNumber(value) && Helpers.isPositive(value)) {
+      this.#sellerId = value;
+    } else {
+      throw new Error(
+        "Invalid seller ID. Seller ID must be a positive number."
+      );
+    }
+  }
+
   toJSON() {
     return {
-      ID: this.ID,
-      Name: this.Name,
-      Price: this.Price,
-      Quantity: this.Quantity,
-      Description: this.Description,
-      CategoryID: this.CategoryID,
-      ImgPath: this.ImgPath,
+      id: this.ID,
+      name: this.Name,
+      price: this.Price,
+      quantity: this.Quantity,
+      description: this.Description,
+      categoryID: this.CategoryID,
+      sellerId: this.SellerId,
+      imgPath: this.ImgPath,
     };
   }
 }

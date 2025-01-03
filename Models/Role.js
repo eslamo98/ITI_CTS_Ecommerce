@@ -30,6 +30,6 @@ export class Role {
   }
 
   toJSON() {
-    return { Id: this.#id, Name: this.#name };
+    return { id: this.#id, name: this.#name };
   }
 }

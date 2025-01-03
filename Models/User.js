@@ -23,7 +23,7 @@ export class User {
     _address,
     _imgPath
   ) {
-    this.ID = User.#autoIncrement++;
+    this.#id = User.#autoIncrement++;
     this.Name = _name;
     this.FirstName = _firstName;
     this.LastName = _lastName;
@@ -39,11 +39,7 @@ export class User {
     return this.#id;
   }
   set ID(value) {
-    if (value.constructor.name === "Number" && value > 0) {
-      this.#id = value;
-    } else {
-      throw new Error("Invalid ID. ID must be a positive integer.");
-    }
+    throw new Error("You can't set user Id.");
   }
 
   get Name() {
@@ -136,7 +132,7 @@ export class User {
     return this.#address;
   }
   set Address(value) {
-    if (value && value.constructor.name === "UserAddress") {
+    if (value && value.constructor.name === "Address") {
       this.#address = value;
     } else {
       throw new Error(
@@ -155,15 +151,15 @@ export class User {
 
   toJSON() {
     return {
-      ID: this.ID,
-      Name: this.Name,
-      FirstName: this.FirstName,
-      LastName: this.LastName,
-      Phone: this.Phone,
-      Email: this.Email,
-      RoleId: this.RoleId,
-      Address: this.Address,
-      ImgPath: this.ImgPath,
+      id: this.ID,
+      name: this.Name,
+      firstName: this.FirstName,
+      lastName: this.LastName,
+      phone: this.Phone,
+      email: this.Email,
+      roleId: this.RoleId,
+      address: this.Address,
+      imgPath: this.ImgPath,
     };
   }
 }

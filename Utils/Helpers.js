@@ -9,7 +9,7 @@ export class Helpers {
 
   static isNumber(num) {
     //regular expression to check number
-    return /^\d+$/.test(String(878));
+    return !isNaN(Number(num));
   }
 
   static isOnlyText(str) {

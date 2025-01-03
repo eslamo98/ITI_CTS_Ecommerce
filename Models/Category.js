@@ -3,7 +3,7 @@ export class Category {
   #name;
   static #autoIncrement = 1;
 
-  constructor(name) {
+  constructor(name, _sellerId) {
     this.#id = Category.#autoIncrement++;
     this.Name = name;
   }
