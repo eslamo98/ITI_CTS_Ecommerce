@@ -4,34 +4,38 @@
     "userId": 1,
     "items": [
       {
-        "productId": 101,
-        "name": "Wireless Mouse",
-        "quantity": 2,
+        "productId": 1,
+        "name": "Camera",
+        "quantity": 1,
         "price": 20.0,
-        "totalPrice": 40.0
+        "totalPrice": 20.0
       },
       {
-        "productId": 102,
-        "name": "Bluetooth Headphones",
+        "productId": 2,
+        "name": "Tv",
+        "quantity": 1,
+        "price": 59.99,
+        "totalPrice": 59.99
+      },
+
+      {
+        "productId": 3,
+        "name": "Friedge",
+        "quantity": 1,
+        "price": 59.99,
+        "totalPrice": 59.99
+      },
+
+      {
+        "productId": 4,
+        "name": "mobile",
         "quantity": 1,
         "price": 59.99,
         "totalPrice": 59.99
       }
     ],
-    "totalItems": 3,
-    "totalPrice": 99.99,
-    "shippingAddress": {
-      "street": "123 Main St",
-      "city": "New York",
-      "state": "NY",
-      "zipCode": "10001",
-      "country": "U.S.A"
-    },
-    "paymentInfo": {
-      "method": "Credit Card",
-      "transactionId": "TXN123456789",
-      "paymentStatus": "Pending"
-    }
+    "totalItems": 4,
+    "totalPrice": 99.99
   },
   {
     "cartId": 67890,
@@ -53,18 +57,6 @@
       }
     ],
     "totalItems": 3,
-    "totalPrice": 99.99,
-    "shippingAddress": {
-      "street": "123 Main St",
-      "city": "New York",
-      "state": "NY",
-      "zipCode": "10001",
-      "country": "U.S.A"
-    },
-    "paymentInfo": {
-      "method": "Credit Card",
-      "transactionId": "TXN123456789",
-      "paymentStatus": "Pending"
-    }
+    "totalPrice": 99.99
   }
 ]

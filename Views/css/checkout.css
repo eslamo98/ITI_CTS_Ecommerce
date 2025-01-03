@@ -1,0 +1,113 @@
+:root {
+  --InputColor: #f5f5f5;
+  --steps-count: 3;
+}
+
+/*   Steps bar styles  starts */
+.Steps-bar {
+  position: relative;
+}
+
+.Steps-bar .progress {
+  height: 10px;
+}
+
+.Steps-bar .step {
+  position: absolute;
+  text-align: center;
+  width: calc(100% / var(--steps-count));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -15px;
+}
+.Steps-bar .step:nth-child(1) {
+  left: 0;
+}
+
+.Steps-bar .step:nth-child(2) {
+  left: calc(100% / var(--steps-count));
+}
+.Steps-bar .step:nth-child(3) {
+  left: calc(2 * (100% / var(--steps-count)));
+}
+
+.step span {
+  display: inline-block;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-style: 25px;
+  font-weight: 700;
+}
+.step h4 {
+  margin: 0;
+  padding-left: 20px;
+  transition: all 0.3s;
+  font-size: 18px;
+}
+
+.myBg-secondary {
+  background-color: var(--bs-progress-bg);
+}
+
+.Steps-bar .progress-bar {
+  transition: all 0.2s;
+}
+
+/*   Steps bar styles ends  */
+
+/* Checkout form starts */
+.checkout-form input,
+.checkout-form select {
+  background-color: var(--InputColor);
+  border: none;
+  height: 30px;
+  font-size: 16px;
+}
+
+.checkout-form select {
+  display: flex;
+  align-items: center;
+  font-size: 16px !important;
+  line-height: 16px;
+}
+
+.checkout-form input:focus {
+  box-shadow: none;
+  border: 1px solid gray;
+  background-color: var(--InputColor);
+}
+
+.part {
+  height: 381px;
+  transition: all 0.3s;
+  opacity: 1;
+}
+
+.part.d-md-none {
+  opacity: 0;
+}
+
+.part.d-block {
+  opacity: 1;
+  height: auto;
+}
+
+.part button {
+  height: 30px;
+  font-size: 16px !important;
+  display: flex;
+  align-items: center;
+}
+
+#checkoutProducts {
+  max-height: 300px;
+  overflow: auto;
+}
+/* Checkout form ends */

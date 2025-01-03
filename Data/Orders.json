@@ -28,10 +28,10 @@
       "zipCode": "10001",
       "country": "U.S.A"
     },
+
     "paymentInfo": {
-      "method": "Credit Card",
-      "transactionId": "TXN123456789",
-      "paymentStatus": "Completed"
+      "id": 1,
+      "method": "Credit Card"
     }
   },
   {

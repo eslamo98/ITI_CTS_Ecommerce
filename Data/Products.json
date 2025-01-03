@@ -1,29 +1,39 @@
 [
   {
     "id": 1,
-    "name": "Product 1",
+    "name": "Camera",
     "price": 10.99,
     "quantity": 5,
     "description": "This is Product 1.",
     "categoryId": 1,
-    "imgPath": "Images/Products/Untitled.jpg"
+    "imgPath": "Images/Products/camera.jpeg"
   },
   {
     "id": 2,
-    "name": "Product 2",
+    "name": "Friedge",
     "price": 15.99,
     "quantity": 3,
     "description": "This is Product 2.",
     "categoryId": 2,
-    "imgPath": "Images/Products/Untitled.jpg"
+    "imgPath": "Images/Products/Fiedge.jpeg"
   },
   {
     "id": 3,
-    "name": "Product 3",
+    "name": "TV",
     "price": 20.99,
     "quantity": 7,
     "description": "This is Product 3.",
     "categoryId": 1,
-    "imgPath": "Images/Products/Untitled.jpg"
+    "imgPath": "Images/Products/TV.jpeg"
+  },
+
+  {
+    "id": 4,
+    "name": "mobile",
+    "price": 20.99,
+    "quantity": 7,
+    "description": "This is Product 3.",
+    "categoryId": 1,
+    "imgPath": "Images/Products/mobile.jpeg"
   }
 ]
