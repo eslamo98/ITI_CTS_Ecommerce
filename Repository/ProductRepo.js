@@ -1,3 +1,5 @@
+import { UsersRepo } from "./UsersRepo.js";
+
 export class ProductRepo {
   //this method save products to local storage
   static GetProductById(productId) {
@@ -47,8 +49,8 @@ export class ProductRepo {
   }
 
   //this method filter products with product name
-  static filterProductsByName(productName) {
-    let products = ProductRepo.GetAllProducts();
+  static filterProductsByName(productName, sellerId) {
+    let products = UsersRepo.getAllSellerProducts(sellerId);
     return products.filter((product) =>
       product.name.toLowerCase().includes(productName.toLowerCase())
     );

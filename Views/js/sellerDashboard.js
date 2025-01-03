@@ -74,7 +74,10 @@ productslink.addEventListener("click", function (event) {
   if (searchProductInput) {
     searchProductInput.addEventListener("input", function (event) {
       const searchTerm = event.target.value.toLowerCase();
-      const filteredProducts = ProductRepo.filterProductsByName(searchTerm);
+      const filteredProducts = ProductRepo.filterProductsByName(
+        searchTerm,
+        loggedUser.id
+      );
       renderProductsTable(filteredProducts);
     });
   }

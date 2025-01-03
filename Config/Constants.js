@@ -5,7 +5,7 @@ export const userLoggedSessionKey = "loggedUserData";
 export let loggedUser = UsersRepo.getLoggedUserDataBySessionKey(
   userLoggedSessionKey
 ) || {
-  id: 3,
+  id: 2,
   name: "John Doe",
   firstName: "first name",
   lastName: "last name",
