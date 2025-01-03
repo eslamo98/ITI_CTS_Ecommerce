@@ -1,7 +1,11 @@
 import { UsersRepo } from "./UsersRepo.js";
 
 export class ProductRepo {
+<<<<<<< Updated upstream
   //this method save products to local storage
+=======
+
+>>>>>>> Stashed changes
   static GetProductById(productId) {
     let products = ProductRepo.GetAllProducts();
     if (products) {
@@ -11,11 +15,16 @@ export class ProductRepo {
     }
   }
 
+<<<<<<< Updated upstream
   //this method return all products from local storage
+=======
+
+>>>>>>> Stashed changes
   static GetAllProducts() {
     return JSON.parse(localStorage.getItem("Products")) || [];
   }
 
+<<<<<<< Updated upstream
   //this method add a product
   static addProduct(product) {
     let products = ProductRepo.GetAllProducts();
@@ -44,10 +53,14 @@ export class ProductRepo {
   }
 
   //this method save products to local storage
+=======
+
+>>>>>>> Stashed changes
   static saveProducts(products) {
     localStorage.setItem("Products", JSON.stringify(products));
   }
 
+<<<<<<< Updated upstream
   //this method filter products with product name
   static filterProductsByName(productName, sellerId) {
     let products = UsersRepo.getAllSellerProducts(sellerId);
@@ -57,6 +70,9 @@ export class ProductRepo {
   }
 
   //This method return product img path if it exist and null if not
+=======
+  
+>>>>>>> Stashed changes
   static getProductImgPathById(productId) {
     let allProducts = ProductRepo.GetAllProducts();
     console.log(allProducts);
