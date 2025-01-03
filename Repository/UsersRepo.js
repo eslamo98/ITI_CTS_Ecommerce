@@ -4,6 +4,17 @@ import { CategoryRepo } from "./CategoryRepo.js";
 import { ProductRepo } from "./ProductRepo.js";
 import { RoleRepo } from "./RoleRepo.js";
 
+
+let usersArray = [];
+fetch('../Data/Users.json')
+  .then(response => response.json())
+  .then(arr => {
+    usersArray = arr;
+  })
+  .catch(error => {
+    console.error('Error fetching the JSON file:', error);
+  });
+
 export class UsersRepo {
 
 
@@ -22,10 +33,31 @@ export class UsersRepo {
   to a JSON string using `JSON.stringify()`.
   */ 
 
-  static saveUsers(users) {
+  static saveUser(user) {
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    users.push(user);
     localStorage.setItem("users", JSON.stringify(users));
   }
 
+  static validateEmail(email) {
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].email === email) {
+        return "email is exist already";
+      }
+    }
+    return "Exist";
+  }
+
+  static validatePhone(phone) {
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].phone === phone) {
+        return "phone is exist already";
+      }
+    }
+    return "Exist";
+  }
 
   /*
    This method retrieves all users stored in localStorage under the key "users".

@@ -8,39 +8,13 @@
 </head>
 <body>
 
-  <!--header-->
-  <div class="container">
-    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start align-items-center">
-      <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-black text-decoration-none">
-        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
-      </a>
-
-      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-3 text-black">Home</a></li>
-        <li><a href="#" class="nav-link px-3 text-black">Features</a></li>
-        <li><a href="#" class="nav-link px-3 text-black">Pricing</a></li>
-        <li><a href="#" class="nav-link px-3 text-black">FAQs</a></li>
-        <li><a href="#" class="nav-link px-3 text-black">About</a></li>
-      </ul>A
-
-      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-        <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
-      </form>
-
-      <div class="text-end">
-        <button type="button" class="btn btn-outline-warning me-2">Login</button>
-        <button type="button" class="btn btn-warning">Sign-up</button>
-      </div>
-    </div>
-  </div> 
-
     <!-- Main Content -->
   <div class="container my-5">
-    <div class="row align-items-center">
+    <div class="row align-items-center justify-content-evenly">
       <div class="col-md-6 text-center">
-        <img src="./image.jpg" alt="Mobile and Cart" class="img-fluid">
+        <img src="./Images/image.jpg" alt="Mobile and Cart" class="img-fluid">
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <h3>Create an account</h3>
         <p>Enter your details below</p>
         <form>
@@ -61,15 +35,15 @@
             <input type="text" class="form-control" placeholder="Phone Number" id="phone" required>
           </div>
           <div class="mb-3">
-            <input type="password" class="form-control" placeholder="Password" required>
+            <input type="password" class="form-control" placeholder="Password" id="password" required>
           </div>
-          <button type="submit" class="btn btn-danger w-100 mb-3" onclick="saveData()">Create Account</button>
+          <button type="submit" class="btn btn-danger w-100 mb-3" onclick="signUp()">Sign Up</button>
           <p class="mt-3">Already have an account? <a href="#">Log in</a></p>
         </form>
       </div>
     </div>
   </div>
-
+  <script src="../Controllers/UserController.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>    
 </body>
 </html>
