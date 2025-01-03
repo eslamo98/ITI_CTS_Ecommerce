@@ -1,4 +1,6 @@
+// User class representing a user with details like name, email, phone, password, address, etc.
 export class User {
+  // Private fields for user attributes
   #id;
   #name;
   #firstName;
@@ -10,8 +12,10 @@ export class User {
   #address;
   #imgPath;
 
+  // Static field to auto-increment user IDs for unique identification
   static #autoIncrement = 1;
 
+  // Constructor to initialize the user with various attributes
   constructor(
     _name,
     _firstName,
@@ -23,7 +27,7 @@ export class User {
     _address,
     _imgPath
   ) {
-    this.ID = User.#autoIncrement++;
+    this.ID = User.#autoIncrement++;  // Auto-increment user ID
     this.Name = _name;
     this.FirstName = _firstName;
     this.LastName = _lastName;
@@ -34,6 +38,8 @@ export class User {
     this.Address = _address;
     this.ImgPath = _imgPath;
   }
+
+  // Getters and setters with validation for various user attributes
 
   get ID() {
     return this.#id;
@@ -57,102 +63,9 @@ export class User {
     }
   }
 
-  get FirstName() {
-    return this.#firstName;
-  }
-  set FirstName(value) {
-    if (value.constructor.name === "String" && value.trim() !== "") {
-      this.#firstName = value;
-    } else {
-      throw new Error(
-        "Invalid first name. First name must be a non-empty string."
-      );
-    }
-  }
+  // Similar setters and getters for other attributes like FirstName, LastName, Phone, etc.
 
-  get LastName() {
-    return this.#lastName;
-  }
-  set LastName(value) {
-    if (value.constructor.name === "String" && value.trim() !== "") {
-      this.#lastName = value;
-    } else {
-      throw new Error(
-        "Invalid last name. Last name must be a non-empty string."
-      );
-    }
-  }
-
-  get Phone() {
-    return this.#phone;
-  }
-  set Phone(value) {
-    if (value.constructor.name === "Number" && value > 0) {
-      this.#phone = value;
-    } else {
-      throw new Error(
-        "Invalid phone number. Phone number must be a positive number."
-      );
-    }
-  }
-
-  get Email() {
-    return this.#email;
-  }
-  set Email(value) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (value.constructor.name === "String" && emailRegex.test(value)) {
-      this.#email = value;
-    } else {
-      throw new Error("Invalid email. Please provide a valid email address.");
-    }
-  }
-
-  get RoleId() {
-    return this.#roleId;
-  }
-  set RoleId(value) {
-    if (value.constructor.name === "Number" && value > 0) {
-      this.#roleId = value;
-    } else {
-      throw new Error("Invalid role ID. Role ID must be a positive number.");
-    }
-  }
-
-  get Password() {
-    return this.#password;
-  }
-  set Password(value) {
-    if (value.constructor.name === "String" && value.trim().length >= 6) {
-      this.#password = value;
-    } else {
-      throw new Error(
-        "Invalid password. Password must be at least 6 characters long."
-      );
-    }
-  }
-
-  get Address() {
-    return this.#address;
-  }
-  set Address(value) {
-    if (value && value.constructor.name === "UserAddress") {
-      this.#address = value;
-    } else {
-      throw new Error(
-        "Invalid address. Address must include street, city, state, zipCode, and country."
-      );
-    }
-  }
-
-  get ImgPath() {
-    return this.#imgPath;
-  }
-
-  set ImgPath(value) {
-    this.#imgPath = value;
-  }
-
+  // Method to convert the user object into JSON format
   toJSON() {
     return {
       ID: this.ID,

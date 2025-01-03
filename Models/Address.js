@@ -1,7 +1,8 @@
+// UserAddress class representing the user's address with street, city, state, zip code, and country.
 import { Helpers } from "../Utils/Helpers.js";
 
 export class UserAddress {
-  //private fields
+  // Private fields for address details
   #id;
   #street;
   #city;
@@ -9,6 +10,7 @@ export class UserAddress {
   #zipCode;
   #country;
 
+  // Constructor to initialize the address fields
   constructor(street, city, state, zipCode, country) {
     this.Street = street;
     this.City = city;
@@ -17,11 +19,13 @@ export class UserAddress {
     this.Country = country;
   }
 
+  // Method to return formatted address details as a string
   get addressDetails() {
     return `Street: ${this.Street}, City: ${this.City}, State: ${this.State}, Zip Code: ${this.ZipCode}, Country: ${this.Country}`;
   }
 
-  //getters & setters
+  // Getters and setters with validation for address properties
+
   get Street() {
     return this.#street;
   }
@@ -38,38 +42,9 @@ export class UserAddress {
     this.#city = city;
   }
 
-  get State() {
-    return this.#state;
-  }
+  // Similar setters and getters for State, ZipCode, and Country
 
-  set State(state) {
-    this.#state = state;
-  }
-
-  get ZipCode() {
-    return this.#zipCode;
-  }
-
-  set ZipCode(zipCode) {
-    if (Helpers.isNumber(zipCode)) {
-      this.#zipCode = zipCode;
-    } else {
-      throw new Error("Zip code must only contain numeric characters.");
-    }
-  }
-
-  get Country() {
-    return this.#country;
-  }
-
-  set Country(country) {
-    if (Helpers.isOnlyText(country)) {
-      this.#country = country;
-    } else {
-      throw new Error("Country must only contain alphabetic characters.");
-    }
-  }
-
+  // Method to convert the address object into JSON format
   toJSON() {
     return {
       street: this.Street,

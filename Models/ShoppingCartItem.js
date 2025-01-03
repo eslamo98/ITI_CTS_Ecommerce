@@ -1,19 +1,26 @@
+// ShoppingCartItem class representing a single item in the shopping cart with details 
+// like product ID, name, quantity, price, etc.
+
 import { Helpers } from "../Utils/Helpers.js";
 
 export class ShoppingCartItem {
+  // Private fields to hold item details
   #productId;
   #name;
   #quantity;
   #price;
   #totalPrice;
 
+  // Constructor to initialize the shopping cart item with product ID, name, quantity, and price
   constructor(productId, name, quantity, price) {
     this.ProductId = productId;
     this.Name = name;
     this.Quantity = quantity;
     this.#price = price;
-    this.#totalPrice = quantity * price;
+    this.#totalPrice = quantity * price;  // Calculate total price based on quantity and price
   }
+
+  // Getters and setters with validation for various item properties
 
   get ProductId() {
     return this.#productId;
@@ -43,7 +50,7 @@ export class ShoppingCartItem {
   set Quantity(value) {
     if (Helpers.isNumber(value) && Helpers.isPositive(value)) {
       this.#quantity = value;
-      this.#totalPrice = this.#quantity * this.#price;
+      this.#totalPrice = this.#quantity * this.#price;  // Recalculate total price when quantity changes
     } else {
       throw new Error("Quantity must be a positive integer.");
     }
@@ -55,7 +62,7 @@ export class ShoppingCartItem {
   set Price(value) {
     if (Helpers.isNumber(value) && value > 0) {
       this.#price = value;
-      this.#totalPrice = this.#quantity * this.#price;
+      this.#totalPrice = this.#quantity * this.#price;  // Recalculate total price when price changes
     } else {
       throw new Error("Price must be a positive number.");
     }
@@ -66,9 +73,10 @@ export class ShoppingCartItem {
   }
 
   set TotalPrice(value) {
-    throw new Error("Total price cannot be set directly.");
+    throw new Error("Total price cannot be set directly.");  // Total price is calculated, so it cannot be set directly
   }
 
+  // Method to convert the item object into JSON format
   toJSON() {
     return {
       productId: this.ProductId,

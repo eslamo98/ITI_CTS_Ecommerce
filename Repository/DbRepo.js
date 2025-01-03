@@ -3,9 +3,7 @@ import { ProductRepo } from "./ProductRepo.js";
 import { CountryRepo } from "./CountryRepo.js";
 import { ShoppingCartRepo } from "./ShoppingCartRepo.js";
 import { OrderRepo } from "./OrderRepo.js";
-import { PaymentInfoRepo } from "./PaymentInfoRepo.js";
 import { RoleRepo } from "./RoleRepo.js";
-import { ShippingAddressRepo } from "./ShippingAddressRepo.js";
 import { UsersRepo } from "./UsersRepo.js";
 import { Category } from "../Models/Category.js";
 import { Product } from "../Models/Product.js";
@@ -13,7 +11,7 @@ import { User } from "../Models/User.js";
 import { Role } from "../Models/Role.js";
 import { ShoppingCart } from "../Models/ShoppingCart.js";
 import { ShoppingCartItem } from "../Models/ShoppingCartItem.js";
-import { UserAddress } from "../Models/UserAddress.js";
+import { Address } from "../Models/Address.js";
 import { Country } from "../Models/Country.js";
 
 export class DbRepo {
@@ -42,7 +40,8 @@ export class DbRepo {
         50,
         "A luxurious bed designed for ultimate comfort.",
         1,
-        "Images/Products/Annibale Colombo Bed.jpg"
+        "Images/Products/Annibale Colombo Bed.jpg",
+        3
       ).toJSON(),
       new Product(
         "Annibale Colombo Sofa",
@@ -50,7 +49,8 @@ export class DbRepo {
         30,
         "A stylish and comfortable sofa for any living space.",
         1,
-        "Images/Products/Annibale Colombo Sofa.jpg"
+        "Images/Products/Annibale Colombo Sofa.jpg",
+        3
       ).toJSON(),
       new Product(
         "Apple",
@@ -58,7 +58,8 @@ export class DbRepo {
         100,
         "Fresh and organic apples, perfect for a healthy snack.",
         2,
-        "Images/Products/Apple.jpg"
+        "Images/Products/Apple.jpg",
+        3
       ).toJSON(),
       new Product(
         "Beef Steak",
@@ -66,7 +67,8 @@ export class DbRepo {
         25,
         "Premium quality beef steak, perfect for grilling.",
         3,
-        "Images/Products/Beef Steak.jpg"
+        "Images/Products/Beef Steak.jpg",
+        3
       ).toJSON(),
       new Product(
         "Bedside Table African Cherry",
@@ -74,7 +76,8 @@ export class DbRepo {
         20,
         "A bedside table crafted from African Cherry wood.",
         1,
-        "Images/Products/Bedside Table African Cherry.jpg"
+        "Images/Products/Bedside Table African Cherry.jpg",
+        3
       ).toJSON(),
       new Product(
         "Calvin Klein CK One",
@@ -82,7 +85,8 @@ export class DbRepo {
         50,
         "A unisex fragrance that exudes elegance and freshness.",
         4,
-        "Images/Products/Calvin Klein CK One.jpg"
+        "Images/Products/Calvin Klein CK One.jpg",
+        3
       ).toJSON(),
       new Product(
         "Camera",
@@ -90,7 +94,8 @@ export class DbRepo {
         15,
         "A high-performance camera for capturing stunning images.",
         4,
-        "Images/Products/camera.jpg"
+        "Images/Products/camera.jpg",
+        3
       ).toJSON(),
       new Product(
         "Cat Food",
@@ -98,7 +103,8 @@ export class DbRepo {
         40,
         "Nutritious and delicious food for your feline friends.",
         3,
-        "Images/Products/Cat Food.jpg"
+        "Images/Products/Cat Food.jpg",
+        2
       ).toJSON(),
       new Product(
         "Chicken Meat",
@@ -106,7 +112,8 @@ export class DbRepo {
         30,
         "Fresh and tender chicken meat, ideal for cooking.",
         3,
-        "Images/Products/Chicken Meat.jpg"
+        "Images/Products/Chicken Meat.jpg",
+        3
       ).toJSON(),
       new Product(
         "Cooking Oil",
@@ -114,7 +121,8 @@ export class DbRepo {
         100,
         "High-quality cooking oil for everyday use.",
         3,
-        "Images/Products/Cooking Oil.jpg"
+        "Images/Products/Cooking Oil.jpg",
+        2
       ).toJSON(),
       new Product(
         "Cucumber",
@@ -122,7 +130,8 @@ export class DbRepo {
         80,
         "Crisp and refreshing cucumbers for salads and snacks.",
         2,
-        "Images/Products/Cucumber.jpg"
+        "Images/Products/Cucumber.jpg",
+        2
       ).toJSON(),
       new Product(
         "Dog Food",
@@ -130,7 +139,8 @@ export class DbRepo {
         50,
         "Healthy and nutritious food for your dogs.",
         3,
-        "Images/Products/Dog Food.jpg"
+        "Images/Products/Dog Food.jpg",
+        2
       ).toJSON(),
       new Product(
         "Dolce Shine Eau de Parfum",
@@ -138,7 +148,8 @@ export class DbRepo {
         30,
         "A vibrant fragrance that embodies sunshine and joy.",
         4,
-        "Images/Products/Dolce Shine Eau de.jpg"
+        "Images/Products/Dolce Shine Eau de.jpg",
+        2
       ).toJSON(),
       new Product(
         "Dior J'adore",
@@ -146,7 +157,8 @@ export class DbRepo {
         20,
         "A classic fragrance with floral and fruity notes.",
         4,
-        "Images/Products/Dior J'adore.jpg"
+        "Images/Products/Dior J'adore.jpg",
+        2
       ).toJSON(),
       new Product(
         "Eggs",
@@ -154,7 +166,8 @@ export class DbRepo {
         60,
         "Farm-fresh eggs, ideal for breakfast and baking.",
         3,
-        "Images/Products/Eggs.jpg"
+        "Images/Products/Eggs.jpg",
+        2
       ).toJSON(),
       new Product(
         "Essence Mascara Lash Princess",
@@ -162,7 +175,8 @@ export class DbRepo {
         40,
         "A mascara that gives your lashes a stunning look.",
         4,
-        "Images/Products/Essence Mascara Lash Princess.jpg"
+        "Images/Products/Essence Mascara Lash Princess.jpg",
+        2
       ).toJSON(),
       new Product(
         "Eyeshadow Palette with Mirror",
@@ -170,7 +184,8 @@ export class DbRepo {
         20,
         "A versatile eyeshadow palette with a built-in mirror.",
         4,
-        "Images/Products/Eyeshadow Palette with Mirror.jpg"
+        "Images/Products/Eyeshadow Palette with Mirror.jpg",
+        2
       ).toJSON(),
       new Product(
         "Fish Steak",
@@ -178,7 +193,8 @@ export class DbRepo {
         25,
         "Fresh fish steak, perfect for a gourmet meal.",
         3,
-        "Images/Products/Fish Steak.jpg"
+        "Images/Products/Fish Steak.jpg",
+        2
       ).toJSON(),
       new Product(
         "Green Bell Pepper",
@@ -186,7 +202,8 @@ export class DbRepo {
         70,
         "Fresh and crisp green bell peppers, perfect for cooking.",
         2,
-        "Images/Products/Green Bell Pepper.jpg"
+        "Images/Products/Green Bell Pepper.jpg",
+        2
       ).toJSON(),
       new Product(
         "Green Chili Pepper",
@@ -194,7 +211,8 @@ export class DbRepo {
         50,
         "Hot and spicy green chili peppers for flavor.",
         2,
-        "Images/Products/Green Chili Pepper.jpg"
+        "Images/Products/Green Chili Pepper.jpg",
+        2
       ).toJSON(),
       new Product(
         "Gucci Bloom Eau de Parfum",
@@ -202,7 +220,8 @@ export class DbRepo {
         25,
         "A sophisticated fragrance inspired by a blooming garden.",
         4,
-        "Images/Products/Gucci Bloom Eau de.jpg"
+        "Images/Products/Gucci Bloom Eau de.jpg",
+        2
       ).toJSON(),
       new Product(
         "Honey Jar",
@@ -210,7 +229,8 @@ export class DbRepo {
         40,
         "Pure and natural honey in a convenient jar.",
         3,
-        "Images/Products/Honey Jar.jpg"
+        "Images/Products/Honey Jar.jpg",
+        2
       ).toJSON(),
       new Product(
         "Ice Cream",
@@ -218,7 +238,8 @@ export class DbRepo {
         50,
         "Creamy and delicious ice cream, perfect for dessert.",
         3,
-        "Images/Products/Ice Cream.jpg"
+        "Images/Products/Ice Cream.jpg",
+        2
       ).toJSON(),
       new Product(
         "Juice",
@@ -226,7 +247,8 @@ export class DbRepo {
         100,
         "Refreshing and healthy juice for any time of day.",
         3,
-        "Images/Products/Juice.jpg"
+        "Images/Products/Juice.jpg",
+        2
       ).toJSON(),
       new Product(
         "Knoll Saarinen Executive Conference Chair",
@@ -234,7 +256,8 @@ export class DbRepo {
         10,
         "A stylish and comfortable chair for your workspace.",
         1,
-        "Images/Products/Knoll Saarinen Executive Conference Chair.jpg"
+        "Images/Products/Knoll Saarinen Executive Conference Chair.jpg",
+        2
       ).toJSON(),
       new Product(
         "Mobile",
@@ -242,7 +265,8 @@ export class DbRepo {
         20,
         "A smartphone with advanced features and capabilities.",
         4,
-        "Images/Products/mobile.jpg"
+        "Images/Products/mobile.jpg",
+        2
       ).toJSON(),
       new Product(
         "Powder Canister",
@@ -250,7 +274,8 @@ export class DbRepo {
         30,
         "A versatile powder canister for kitchen storage.",
         3,
-        "Images/Products/Powder Canister.jpg"
+        "Images/Products/Powder Canister.jpg",
+        2
       ).toJSON(),
       new Product(
         "Red Lipstick",
@@ -258,7 +283,8 @@ export class DbRepo {
         50,
         "A vibrant red lipstick for a bold look.",
         4,
-        "Images/Products/Red Lipstick.jpg"
+        "Images/Products/Red Lipstick.jpg",
+        2
       ).toJSON(),
       new Product(
         "Red Nail Polish",
@@ -266,7 +292,8 @@ export class DbRepo {
         40,
         "A long-lasting red nail polish for stylish nails.",
         4,
-        "Images/Products/Red Nail Polish.jpg"
+        "Images/Products/Red Nail Polish.jpg",
+        2
       ).toJSON(),
       new Product(
         "TV",
@@ -274,7 +301,8 @@ export class DbRepo {
         10,
         "A high-definition TV for an exceptional viewing experience.",
         4,
-        "Images/Products/TV.jpg"
+        "Images/Products/TV.jpg",
+        2
       ).toJSON(),
       new Product(
         "Wooden Bathroom Sink with Mirror",
@@ -282,10 +310,21 @@ export class DbRepo {
         5,
         "A stylish wooden sink with an attached mirror for bathrooms.",
         1,
-        "Images/Products/Wooden Bathroom Sink with Mirror.jpg"
+        "Images/Products/Wooden Bathroom Sink with Mirror.jpg",
+        2
       ).toJSON(),
     ];
-
+    console.log(
+      new Product(
+        "Annibale Colombo Bed",
+        1199.99,
+        50,
+        "A luxurious bed designed for ultimate comfort.",
+        1,
+        "Images/Products/Annibale Colombo Bed.jpg",
+        3
+      ).toJSON()
+    );
     ProductRepo.saveProducts(productsData);
 
     RoleRepo.saveRoles([
@@ -338,7 +377,7 @@ export class DbRepo {
         `${firstName.toLowerCase()}@example.com`,
         index === 0 ? 1 : index <= 2 ? 2 : 3, // Admin for the first, Seller for the next two, Customer for the rest
         "password123",
-        new UserAddress("123 Main St", "City", "State", 10001, "Country"),
+        new Address("123 Main St", "City", "State", 10001, "Country"),
         `UsersImages/${firstName.toLowerCase()}.jpg` // Path to the user's image
       ).toJSON();
     });
