@@ -1,24 +1,34 @@
+// ShoppingCart class representing the user's shopping cart with items 
+// and total price calculations.
 import { Helpers } from "../Utils/Helpers.js";
+
 export class ShoppingCart {
+  // Private fields to hold cart details
   #cartId;
   #userId;
   #items;
   #totalItems;
   #totalPrice;
+
+  // Static field to auto-increment cart ID for unique identification
   static #autoIncrement = 1;
+
+  // Constructor to initialize the shopping cart
   constructor(userId, items) {
-    console.log(items);
-    this.#cartId = ShoppingCart.#autoIncrement++;
-    this.UserId = userId;
-    this.Items = items;
-    this.TotalItems = items.length;
-    this.TotalPrice = items.reduce(
+    console.log(items);  // Logging items to the console (for debugging purposes)
+    
+    this.#cartId = ShoppingCart.#autoIncrement++; // Auto-increment cart ID
+    this.UserId = userId;  // Assign user ID to the cart
+    this.Items = items;  // Set the items in the cart
+    this.TotalItems = items.length;  // Calculate the total number of items
+    this.TotalPrice = items.reduce(  // Calculate the total price of all items
       (sum, shoppingCartItem) => sum + shoppingCartItem.TotalPrice,
       0
     );
   }
 
-  //setters & getters
+  // Getters and setters with validation for various cart properties
+
   get CartId() {
     return this.#cartId;
   }
@@ -50,7 +60,7 @@ export class ShoppingCart {
   set Items(items) {
     if (Array.isArray(items)) {
       this.#items = items;
-      this.updateTotalItemsAndPrice();
+      this.updateTotalItemsAndPrice(); // Recalculate total items and price when items are set
     } else {
       throw new Error("Invalid items. It should be an array of objects.");
     }
@@ -80,7 +90,7 @@ export class ShoppingCart {
     }
   }
 
-  //methods
+  // Method to update total price and total items after modifications
   updateTotalItemsAndPrice() {
     this.TotalPrice = this.#items.reduce(
       (total, item) => total + item.TotalPrice,
@@ -89,11 +99,12 @@ export class ShoppingCart {
     this.TotalItems = this.#items.length;
   }
 
+  // Method to convert the cart object into JSON format
   toJSON() {
     return {
       cartId: this.CartId,
       userId: this.UserId,
-      items: this.Items.map((item) => item.toJSON()),
+      items: this.Items.map((item) => item.toJSON()),  // Convert each item to JSON
       totalItems: this.TotalItems,
       totalPrice: this.TotalPrice,
     };

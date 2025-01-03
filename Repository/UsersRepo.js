@@ -35,7 +35,6 @@ export class UsersRepo {
   static getUsers() {
     return JSON.parse(localStorage.getItem("users")) || [];
   }
-<<<<<<< Updated upstream
 
   static getUserById(userId) {
     const users = this.getUsers();
@@ -62,7 +61,4 @@ export class UsersRepo {
       return null;
     }
   }
-=======
-  
->>>>>>> Stashed changes
 }
