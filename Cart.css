@@ -1,0 +1,24 @@
+body{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    background-color: white;
+    font-family: Arial;
+}
+.cart-item img {
+    max-width: 100px;
+    height: auto;
+    }
+
+.quantity-input {
+ width: 50px;
+}
+
+.cart-summary {
+ background-color: #f8f9fa;
+ border-radius: 10px;
+}
+.form-control:focus{
+    border-color:black;
+    box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25);
+}
