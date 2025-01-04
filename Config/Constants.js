@@ -1,10 +1,8 @@
 // Importing the UsersRepo class to interact with localStorage for user-related data
 import { UsersRepo } from "../Repository/UsersRepo.js";
 
-
 // A constant key used to store and retrieve the logged user data from localStorage
 export const userLoggedSessionKey = "loggedUserData";
-
 
 /* Try to retrieve the logged user data from localStorage using the session key.
    If no data is found, use the default user object instead.*/
@@ -28,15 +26,8 @@ export let loggedUser = UsersRepo.getLoggedUserDataBySessionKey(
   },
 };
 
-
-
-
 // A constant API key related to countries (although its usage is not defined in this code)
 export const countriesApiKey = "4JsaxIpiYmkgpGmHxmRgXIR1t4n8Du84Wq6WSWdU";
-
-
-
-
 
 /*  ----------------------------File Summary-------------------------------
 

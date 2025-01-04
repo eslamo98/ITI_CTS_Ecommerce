@@ -82,32 +82,58 @@ productslink.addEventListener("click", function (event) {
     });
   }
 });
-
 function renderProductsTable(products) {
   let productTable = document.getElementById("productTable");
   productTable.innerHTML = ""; // Clear the table
+
   products.forEach((product) => {
     const row = document.createElement("tr");
     row.innerHTML = `
-          <td>${product.id}</td>
-          <td>${product.name}</td>
-          <td>$${product.price.toFixed(2)}</td>
-          <td>${product.quantity}</td>
-          <td><img src="${product.imgPath}" width="50" alt="${
-      product.Name
-    }"></td>
-          <td>
-            <button class="btn btn-primary btn-sm me-2" onclick="editProduct(${
-              product.id
-            })">Edit</button>
-            <button class="btn btn-danger btn-sm" onclick="deleteProduct(${
-              product.id
-            })">Delete</button>
-          </td>
-        `;
+      <td>${product.id}</td>
+      <td>${product.name}</td>
+      <td>$${product.price.toFixed(2)}</td>
+      <td>${product.quantity}</td>
+      <td><img src="${product.imgPath}" width="50" alt="${product.name}"></td>
+      <td>
+        <button class="btn btn-primary btn-sm me-2" onclick="editProduct(${
+          product.id
+        })">Edit</button>
+        <button class="btn btn-danger btn-sm" onclick="askDeleteConfirmation(${
+          product.id
+        })">Delete</button>
+      </td>
+    `;
     productTable.appendChild(row);
   });
 }
+
+function askDeleteConfirmation(productId) {
+  // Set the product ID in the modal for later use
+  window.currentProductId = productId;
+  // Show the confirmation modal
+  var myModal = new bootstrap.Modal(
+    document.getElementById("confirmDeleteModal")
+  );
+  myModal.show();
+}
+
+function deleteProduct() {
+  const productId = window.currentProductId;
+  // Proceed with deleting the product
+  console.log(`Deleting product with ID: ${productId}`);
+  // You can call an API to delete the product here, e.g., deleteProductAPI(productId);
+
+  // Hide the modal after deletion
+  var myModal = bootstrap.Modal.getInstance(
+    document.getElementById("confirmDeleteModal")
+  );
+  myModal.hide();
+}
+
+// Attach the deleteProduct function to the confirm delete button
+document
+  .getElementById("confirmDeleteButton")
+  .addEventListener("click", deleteProduct);
 
 let customerslink = document.getElementById("customerslink");
 
