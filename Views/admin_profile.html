@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Elegant oval button styling */
+    .edit-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;  /* Reduced padding for a thinner, more elegant oval shape */
+      background-color: #F1F1F1; /* Set background color to #F1F1F1 */
+      color: #111111;  /* Text color set to #111111 */
+      border-radius: 20px;  /* Slightly smaller border-radius for a more refined look */
+      text-decoration: none; /* Remove underline from the link */
+      font-weight: 500;  /* Bold text */
+      transition: background-color 0.3s ease;
+      border: none;  /* Remove the border */
+      font-size: 14px;  /* Adjust font size for a more elegant look */
+    }
+
+    /* Icon spacing */
+    .edit-btn i {
+      margin-left: 6px; /* Space between the text and icon */
+    }
+
+    /* Hover effect */
+    .edit-btn:hover {
+      background-color: #E0E0E0; /* Slightly darker background on hover */
+      color: #111111; /* Keep text color same */
+    }
+
+    /* Section headers color */
+    h6 {
+      color: #DB4444; /* Set section headers to #DB4444 */
+    }
+  </style>
+</head>
+<body>
+  <div class="container my-5">
+    <!-- My Profile Header -->
+    <h2 class="mb-4">My Profile</h2>
+
+    <!-- Profile Card -->
+    <div class="card mb-4">
+      <div class="card-body d-flex align-items-center">
+        <div class="rounded-circle overflow-hidden" style="width: 80px; height: 80px;">
+          <img src="https://via.placeholder.com/80" class="img-fluid" alt="Profile Picture">
+        </div>
+        <div class="ms-3">
+          <h5 class="mb-1">Rafiqur Rahman</h5>
+          <p class="mb-0 text-muted">Team Manager</p>
+          <p class="mb-0 text-muted">Leeds, United Kingdom</p>
+        </div>
+        <a href="#" class="ms-auto edit-btn">Edit <i class="bi bi-pencil"></i></a>
+      </div>
+    </div>
+
+    <!-- Personal Information Section -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h6 class="mb-0">Personal Information</h6>
+          <a href="#" class="edit-btn">Edit <i class="bi bi-pencil"></i></a>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <strong>First Name</strong>
+            <p class="mb-0">Rafiqur</p>
+          </div>
+          <div class="col-md-6">
+            <strong>Last Name</strong>
+            <p class="mb-0">Rahman</p>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <strong>Email address</strong>
+            <p class="mb-0">rafiqurrahman51@gmail.com</p>
+          </div>
+          <div class="col-md-6">
+            <strong>Phone</strong>
+            <p class="mb-0">+09 345 346 46</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <strong>Bio</strong>
+            <p class="mb-0">Team Manager</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Address Section -->
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h6 class="mb-0">Address</h6>
+          <a href="#" class="edit-btn">Edit <i class="bi bi-pencil"></i></a>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <strong>Country</strong>
+            <p class="mb-0">United Kingdom</p>
+          </div>
+          <div class="col-md-6">
+            <strong>City/State</strong>
+            <p class="mb-0">Leeds, East London</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <strong>Postal Code</strong>
+            <p class="mb-0">ERT 2354</p>
+          </div>
+          <div class="col-md-6">
+            <strong>TAX ID</strong>
+            <p class="mb-0">AS45645756</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> <!-- For icons -->
+</body>
+</html>
