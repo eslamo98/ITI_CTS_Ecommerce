@@ -5,7 +5,7 @@ import { DbRepo } from "../../Repository/DbRepo.js";
 localStorage.clear();
 DbRepo.setUpLocalStorage();
 
-// دالة لاختيار عدد معين من المنتجات بشكل عشوائي
+// لاختيار عدد معين من المنتجات بشكل عشوائي
 function getRandomProducts(products, count) {
     const shuffled = products.sort(() => 0.5 - Math.random()); // نخلط المنتجات بشكل عشوائي
     return shuffled.slice(0, count); // نأخذ أول "count" منتجات من القائمة المخلوطة
