@@ -188,7 +188,7 @@ margin-top: 60px;
     cursor: pointer; 
 }
 .card {
-    width: 300px; /* Set card width */
+    /* width: 300px; Set card width */
     height: 350px;
 }
 .card-img-top {
@@ -622,3 +622,135 @@ margin-top: 60px;
 }
 
 
+
+
+
+
+
+/* Media Queries for Responsive Design */
+
+@media (max-width: 768px) {
+    /* Navbar */
+    .navbar-brand {
+        margin-left: 0 !important;
+    }
+
+    .navbar-nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .search-wrapper {
+        max-width: 100%;
+        margin-top: 10px;
+    }
+
+    .search-icon {
+        left: 85%;
+    }
+
+    /* Slider */
+    #imageSlider .carousel-item {
+        height: 300px; /* تقليل الارتفاع في الشاشات الصغيرة */
+    }
+
+    .carousel-caption h5 {
+        font-size: 1.2rem;
+    }
+
+    .carousel-caption p {
+        font-size: 0.9rem;
+    }
+
+    /* Grid of Photos */
+    .photo-grid {
+        grid-template-columns: 1fr; /* جعل التقسيمة عمودية في الشاشات الصغيرة */
+        height: auto; /* إزالة الارتفاع الثابت */
+    }
+
+    .photo-large {
+        grid-row: span 1; /* إزالة span 2 في الشاشات الصغيرة */
+    }
+
+    /* Cards */
+    .card {
+        width: 100%; /* جعل الكروت تأخذ العرض الكامل */
+        height: auto; /* إزالة الارتفاع الثابت */
+    }
+
+    .card-img-top {
+        height: 200px; /* تقليل ارتفاع الصور في الشاشات الصغيرة */
+    }
+
+    /* Footer */
+    .footer-section {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .footer-links {
+        justify-content: center;
+    }
+
+    .footer-newsletter input {
+        width: 80%; /* تقليل عرض حقل الإيميل */
+    }
+
+    .newsletter-btn {
+        right: 15%;
+    }
+
+    /* Features Section */
+    .card-title {
+        font-size: 1rem; /* تقليل حجم النص في الشاشات الصغيرة */
+    }
+
+    .card-text {
+        font-size: 0.9rem;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        padding: 2rem 0; /* تقليل الحشو في الشاشات الصغيرة */
+    }
+
+    .hero-title {
+        font-size: 2rem; /* تقليل حجم العنوان */
+    }
+
+    .hero-description {
+        font-size: 1rem; /* تقليل حجم الوصف */
+    }
+
+    .hero-image {
+        margin-top: 1rem; /* تقليل المسافة بين الصورة والنص */
+    }
+
+    /* Browse by Category */
+    .square-container {
+        width: 100%; /* جعل العناصر تأخذ العرض الكامل */
+        height: auto; /* إزالة الارتفاع الثابت */
+        margin-bottom: 10px; /* إضافة مسافة بين العناصر */
+    }
+
+    .square-container p {
+        font-size: 0.9rem; /* تقليل حجم النص */
+    }
+
+    /* Countdown Timer */
+    .countdown-item {
+        font-size: 1.5rem; /* تقليل حجم الأرقام */
+        margin-left: 0; /* إزالة الهوامش */
+    }
+
+    .countdown-label {
+        font-size: 0.7rem; /* تقليل حجم النص */
+        margin-left: 0;
+    }
+
+    /* Buttons */
+    .btn-animated {
+        font-size: 0.9rem; /* تقليل حجم النص في الأزرار */
+        padding: 8px 16px; /* تقليل الحشو */
+    }
+}

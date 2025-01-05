@@ -25,11 +25,11 @@ function generateProductCards(containerId, products) {
             : product.name;
 
         const cardHTML = `
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="card">
-                    <img src="${product.imgPath}" class="card-img-top" alt="${product.name}">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="${product.imgPath}" class="card-img-top img-fluid" alt="${product.name}">
                     <div class="card-body">
-                        <h5 class="card-title" title="${product.name}">${truncatedName}</h5>
+                        <h5 class="card-title text-truncate" title="${product.name}">${truncatedName}</h5>
                         <p class="card-text">${product.description}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <span class="h5 mb-0 price">$${product.price.toFixed(2)}</span>
