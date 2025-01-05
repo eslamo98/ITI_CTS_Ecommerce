@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="Views/css/bootstrap.min.css">
     <link rel="stylesheet" href="Views/css/home.css" >
     <link rel="stylesheet" href="Views/css/bootstrap-icons.css">
+    <script src="Views/js/bootstrap.bundle.min.js"></script>
+    <script src="Views/js/home.js"></script>
+    <!-- <script type="module" src="Views/js/homeProduct.js"></script> -->
+
    
 
 </head>
@@ -153,15 +157,23 @@
 
 
 
-<!-- First Product Categorey -->
-<div class="container mt-4">
-    <!-- Product Cards Section -->
-    <div class="row" id="product-cards">
-        <!-- Cards will be dynamically generated here -->
+    <!-- First Row of Product Cards -->
+    <div class="container mt-4">
+        <div class="row" id="product-cards-1">
+            <!-- هنا هتظهر الكاردس الأولى -->
+        </div>
     </div>
-</div>
 
-<script>
+    <!-- Second Row of Product Cards -->
+    <div class="container mt-4">
+        <div class="row" id="product-cards-2">
+            <!-- هنا هتظهر الكاردس التانية -->
+        </div>
+    </div>
+    
+<script type="module" src="Views/js/homeProduct.js"></script>
+
+<!-- <script>
             // Sample data for demonstration
             const productData = [
             {
@@ -218,7 +230,7 @@
 
             filteredProducts.forEach(product => {
                 const cardHTML = `
-                    <div class="col-6 col-md-4 col-lg-3 mb-4"> <!-- Responsive classes -->
+                    <div class="col-6 col-md-4 col-lg-3 mb-4"> <!-- Responsive classes --
                         <div class="card">
                             <img src="${product.image}" class="card-img-top" alt="${product.name}">
                             <div class="card-body">
@@ -253,7 +265,11 @@
 
         // Generate cards on page load
         generateProductCards();
-</script>
+</script> -->
+
+
+
+
 
 
 <!-- Button to see all product -->
