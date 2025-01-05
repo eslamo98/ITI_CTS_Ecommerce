@@ -313,9 +313,10 @@ object-fit: cover; /* يجعل الصورة تغطي العنصر بشكل جي�
     background-color: #000000;
     color: white;
     padding: 5rem 0;
-    width: 1300px;
     border-radius: 15px;
-    margin: 0 auto;
+    margin-left: 110px;
+    margin-right: 110px;
+    padding-left: 50px;
 }
 
 .hero-title {
@@ -332,23 +333,22 @@ object-fit: cover; /* يجعل الصورة تغطي العنصر بشكل جي�
 .hero-image {
     border-radius: 0.5rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    box-shadow: 10px 10px 10px 10px #ffffff  spread;
-
 }
 
 @media (max-width: 767.98px) {
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2rem; /* تصغير حجم العنوان على الشاشات الصغيرة */
     }
 
     .hero-description {
-        font-size: 1rem;
+        font-size: 1rem; /* تصغير حجم الوصف على الشاشات الصغيرة */
     }
 
     .hero-image {
-        margin: 2rem auto 0;
+        margin: 2rem auto 0; /* تباعد الصورة على الشاشات الصغيرة */
     }
 }
+
 
 
 
