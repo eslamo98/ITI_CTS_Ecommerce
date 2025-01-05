@@ -218,6 +218,38 @@
       width: 100%;
       height: 100%;
     }
+
+    .nav-link {
+  text-decoration: none;
+  color: inherit;
+  padding: 10px;
+  display: block;
+  font-size: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.nav-link:focus {
+  outline: none;
+  background-color: #e0e0e0;
+}
+
+.nav-link.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.nav-link:visited,
+.nav-link:active {
+  color: inherit;
+  background-color: inherit;
+}
+
+    
   </style>
 </head>
 <body>
@@ -227,69 +259,52 @@
       <div class="navbar-logo">
         <img src="../images/logo.png" alt="SwiftCart Logo">
       </div>
+
       <!-- Nav Categories and Items -->
       <div class="nav-category">Main Menu</div>
+
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link active" href="#" onclick="loadContent('dashboard')"><i class="bi bi-speedometer2"></i> Dashboard</a>
+          <a class="nav-link active" href="#"  data-section="admin_dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" onclick="loadContent('products')"><i class="bi bi-box-seam"></i> Products</a>
+          <a class="nav-link" href="#" data-section="admin_products.html"><i class="bi bi-box-seam"></i> Products</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" onclick="loadContent('orders')"><i class="bi bi-bag"></i> Orders</a>
+          <a class="nav-link" href="#" data-section="admin_orders.html" ><i class="bi bi-bag"></i> Orders</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" onclick="loadContent('transactions')"><i class="bi bi-wallet2"></i> Transactions</a>
+          <a class="nav-link" href="#"  data-section="admin_transaction.html"><i class="bi bi-wallet2"></i> Transactions</a>
         </li>
       </ul>
       
       <!-- Updated Category Name -->
       <div class="nav-category">Users</div>
+
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link" href="#" onclick="loadContent('accounts')"><i class="bi bi-people"></i> Accounts</a>
+          <a class="nav-link" href="#" data-section="admin_users.html"><i class="bi bi-people"></i> Accounts</a>
         </li>
       </ul>
 
       <div class="nav-category">Admin</div>
+      
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link" href="#" onclick="loadContent('profile')"><i class="bi bi-person-circle"></i> Profile</a>
+          <a class="nav-link" href="#" data-section="admin_profile.html"><i class="bi bi-person-circle"></i> Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" onclick="loadContent('home')"><i class="bi bi-house-door"></i> Home</a>
+          <a class="nav-link" href="#" data-section="home"><i class="bi bi-house-door"></i> Home</a>
         </li>
       </ul>
     </nav>
 
     <!-- Content Area -->
     <main class="col px-4" id="content">
-      <!-- Header of Content (Dashboard Section) -->
-      <div class="header">
-        <h1>Dashboard</h1>
-        <div>
-          <i class="bi bi-bell profile-icon"></i>
-          <i class="bi bi-person-circle profile-icon"></i>
-        </div>
-      </div>
-
-      <!-- Dashboards Layout -->
-      <div class="dashboard-row">
-        <div class="dashboard">Dashboard 1</div>
-        <div class="dashboard">Dashboard 2</div>
-      </div>
-
-      <div class="dashboard-row">
-        <div class="dashboard">Dashboard 3</div>
-        <div class="dashboard">Dashboard 4</div>
-        <div class="dashboard">Dashboard 5</div>
-      </div>
-
-      <div class="dashboard-row">
-        <div class="dashboard">Dashboard 6</div>
-      </div>
+      <!-- Content will be dynamically loaded here -->
     </main>
+
+
   </div>
 
   <!-- Bootstrap JS -->
