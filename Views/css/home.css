@@ -129,22 +129,21 @@ object-fit: cover; /* يجعل الصورة تغطي العنصر بشكل جي�
 
 /* red rec. */
 .custom-rectangle {
-margin-left: 120px;
-margin-top: 60px;
     background-color: #DB4444;
-    width: 20px; /* Adjust width as needed */
-    height: 50px; /* Adjust height as needed */
+    width: 20px; /* عرض المستطيل */
+    height: 50px; /* ارتفاع المستطيل */
     border-radius: 2px;
-    position: relative; /* Enable positioning for the text */
 }
+
 .custom-rectangle-text {
-    position: absolute;
     font-weight: 600;
-    top: 50%;
-    left: 100%; /* Position it to the right of the rectangle */
-    transform: translateY(-50%); /* Center vertically */
-    margin-left: 10px; /* Space between rectangle and text */
-    color: #DB4444; /* Same color as rectangle */
+    color: #DB4444; /* لون النص */
+}
+
+.tagTo {
+    font-size: 1.5rem; /* حجم النص */
+    font-weight: bold; /* سمك النص */
+    color: #000; /* لون النص */
 }
 
 
