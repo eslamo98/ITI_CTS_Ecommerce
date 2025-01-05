@@ -1,19 +1,20 @@
 import { ProductRepo } from "../../Repository/ProductRepo.js";
 import { DbRepo } from "../../Repository/DbRepo.js";
 
+// تنظيف localStorage وإعداد البيانات
 localStorage.clear();
 DbRepo.setUpLocalStorage();
 
-const productId = 1; // افترض أنك عايز تجيب المنتج ذو الـ id = 1
-const product = ProductRepo.GetProductById(productId);
+// دالة لاختيار عدد معين من المنتجات بشكل عشوائي
+function getRandomProducts(products, count) {
+    const shuffled = products.sort(() => 0.5 - Math.random()); // نخلط المنتجات بشكل عشوائي
+    return shuffled.slice(0, count); // نأخذ أول "count" منتجات من القائمة المخلوطة
+}
 
 // دالة لإنشاء الكاردس
 function generateProductCards(containerId, products) {
     const container = document.getElementById(containerId); // نجيب الـ container باستخدام الـ id
     container.innerHTML = ''; // نمسح أي محتوى قديم
-
-    console.log(product)
-
 
     // نعمل لوب على كل المنتجات وننشئ كاردس لكل منتج
     products.forEach(product => {
@@ -48,11 +49,11 @@ function generateProductCards(containerId, products) {
 // نجيب كل المنتجات
 const allProducts = ProductRepo.GetAllProducts();
 
-// نستخدم الفانكشن لأول صف كاردس
-generateProductCards('product-cards-1', allProducts.slice(0, 4)); // أول 4 منتجات
+// نستخدم الفانكشن لأول صف كاردس مع 4 منتجات عشوائية
+generateProductCards('product-cards-1', getRandomProducts(allProducts, 4));
 
-// نستخدم الفانكشن لصف كاردس تاني
-generateProductCards('product-cards-2', allProducts.slice(4, 8)); // المنتجات من 5 إلى 8
+// نستخدم الفانكشن لصف كاردس تاني مع 4 منتجات عشوائية
+generateProductCards('product-cards-2', getRandomProducts(allProducts, 4));
 
 // دالة للبحث عن منتج
 document.getElementById('search-input').addEventListener('input', function() {
