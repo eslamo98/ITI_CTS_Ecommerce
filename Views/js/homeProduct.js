@@ -33,13 +33,13 @@ function generateProductCards(containerId, products) {
                         <p class="card-text">${product.description}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <span class="h5 mb-0 price">$${product.price.toFixed(2)}</span>
-                            <div>
+                          <!--  <div>
                                 <i class="fas fa-star text-warning"></i>
                                 <i class="fas fa-star text-warning"></i>
                                 <i class="fas fa-star text-warning"></i>
                                 <i class="fas fa-star-half-alt text-warning"></i>
                                 <small class="text-muted">(4.5)</small>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-center">
