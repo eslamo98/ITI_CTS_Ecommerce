@@ -155,15 +155,12 @@ margin-top: 60px;
     font-weight: bold;
     text-align: center;
     color: #000000;
-    margin-left: 350px;
-    
 }
 
 .countdown-label {
     font-size: 0.875rem;
     text-transform: uppercase;
     color: #DB4444;
-    margin-left: 350px;
 }
 
 .social-icon {
@@ -174,9 +171,8 @@ margin-top: 60px;
 }
 
 .social-icon:hover {
-    color:#DB4444;
+    color: #DB4444;
 }
-
 
 
 
