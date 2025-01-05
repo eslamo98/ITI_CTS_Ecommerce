@@ -1,9 +1,8 @@
 // This class manages the category data stored in localStorage.
 export class CategoryRepo {
-
   // Retrieves all categories from localStorage. Returns an empty array if no categories are found.
   static getAllCategories() {
-    return localStorage.getItem("Categories") || [];
+    return JSON.parse(localStorage.getItem("Categories")) || [];
   }
 
   // Deletes a category by its ID from localStorage.

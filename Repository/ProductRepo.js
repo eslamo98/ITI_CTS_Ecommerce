@@ -29,6 +29,7 @@ export class ProductRepo {
     let index = products.findIndex((product) => product.id === productId);
     if (index > -1) {
       products[index] = updatedProduct;
+      console.log(products);
       ProductRepo.saveProducts(products);
       return true;
     }
@@ -39,7 +40,7 @@ export class ProductRepo {
   //this method delete product by id return bool value
   static deleteProduct(productId) {
     let products = ProductRepo.GetAllProducts();
-    let newProducts = products.fillter((product) => product.id !== productId);
+    let newProducts = products.filter((product) => product.id !== productId);
     ProductRepo.saveProducts(newProducts);
   }
 

@@ -6,7 +6,8 @@
     "quantity": 5,
     "description": "This is Product 1.",
     "categoryId": 1,
-    "imgPath": "Images/Products/camera.jpeg"
+    "imgPath": "Images/Products/camera.jpeg",
+    "sellerId": 3
   },
   {
     "id": 2,
@@ -15,7 +16,8 @@
     "quantity": 3,
     "description": "This is Product 2.",
     "categoryId": 2,
-    "imgPath": "Images/Products/Fiedge.jpeg"
+    "imgPath": "Images/Products/Fiedge.jpeg",
+    "sellerId": 3
   },
   {
     "id": 3,
@@ -24,7 +26,8 @@
     "quantity": 7,
     "description": "This is Product 3.",
     "categoryId": 1,
-    "imgPath": "Images/Products/TV.jpeg"
+    "imgPath": "Images/Products/TV.jpeg",
+    "sellerId": 2
   },
 
   {
@@ -34,6 +37,7 @@
     "quantity": 7,
     "description": "This is Product 3.",
     "categoryId": 1,
-    "imgPath": "Images/Products/mobile.jpeg"
+    "imgPath": "Images/Products/mobile.jpeg",
+    "sellerId": 2
   }
 ]
