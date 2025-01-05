@@ -371,11 +371,17 @@ margin-top: 60px;
     border-radius: 10px; /* زوايا مدورة */
     height: 100%; /* ارتفاع كامل */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* تأثيرات الحركة */
+    display: block; /* علشان الـ <a> tag تاخد المساحة كاملة */
+    text-decoration: none; /* إزالة الخط اللي تحت الرابط */
+    color: inherit; /* إزالة تغيير لون النص */
 }
 
 .photo-item:hover {
-    transform: scale(1.0); /* تكبير العنصر قليلاً عند الـ hover */
+    cursor: pointer;
+    transform: scale(1.02); /* تكبير العنصر قليلاً عند الـ hover */
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* إضافة ظل خفيف */
+    
+    
 }
 
 .photo-large {
@@ -396,6 +402,7 @@ margin-top: 60px;
 
 .photo-item:hover .photo-content {
     opacity: 1; /* إظهار المحتوى بالكامل عند الـ hover */
+    cursor: pointer;
 }
 
 .photo-item img {
@@ -406,9 +413,10 @@ margin-top: 60px;
 }
 
 .photo-item:hover img {
-    transform: scale(1.1); /* تكبير الصورة قليلاً عند الـ hover */
-}
+    transform: scale(1.05); /* تكبير الصورة قليلاً عند الـ hover */
+    cursor: pointer;
 
+}
 
 
 
