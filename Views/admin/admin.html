@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SwiftCart</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #FAFAFA;
+    }
+
+    #sidebar {
+      width: 200px;
+      padding-left: 10px;
+    }
+
+    .navbar-logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.25rem;
+      background: none;
+    }
+
+    .nav-category {
+      font-size: 0.75rem;
+      color: gray;
+      font-weight: 300;
+      margin-top: 1rem;
+      margin-bottom: 0.25rem;
+      padding-left: 0.75rem;
+    }
+
+    .nav-link {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: gray;
+      padding: 0.25rem 0.75rem;
+    }
+
+    .nav-link.active {
+      color: black !important;
+      background-color: #F3F4F8 !important;
+      border-radius: 5px;
+    }
+
+ 
+    #sidebar {
+      width: 180px;
+    }
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0.25rem;  
+      margin-left: 0;  
+      margin-bottom: 0; 
+    }
+    .navbar-logo img {
+      margin-top: 20px;
+      margin-left: 14px;
+      height: 50px;
+      width: 125px;
+
+    }    
+    
+
+ 
+    #sidebar {
+      width: 180px;
+    }
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0.25rem;  
+      margin-left: 0;  
+      margin-bottom: 0; 
+    }
+    .navbar-logo img {
+      margin-top: 20px;
+      margin-left: 14px;
+      height: 50px;
+      width: 125px;
+
+    }    
+    
+    
+
+    /* Right Section: Content area */
+
+    #sidebar {
+      width: 180px;
+    }
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0.25rem;  
+      margin-left: 0;  
+      margin-bottom: 0; 
+    }
+    .navbar-logo img {
+      margin-top: 20px;
+      margin-left: 14px;
+      height: 50px;
+      width: 125px;
+    }    
+    
+    .content-wrapper {
+      display: flex;
+    }
+
+    /* Header Styling */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .header h1 {
+      font-size: 1.25rem; /* Reduced size */
+      font-weight: bold; /* Made it bold */
+      margin: 0;
+    }
+
+    .profile-icon {
+      font-size: 1.5rem; /* Made it bigger but not too much */
+    }
+
+    .data-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #f9f9f9;
+      border-radius: 12px;
+      padding: 20px;
+      width: 100%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      font-family: Arial, sans-serif;
+    }
+
+    /* Dashboards Layout */
+    .dashboard-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .dashboard {
+      flex: 1;
+      min-height: 150px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+    }
+
+    .text-section {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .title {
+      font-size: 16px;
+      color: #333;
+      margin: 0;
+    }
+
+    .duration {
+      font-size: 12px;
+      color: gray;
+      margin: 4px 0;
+    }
+
+    .amount {
+      font-size: 24px;
+      font-weight: bold;
+      color: #000;
+      margin: 8px 0;
+    }
+
+    .change {
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      margin: 4px 0;
+    }
+
+    .change .arrow {
+      font-size: 16px;
+      margin-right: 4px;
+    }
+
+    .change .percentage {
+      font-weight: bold;
+    }
+
+    .change .up {
+      color: green;
+    }
+
+    .change .down {
+      color: red;
+    }
+
+    .graph-section {
+      width: 100px;
+      height: 60px;
+    }
+
+    .graph {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="content-wrapper d-flex">
+    <!-- Sidebar -->
+    <nav class="col-auto vh-100 bg-white d-flex flex-column" id="sidebar">
+      <div class="navbar-logo">
+        <img src="../images/logo.png" alt="SwiftCart Logo">
+      </div>
+      <!-- Nav Categories and Items -->
+      <div class="nav-category">Main Menu</div>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link active" href="#" onclick="loadContent('dashboard')"><i class="bi bi-speedometer2"></i> Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="loadContent('products')"><i class="bi bi-box-seam"></i> Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="loadContent('orders')"><i class="bi bi-bag"></i> Orders</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="loadContent('transactions')"><i class="bi bi-wallet2"></i> Transactions</a>
+        </li>
+      </ul>
+      
+      <!-- Updated Category Name -->
+      <div class="nav-category">Users</div>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="loadContent('accounts')"><i class="bi bi-people"></i> Accounts</a>
+        </li>
+      </ul>
+
+      <div class="nav-category">Admin</div>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="loadContent('profile')"><i class="bi bi-person-circle"></i> Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="loadContent('home')"><i class="bi bi-house-door"></i> Home</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Content Area -->
+    <main class="col px-4" id="content">
+      <!-- Header of Content (Dashboard Section) -->
+      <div class="header">
+        <h1>Dashboard</h1>
+        <div>
+          <i class="bi bi-bell profile-icon"></i>
+          <i class="bi bi-person-circle profile-icon"></i>
+        </div>
+      </div>
+
+      <!-- Dashboards Layout -->
+      <div class="dashboard-row">
+        <div class="dashboard">Dashboard 1</div>
+        <div class="dashboard">Dashboard 2</div>
+      </div>
+
+      <div class="dashboard-row">
+        <div class="dashboard">Dashboard 3</div>
+        <div class="dashboard">Dashboard 4</div>
+        <div class="dashboard">Dashboard 5</div>
+      </div>
+
+      <div class="dashboard-row">
+        <div class="dashboard">Dashboard 6</div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom Script -->
+  <script src="../js/admin.js"></script>
+</body>
+</html>
