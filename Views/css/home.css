@@ -181,8 +181,15 @@ margin-top: 60px;
 
 
 /* Product Categorey */
+.card-title {
+    white-space: nowrap; /* eliminate text to jump to new line*/
+    overflow: hidden; /* يخفي النص الزائد */
+    text-overflow: ellipsis; /* يعرض النقاط (...) */
+    cursor: pointer; 
+}
 .card {
     width: 300px; /* Set card width */
+    height: 350px;
 }
 .card-img-top {
     height: 150px; /* Set a fixed height */
@@ -304,6 +311,49 @@ margin-top: 60px;
 }
 
 
+
+
+/* Img with button */
+.hero-section {
+    background-color: #000000;
+    color: white;
+    padding: 5rem 0;
+    width: 1300px;
+    border-radius: 15px;
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.hero-image {
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    box-shadow: 10px 10px 10px 10px #ffffff  spread;
+
+}
+
+@media (max-width: 767.98px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+    }
+
+    .hero-image {
+        margin: 2rem auto 0;
+    }
+}
 
 
 
@@ -505,3 +555,5 @@ margin-top: 60px;
         margin-bottom: 40px;
     }
 }
+
+
