@@ -18,12 +18,18 @@ function generateProductCards(containerId, products) {
 
     // نعمل لوب على كل المنتجات وننشئ كاردس لكل منتج
     products.forEach(product => {
+        // نحدد طول النص الذي نريد عرضه قبل إضافة النقاط
+        const maxLength = 20; // يمكنك تغيير هذا الرقم حسب الحاجة
+        const truncatedName = product.name.length > maxLength 
+            ? product.name.substring(0, maxLength) + '...' 
+            : product.name;
+
         const cardHTML = `
             <div class="col-6 col-md-4 col-lg-3 mb-4">
                 <div class="card">
                     <img src="${product.imgPath}" class="card-img-top" alt="${product.name}">
                     <div class="card-body">
-                        <h5 class="card-title">${product.name}</h5>
+                        <h5 class="card-title" title="${product.name}">${truncatedName}</h5>
                         <p class="card-text">${product.description}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <span class="h5 mb-0 price">$${product.price.toFixed(2)}</span>
@@ -55,6 +61,13 @@ generateProductCards('product-cards-1', getRandomProducts(allProducts, 4));
 // نستخدم الفانكشن لصف كاردس تاني مع 4 منتجات عشوائية
 generateProductCards('product-cards-2', getRandomProducts(allProducts, 4));
 
+// نستخدم الفانكشن لصف كاردس تالت مع 4 منتجات عشوائية
+generateProductCards('product-cards-3', getRandomProducts(allProducts, 4));
+
+// نستخدم الفانكشن لصف كاردس رابع مع 4 منتجات عشوائية
+generateProductCards('product-cards-4', getRandomProducts(allProducts, 4));
+
+
 // دالة للبحث عن منتج
 document.getElementById('search-input').addEventListener('input', function() {
     const searchTerm = this.value; // نجيب الكلمة اللي المستخدم كتبها
@@ -66,9 +79,20 @@ document.getElementById('search-input').addEventListener('input', function() {
         product.category.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    // نعرض المنتجات المفلترة في الصف الأول
-    generateProductCards('product-cards-1', filteredProducts.slice(0, 4)); // أول 4 منتجات
+    // // نعرض المنتجات المفلترة في الصف الأول
+    // generateProductCards('product-cards-1', filteredProducts.slice(0, 4)); // أول 4 منتجات
 
-    // نعرض المنتجات المفلترة في الصف التاني
-    generateProductCards('product-cards-2', filteredProducts.slice(4, 8)); // المنتجات من 5 إلى 8
+    // // نعرض المنتجات المفلترة في الصف التاني
+    // generateProductCards('product-cards-2', filteredProducts.slice(4, 8)); // المنتجات من 5 إلى 8
+
+
+    
+    // // نعرض المنتجات المفلترة في الصف الأول
+    // generateProductCards('product-cards-3', filteredProducts.slice(8, 12)); // أول 4 منتجات
+
+    // // نعرض المنتجات المفلترة في الصف التاني
+    // generateProductCards('product-cards-4', filteredProducts.slice(12, 16)); // المنتجات من 5 إلى 8
+
+
+    
 });
