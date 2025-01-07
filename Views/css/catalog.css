@@ -1,0 +1,89 @@
+#sidebar {
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+.sidebar-hidden {
+    margin-left: -100%;
+}
+
+@media (max-width: 767.98px) {
+    #sidebar {
+        position: fixed;
+        z-index: 1000;
+        background-color: #f8f9fa;
+        width: 80%;
+        max-width: 250px;
+    }
+}
+
+.nav-link {
+    color: #333;
+    transition: all 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background-color: #e9ecef;
+}
+
+
+
+
+/* Nav Bar */
+
+.navbar {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 1rem; 
+}
+.nav-link {
+    position: relative;
+    color: #000; 
+}
+.nav-link.selected {
+    color: #DB4444; 
+}
+.nav-link:hover::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -5px;
+    height: 2px;
+    background-color: #DB4444; /* underline text color  */
+}
+
+
+
+
+
+/* cards */
+.card-title {
+    white-space: nowrap; /* eliminate text to jump to new line*/
+    overflow: hidden; /* يخفي النص الزائد */
+    text-overflow: ellipsis; /* يعرض النقاط (...) */
+    cursor: pointer; 
+}
+.card {
+    /* width: 300px; Set card width */
+    height: 350px;
+}
+.card-img-top {
+    height: 150px; /* Set a fixed height */
+    object-fit: cover; /* Maintain aspect ratio */
+}
+.card-footer {
+    background-color: black; /* Change background of button container to black */
+}
+.btn-primary {
+    background-color: white;
+    color: black;
+    border-color: white;
+}
+.btn-primary:hover {
+    background-color: #DB4444; /* Change button color on hover */
+    border-color: #DB4444; /* Change border color on hover */
+}
+.price {
+    color: #DB4444; /* Change price color */
+}
