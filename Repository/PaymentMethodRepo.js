@@ -33,6 +33,11 @@ export class PaymentMethodRepo {
     return false;
   }
 
+  static getPaymentByName(value) {
+    let payments = PaymentMethodRepo.getAllPaymentMethodRepo();
+    return payments.find((payment) => payment.Method.includes(value));
+  }
+
   //this check if the method exist already in the payments or not
   static isValidPaymentMethod(value) {
     let paymentMethods = PaymentMethodRepo.getAllPaymentMethodRepo();

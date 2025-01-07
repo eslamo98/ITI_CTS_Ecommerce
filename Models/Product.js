@@ -1,3 +1,4 @@
+import { ProductRepo } from "../Repository/ProductRepo.js";
 import { Helpers } from "../Utils/Helpers.js";
 
 export class Product {
@@ -10,7 +11,10 @@ export class Product {
   #imgPath;
   #sellerId;
 
-  static #autoIncrement = 1;
+  static #autoIncrement =
+    ProductRepo.getNumberOfProductsInLOSt() === 0
+      ? 1
+      : ProductRepo.getNumberOfProductsInLOSt() + 1;
 
   constructor(_name, _price, _quantity, _desc, _catId, _imgPath, _sellerId) {
     this.ID = Product.#autoIncrement++;
@@ -63,7 +67,7 @@ export class Product {
   }
 
   set Quantity(value) {
-    if (value.constructor.name === "Number" && value >= 0) {
+    if (Number(value).constructor.name === "Number" && value >= 0) {
       this.#quantity = value;
     } else {
       throw new Error(

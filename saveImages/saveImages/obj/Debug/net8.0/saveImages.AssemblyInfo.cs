@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("saveImages")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0f8e979ba27b119c45fda9bdc006684774a94ee5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fcb84edaedd15be43d6691a2714160ffcdc0f8dc")]
 [assembly: System.Reflection.AssemblyProductAttribute("saveImages")]
 [assembly: System.Reflection.AssemblyTitleAttribute("saveImages")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

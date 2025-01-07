@@ -1,3 +1,5 @@
+import { Helpers } from "../Utils/Helpers.js";
+
 export class IndexedDBRepo {
   static dbName = "AppDB";
   static dbVersion = 1;
@@ -58,6 +60,7 @@ export class IndexedDBRepo {
 
   // Add a new record
   static add(tableName, data) {
+    console.log(data);
     return new Promise(async (resolve, reject) => {
       const db = await this.openDB();
       const transaction = db.transaction([tableName], "readwrite");
@@ -77,6 +80,8 @@ export class IndexedDBRepo {
 
       // Fetch the existing record in a separate transaction
       const existingRecord = await this.getById(tableName, key);
+      alert("");
+      Helpers.myConsole(existingRecord, "This is from update");
 
       // Open a new transaction to perform the update or add operation
       const transaction = db.transaction([tableName], "readwrite");

@@ -8,34 +8,45 @@ import { ImgsTables } from "../../Config/ImgsTables.js";
 let content = document.getElementById("content");
 let MainContent = document.getElementById("MainContent");
 let mainHeader = document.createElement("header");
+import { Product } from "../../Models/Product.js";
+import { OrderStatus } from "../../Config/OrderStatus.js";
+import { OrderRepo } from "../../Repository/OrderRepo.js";
 
 // create form elements
 let createForm = document.getElementById("createForm");
+let createCloseBtn = document.querySelector("#createProductModal .btn-close");
+
 let createProductName = document.getElementById("createProductName");
 let createProductPrice = document.getElementById("createProductPrice");
 let createProductDesc = document.getElementById("createProductDesc");
 let createProductCategory = document.getElementById("createProductCategory");
 let createProductImage = document.getElementById("createProductImage");
+let createProductQty = document.getElementById("createProductQty");
+
 let createSaveBtn = document.getElementById("createSaveBtn");
 
 // edit form elements
 let editForm = document.getElementById("editForm");
+let editCloseBtn = document.querySelector("#staticBackdrop .btn-close");
 let editProductName = document.getElementById("editProductName");
 let editProductPrice = document.getElementById("editProductPrice");
 let editProductDesc = document.getElementById("editProductDesc");
 let editProductCategory = document.getElementById("editProductCategory");
 let editProductImage = document.getElementById("editProductImage");
+let editProductQty = document.getElementById("editProductQty");
 let editSaveBtn = document.getElementById("editSaveBtn");
 
 function initCategories() {
   let allCategories = CategoryRepo.getAllCategories();
   //console.log(allCategories);
   editProductCategory.innerHTML = "";
+  createProductCategory.innerHTML = "";
   for (let i = 0; i < allCategories.length; i++) {
     let option = document.createElement("option");
     option.value = allCategories[i].id;
     option.text = allCategories[i].name;
     editProductCategory.appendChild(option);
+    createProductCategory.appendChild(option);
   }
 }
 
@@ -62,6 +73,7 @@ let createLaunchBtn = document.getElementById("createLaunchBtn");
 let deleteConfirmBtn = document.getElementById("deleteConfirmBtn");
 let confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
 let noDeleteBtn = document.getElementById("noDeleteBtn");
+let orderDetailLaunchBtn = document.getElementById("orderDetailLaunchBtn");
 
 MainContent.addEventListener("click", async (e) => {
   console.log(e.target);
@@ -78,6 +90,7 @@ MainContent.addEventListener("click", async (e) => {
     editProductDesc.value = product.description;
     editProductCategory.value = product.categoryID;
     editProductImage.value = "";
+    editProductQty.value = product.quantity;
     displayProductImg(await getProductImgSrc(product));
     //console.log(product);
     launchBtn.click();
@@ -97,6 +110,14 @@ MainContent.addEventListener("click", async (e) => {
       IndexedDBRepo.delete(ImgsTables.productImg, productId);
       noDeleteBtn.click();
     });
+  } else if (
+    e.target.nodeName === "BUTTON" &&
+    e.target.getAttribute("data-orderId") &&
+    e.target.classList.contains("details_btn")
+  ) {
+    let orderId = +e.target.getAttribute("data-orderId");
+    renderOrder(OrderRepo.getSellerOrderById(orderId, loggedUser.id));
+    orderDetailLaunchBtn.click();
   }
 });
 
@@ -111,12 +132,14 @@ editSaveBtn.addEventListener("click", async (e) => {
   product.price = parseFloat(editProductPrice.value);
   product.description = editProductDesc.value;
   product.categoryID = parseInt(editProductCategory.value);
+  product.quantity = parseInt(editProductQty.value);
   product.imgPath = null; // Image path will be handled via IndexedDB
 
   // Save the updated image and product
   await saveImg(productId, "editProductImage"); // Ensure the image is saved before updating UI
   ProductRepo.updateProduct(productId, product);
 
+  editCloseBtn.click();
   // Re-render the products table after updates
   const products = UsersRepo.getAllSellerProducts(loggedUser.id);
   await renderProductsTable(products);
@@ -125,17 +148,31 @@ editSaveBtn.addEventListener("click", async (e) => {
 createSaveBtn.addEventListener("click", async (e) => {
   e.preventDefault(); // Prevent form submission
 
-  // Update product details
-  product.name = editProductName.value;
-  product.price = parseFloat(editProductPrice.value);
-  product.description = editProductDesc.value;
-  product.categoryID = parseInt(editProductCategory.value);
-  product.imgPath = null; // Image path will be handled via IndexedDB
+  let product = new Product(
+    createProductName.value,
+    parseFloat(createProductPrice.value),
+    createProductQty.value,
+    createProductDesc.value,
+    parseInt(createProductCategory.value),
+
+    null, // Image path will be handled via IndexedDB
+    loggedUser.id
+  );
 
   // Save the updated image and product
-  await saveImg(productId, "editProductImage"); // Ensure the image is saved before updating UI
-  ProductRepo.updateProduct(productId, product);
+  await saveImg(product.ID, "createProductImage"); // Ensure the image is saved before updating UI
+  ProductRepo.addProduct(product);
 
+  // reset inputs of the form
+  createProductName.value = "";
+  createProductPrice.value = "";
+  createProductDesc.value = "";
+  createProductCategory.value = "";
+  createProductImage.value = "";
+  createProductQty.value = "";
+  document.getElementById("createproductImagePreview").src = "";
+
+  createCloseBtn.click();
   // Re-render the products table after updates
   const products = UsersRepo.getAllSellerProducts(loggedUser.id);
   await renderProductsTable(products);
@@ -156,7 +193,58 @@ dashboardlink.addEventListener("click", function (event) {
 let orderslink = document.getElementById("orderslink");
 
 orderslink.addEventListener("click", function (event) {
-  // headerTitle.innerHTML = "Orders";
+  mainHeader.innerHTML = `
+          <h2 class="m-0">Dashboard</h2>
+          <button class="btn btn-success create_order" >Order</button>
+          <input type="text" class="form-control" style="width: 150px; height: 30px" id="ordersearch" placeholder="Search...">
+          <div class="header-icons">
+            <button class="btn btn-light"><i class="bi bi-bell"></i></button>
+            <button class="btn btn-light">
+              <i class="bi bi-person-circle"></i>
+            </button>
+          </div>`;
+  content.insertAdjacentElement("afterbegin", mainHeader);
+  let headerTitle = content.querySelector("h2");
+
+  headerTitle.innerHTML = "Orders";
+
+  MainContent.innerHTML = `
+  <table class="table table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Customer</th>
+          <th scope="col">Items</th>
+          <th scope="col">Total Price</th>
+          <th scope="col">Status</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="orderTable">
+        <!-- Dynamic rows will be added here -->
+      </tbody>
+    </table>
+  `;
+
+  const sellerOrders = OrderRepo.getAllSellerOrders(loggedUser.id);
+  Helpers.myConsole(sellerOrders, "seller orders");
+  //create table of orders using bootstrap table
+  //console.log(sellerOrders);
+  renderOrdersTable(sellerOrders);
+  // populate table with sellerOrders data
+
+  let searchOrderInput = document.getElementById("ordersearch");
+  if (searchOrderInput) {
+    searchOrderInput.addEventListener("input", function (event) {
+      const searchTerm = event.target.value.toLowerCase();
+      const filteredOrders = sellerOrders.filter((order) =>
+        UsersRepo.getUserById(order.userId)
+          .name.toLowerCase()
+          .includes(searchTerm)
+      );
+      renderOrdersTable(filteredOrders);
+    });
+  }
 });
 
 let productslink = document.getElementById("productslink");
@@ -229,6 +317,7 @@ async function getProductImgSrc(product) {
       ImgsTables.productImg,
       product.id
     );
+
     return productImg?.imgBinary || "default-image-path.png"; // Fallback to a default image
   }
 }
@@ -257,6 +346,42 @@ async function renderProductsTable(products) {
       </td>
     `;
     productTable.appendChild(row);
+  }
+}
+
+function renderOrder(order) {
+  Helpers.myConsole(order, "from my order");
+}
+
+function renderOrdersTable(orders) {
+  let orderTable = document.getElementById("orderTable");
+  orderTable.innerHTML = ""; // Clear the table
+  let filteredOrders = orders.filter((order) => order.cartItems.length > 0);
+  for (const order of filteredOrders) {
+    Helpers.myConsole(order, "from renderOrdersTable function");
+    if (order.totalPrice > 0) {
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+      <td>${order.id}</td>
+      <td>${UsersRepo.getUserById(order.userId).name}</td>
+      <td>${order.cartItems.length}</td>
+      <td>${order.totalPrice.toFixed(2)}</td>
+      <td>${Helpers.GetPropperBadge(order.status)}</td>
+      <td style="min-width: 150px">
+        <button class="btn btn-primary btn-sm me-2 details_btn" data-orderId="${
+          order.id
+        }">Details</button>
+         <button class="btn btn-secondary btn-sm cancel_btn"  data-orderId="${
+           order.id
+         }">Cancel</button>
+        <button class="btn btn-danger btn-sm delete_btn"  data-orderId="${
+          order.id
+        }">Delete</button>
+      </td>
+    `;
+      orderTable.appendChild(row);
+    }
   }
 }
 

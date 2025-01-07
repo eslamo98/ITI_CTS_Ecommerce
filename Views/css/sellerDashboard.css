@@ -5,6 +5,14 @@ body {
   background-color: #fafafa;
 }
 
+/* general */
+.truncated-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* general */
+
 .content-wrapper {
   display: grid;
   grid-template-areas: "sidebar main";

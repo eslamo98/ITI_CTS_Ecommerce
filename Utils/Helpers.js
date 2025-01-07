@@ -1,3 +1,5 @@
+import { OrderStatus } from "../Config/OrderStatus.js";
+
 export class Helpers {
   // Checks if a number is negative
   static isNegative(num) {
@@ -48,5 +50,27 @@ export class Helpers {
     // Check if the value is not null, undefined, or an empty string (including strings with only whitespace)
     if (value?.trim() === "") return false;
     return value !== null && value !== undefined && value !== ""; // Returns true if the value is not null or empty
+  }
+
+  static myConsole(object, message) {
+    console.log("_______________________________");
+    console.log(`Message: ${message}`);
+    console.log(object);
+    console.log("_______________________________");
+  }
+
+  static GetPropperBadge(status) {
+    switch (status) {
+      case OrderStatus.PENDING:
+        return `<span class="badge bg-warning text-dark">${OrderStatus.PENDING}</span>`;
+      case OrderStatus.SHIPPED:
+        return `<span class="badge bg-primary">${OrderStatus.SHIPPED}</span>`;
+      case OrderStatus.COMPLETED:
+        return `<span class="badge bg-success">${OrderStatus.COMPLETED}</span>`;
+      case OrderStatus.CANCELLED:
+        return `<span class="badge bg-danger">${OrderStatus.CANCELLED}</span>`;
+      default:
+        return `<span class="badge bg-secondary">N/A</span>`;
+    }
   }
 }
