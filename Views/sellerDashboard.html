@@ -737,103 +737,32 @@
                       <div class="row">
                         <div class="col mb-3">
                           <p class="small text-muted mb-1">Date</p>
-                          <p>10 April 2021</p>
+                          <p id="order_date">10 April 2021</p>
                         </div>
                         <div class="col mb-3">
                           <p class="small text-muted mb-1">Order No.</p>
-                          <p>012j1gvs356c</p>
+                          <p id="order_no">012j1gvs356c</p>
                         </div>
                       </div>
 
                       <div
-                        class="mx-n5 px-5 py-4"
+                        class="mx-n5 px-3 py-3"
                         style="background-color: #f2f2f2"
                       >
-                        <div class="row">
-                          <div class="col-md-8 col-lg-9">
-                            <p
-                              data-bs-toggle="tooltip"
-                              data-bs-placement="left"
-                              title="BEATS Solo 3 Wireless Headphones"
-                              class="truncated-text"
-                              style="width: 100px"
-                            >
-                              BEATS Solo 3 Wireless Headphones
-                            </p>
-                          </div>
-                          <div class="col-md-4 col-lg-3">
-                            <p>£299.99</p>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-8 col-lg-9">
-                            <p class="mb-0">Shipping</p>
-                          </div>
-                          <div class="col-md-4 col-lg-3">
-                            <p class="mb-0">£33.00</p>
-                          </div>
-                        </div>
+                        <div id="order_items"></div>
                       </div>
 
                       <div class="row my-4">
                         <div class="col-md-4 offset-md-8 col-lg-3 offset-lg-9">
-                          <p class="lead fw-bold mb-0" style="color: #f37a27">
+                          <p
+                            class="lead fw-bold mb-0"
+                            style="color: #f37a27"
+                            id="order_total_price"
+                          >
                             £262.99
                           </p>
                         </div>
                       </div>
-
-                      <!-- <p class="lead fw-bold mb-4 pb-2" style="color: #f37a27">
-                        Tracking Order
-                      </p>
-
-                      <div class="row">
-                        <div class="col-lg-12">
-                          <div class="horizontal-timeline">
-                            <ul
-                              class="list-inline items d-flex justify-content-between"
-                            >
-                              <li class="list-inline-item items-list">
-                                <p
-                                  class="py-1 px-2 rounded text-white"
-                                  style="background-color: #f37a27"
-                                >
-                                  Ordered
-                                </p>
-                              </li>
-                              <li class="list-inline-item items-list">
-                                <p
-                                  class="py-1 px-2 rounded text-white"
-                                  style="background-color: #f37a27"
-                                >
-                                  Shipped
-                                </p>
-                              </li>
-                              <li class="list-inline-item items-list">
-                                <p
-                                  class="py-1 px-2 rounded text-white"
-                                  style="background-color: #f37a27"
-                                >
-                                  On the way
-                                </p>
-                              </li>
-                              <li
-                                class="list-inline-item items-list text-end"
-                                style="margin-right: 8px"
-                              >
-                                <p style="margin-right: -8px">Delivered</p>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-
-                      <p class="mt-4 pt-2 mb-0">
-                        Want any help?
-                        <a href="#!" style="color: #f37a27"
-                          >Please contact us</a
-                        >
-                      </p> -->
                     </div>
                   </div>
                 </div>
@@ -851,6 +780,64 @@
             <!-- <button type="button" id="editSaveBtn" class="btn btn-primary">
               Save
             </button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete order modal confirmation -->
+    <!-- Button trigger modal -->
+    <button
+      type="button"
+      class="btn btn-primary d-none"
+      data-bs-toggle="modal"
+      data-bs-target="#deleteOrderConfiremation"
+      id="launchDeleteOrderModalBtn"
+    >
+      Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="deleteOrderConfiremation"
+      tabindex="-1"
+      aria-labelledby="deleteOrderConfiremationLabel"
+      aria-hidden="true"
+      data-productId="0"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="deleteOrderConfiremationLabel">
+              Modal title
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            Are Sure you want to delete this <strong>Order</strong>?
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              id="noDeleteOrderBtn"
+            >
+              No
+            </button>
+            <button
+              type="button"
+              id="confirmDeleteOrderBtn"
+              class="btn btn-primary"
+            >
+              Yes
+            </button>
           </div>
         </div>
       </div>

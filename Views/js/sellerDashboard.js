@@ -74,6 +74,11 @@ let deleteConfirmBtn = document.getElementById("deleteConfirmBtn");
 let confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
 let noDeleteBtn = document.getElementById("noDeleteBtn");
 let orderDetailLaunchBtn = document.getElementById("orderDetailLaunchBtn");
+let launchDeleteOrderModalBtn = document.getElementById(
+  "launchDeleteOrderModalBtn"
+);
+let confirmDeleteOrderBtn = document.getElementById("confirmDeleteOrderBtn");
+let noDeleteOrderBtn = document.getElementById("noDeleteOrderBtn");
 
 MainContent.addEventListener("click", async (e) => {
   console.log(e.target);
@@ -118,6 +123,32 @@ MainContent.addEventListener("click", async (e) => {
     let orderId = +e.target.getAttribute("data-orderId");
     renderOrder(OrderRepo.getSellerOrderById(orderId, loggedUser.id));
     orderDetailLaunchBtn.click();
+  } else if (
+    e.target.nodeName === "BUTTON" &&
+    e.target.getAttribute("data-orderId") &&
+    e.target.classList.contains("cancel_btn")
+  ) {
+    let orderId = +e.target.getAttribute("data-orderId");
+    let order = OrderRepo.getSellerOrderById(orderId, loggedUser.id);
+
+    order.status = OrderStatus.CANCELLED;
+    OrderRepo.updateOrder(orderId, order);
+    if (OrderRepo.updateOrder(orderId, order))
+      renderOrdersTable(OrderRepo.getAllSellerOrders(loggedUser.id));
+  } else if (
+    e.target.nodeName === "BUTTON" &&
+    e.target.getAttribute("data-orderId") &&
+    e.target.classList.contains("delete_btn")
+  ) {
+    let orderId = +e.target.getAttribute("data-orderId");
+    console.log(orderId);
+
+    launchDeleteOrderModalBtn.click();
+    confirmDeleteOrderBtn.addEventListener("click", (e) => {
+      OrderRepo.deleteSellerOrder(loggedUser.id, orderId);
+      renderOrdersTable(OrderRepo.getAllSellerOrders(loggedUser.id));
+      noDeleteOrderBtn.click();
+    });
   }
 });
 
@@ -350,10 +381,48 @@ async function renderProductsTable(products) {
 }
 
 function renderOrder(order) {
-  Helpers.myConsole(order, "from my order");
+  let orderDate = document.getElementById("order_date");
+  let orderNo = document.getElementById("order_no");
+  let orderItems = document.getElementById("order_items");
+  let orderTotalPrice = document.getElementById("order_total_price");
+
+  orderDate.innerHTML = Helpers.formatDate(order.orderDate);
+  orderNo.innerHTML = `#${order.id}`;
+  orderItems.innerHTML = "";
+  for (let i = 0; i < order.cartItems.length; i++) {
+    orderItems.innerHTML += `<div class="row">
+                            <div class="col-md-8">
+                              <p
+                                data-bs-toggle="tooltip"
+                                data-bs-placement="left"
+                                title="${
+                                  ProductRepo.GetProductById(
+                                    order.cartItems[i].productId
+                                  ).name
+                                }"
+                                class="truncated-text"
+                                style="width: 100px"
+                              >
+                              ${
+                                ProductRepo.GetProductById(
+                                  order.cartItems[i].productId
+                                ).name
+                              }
+                              </p>
+                            </div>
+                            <div class="col-md-2 col-lg-2">x${
+                              order.cartItems[i].quantity
+                            }</div>
+                            <div class="col-md-2 col-lg-2">
+                              <p>£${order.cartItems[i].totalPrice}</p>
+                            </div>
+                          </div>`;
+  }
+  orderTotalPrice.innerHTML = `$${order.totalPrice.toFixed(2)}`;
 }
 
 function renderOrdersTable(orders) {
+  Helpers.myConsole(orders, "from render orders table");
   let orderTable = document.getElementById("orderTable");
   orderTable.innerHTML = ""; // Clear the table
   let filteredOrders = orders.filter((order) => order.cartItems.length > 0);

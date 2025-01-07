@@ -33,6 +33,8 @@ export class Order {
   #cartItems;
   #shippingAddress;
   #paymentMethod;
+  #subOrders = [];
+
   static #autoIncrement =
     OrderRepo.getOrdersInLcStLen() === 0
       ? 1
@@ -53,7 +55,6 @@ export class Order {
     this.#status = _status; // Order status (e.g., Pending)
 
     this.#cartItems = _cartItems;
-    console.log(_cartItems);
     this.#totalPrice = _cartItems.reduce(
       (sum, next) => sum + next.TotalPrice,
       0

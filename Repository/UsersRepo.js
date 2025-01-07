@@ -41,7 +41,6 @@ export class UsersRepo {
     console.log(RoleRepo.isSeller(sellerId), sellerId);
     if (RoleRepo.isSeller(sellerId)) {
       let allProducts = ProductRepo.GetAllProducts();
-      console.log(allProducts);
       return allProducts.filter((product) => product.sellerId === sellerId);
     } else {
       return [];

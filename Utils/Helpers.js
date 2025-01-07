@@ -73,4 +73,9 @@ export class Helpers {
         return `<span class="badge bg-secondary">N/A</span>`;
     }
   }
+
+  static formatDate(date) {
+    // Format the date to "YYYY-MM-DD"
+    return new Date(date).toISOString().split("T")[0];
+  }
 }

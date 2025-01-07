@@ -9,6 +9,10 @@ export class OrderRepo {
     return JSON.parse(localStorage.getItem("Orders")) || [];
   }
 
+  static getOrderById(orderId) {
+    return this.getAllOrders().find((order) => order.id === orderId);
+  }
+
   // Saves the given orders array to localStorage under the "Orders" key.
   static saveOrders(orders) {
     localStorage.setItem("Orders", JSON.stringify(orders));
@@ -22,12 +26,56 @@ export class OrderRepo {
     OrderRepo.saveOrders(currentOrders); // Save the updated list back to localStorage
   }
 
+  static updateOrder(orderId, updatedOrder) {
+    const currentOrders = this.getAllOrders();
+    if (currentOrders) {
+      const index = currentOrders.findIndex((order) => order.id === orderId);
+      if (index !== -1) {
+        currentOrders[index] = updatedOrder; // Update the order with the new details
+        OrderRepo.saveOrders(currentOrders); // Save the updated list back to localStorage
+        Helpers.myConsole(this.getOrderById(4), "current orders;");
+        return true;
+      }
+    }
+
+    return false; // Order not found to update
+  }
+
   // Removes an order from the list based on the given order ID.
   // It filters out the order with the matching ID and saves the updated list.
   static removeOrder(orderId) {
     const currentOrders = OrderRepo.getAllOrders(); // Get current orders from localStorage
     const updatedOrders = currentOrders.filter((order) => order.id !== orderId); // Filter out the order by ID
     OrderRepo.saveOrders(updatedOrders); // Save the updated list back to localStorage
+  }
+
+  static deleteOrder(orderId) {
+    const currentOrders = OrderRepo.getAllOrders();
+    const filterdOrders = currentOrders.filter((order) => order.id != orderId);
+    OrderRepo.saveOrders(filterdOrders);
+  }
+
+  static deleteSellerOrder(sellerId, orderId) {
+    const currentOrders = OrderRepo.getAllOrders();
+
+    currentOrders.map((order) => {
+      for (let i = 0; i < order.cartItems.length; i++) {
+        order.cartItems = order.cartItems.filter(
+          (item) =>
+            ProductRepo.getSellerIdByProductId(item.productId) != sellerId &&
+            order.id == orderId
+        );
+
+        order.totalPrice = order.cartItems.reduce(
+          (sum, next) => sum + next.totalPrice,
+          0
+        );
+
+        order.totalAmount = order.cartItems.length;
+      }
+    });
+
+    OrderRepo.saveOrders(currentOrders); // Save the updated list back to localStorage
   }
 
   static getOrdersInLcStLen() {
