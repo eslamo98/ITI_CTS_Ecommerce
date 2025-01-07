@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="Views/css/bootstrap.min.css">
     <link rel="stylesheet" href="Views/css/home.css" >
     <link rel="stylesheet" href="Views/css/bootstrap-icons.css">
+    <script src="Views/js/bootstrap.bundle.min.js"></script>
+    <script src="Views/js/home.js"></script>
+    <!-- <script type="module" src="Views/js/homeProduct.js"></script> -->
+
    
 
 </head>
@@ -26,15 +30,7 @@
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <!-- Logo -->
             <a class="navbar-brand ms-5" href="#">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                <img id="logo" src="" alt="Logo" width="140" height="50">
-=======
                 <img id="logo" src="Views/images/logo.png" alt="Logo" width="140" height="50">
->>>>>>> origin/master
-=======
-                <img id="logo" src="Views/images/logo.png" alt="Logo" width="140" height="50">
->>>>>>> 99b08cf0059f15097654d54cc14cf865e4060962
             </a>
     
             <!-- Toggle button for mobile view -->
@@ -49,7 +45,7 @@
                         <a href="#" class="nav-link selected">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Contact</a>
+                        <a href="Views/contact.html" class="nav-link">Contact</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">About</a>
@@ -130,141 +126,68 @@
 
 
 <!-- red rec. Today's -->
-<div class="custom-rectangle mb-3">
-    <span class="custom-rectangle-text ">Today's</span>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 d-flex align-items-center">
+            <!-- المستطيل الأحمر -->
+            <div class="custom-rectangle me-2"></div>
+            <!-- النص "Today's" -->
+            <span class="custom-rectangle-text">Today's</span>
+        </div>
+    </div>
 </div>
-<!-- Tag Before Categorey -->
-<span class="container tagTo">Flash Sales</span>
+
+<!-- Tag Before Category -->
+<div class="container mt-4 ms-0">
+    <h2 class="tagTo">Flash Sales</h2>
+</div>
+
+
+
+
 
 <!-- Timer -->
-<div class="container col-md-8 text-center row justify-content-center">
-<div class="row mb-2" id="countdown">
-    <div class="col-3">
-        <div class="countdown-item" id="days">00</div>
-        <div class="countdown-label">Days</div>
-    </div>
-    <div class="col-3">
-        <div class="countdown-item" id="hours">00</div>
-        <div class="countdown-label">Hours</div>
-    </div>
-    <div class="col-3">
-        <div class="countdown-item" id="minutes">00</div>
-        <div class="countdown-label">Minutes</div>
-    </div>
-    <div class="col-3">
-        <div class="countdown-item" id="seconds">00</div>
-        <div class="countdown-label">Seconds</div>
-    </div>
-</div>
-</div>
-
-
-
-
-<!-- First Product Categorey -->
-<div class="container mt-4">
-    <!-- Product Cards Section -->
-    <div class="row" id="product-cards">
-        <!-- Cards will be dynamically generated here -->
+<div class="container text-center">
+    <div class="row justify-content-center" id="countdown">
+        <!-- الأيام -->
+        <div class="col-6 col-sm-3 mb-3">
+            <div class="countdown-item display-4 fw-bold" id="days">00</div>
+            <div class="countdown-label fs-5">Days</div>
+        </div>
+        <!-- الساعات -->
+        <div class="col-6 col-sm-3 mb-3">
+            <div class="countdown-item display-4 fw-bold" id="hours">00</div>
+            <div class="countdown-label fs-5">Hours</div>
+        </div>
+        <!-- الدقائق -->
+        <div class="col-6 col-sm-3 mb-3">
+            <div class="countdown-item display-4 fw-bold" id="minutes">00</div>
+            <div class="countdown-label fs-5">Minutes</div>
+        </div>
+        <!-- الثواني -->
+        <div class="col-6 col-sm-3 mb-3">
+            <div class="countdown-item display-4 fw-bold" id="seconds">00</div>
+            <div class="countdown-label fs-5">Seconds</div>
+        </div>
     </div>
 </div>
 
-<script>
-            // Sample data for demonstration
-            const productData = [
-            {
-                "id": 1,
-                "name": "Product 1",
-                "price": 10.99,
-                "quantity": 5,
-                "description": "This is Product 1.",
-                "image": "images/staticproduct1.png", // Local image path
-                "category": "Category 1"
-            },
-            {
-                "id": 2,
-                "name": "Product 2",
-                "price": 15.99,
-                "quantity": 3,
-                "description": "This is Product 2.",
-                "image": "images/product2.jpg",
-                "category": "Category 2"
-            },
-            {
-                "id": 3,
-                "name": "Product 3",
-                "price": 20.99,
-                "quantity": 7,
-                "description": "This is Product 3.",
-                "image": "images/product3.jpg",
-                "category": "Category 1"
-            },
-            {
-                "id": 4,
-                "name": "Product 4",
-                "price": 20.99,
-                "quantity": 2,
-                "description": "This is Product 4.",
-                "image": "images/product4.jpg",
-                "category": "Category 2"
-            },
-        ];
-
-        // Store data in local storage for demonstration
-        localStorage.setItem('products', JSON.stringify(productData));
-
-        // Function to generate product cards
-        function generateProductCards(filter = '') {
-            const products = JSON.parse(localStorage.getItem('products'));
-            const container = document.getElementById('product-cards');
-            container.innerHTML = ''; // Clear existing content
-
-            const filteredProducts = products.filter(product => 
-                product.name.toLowerCase().includes(filter.toLowerCase()) ||
-                product.category.toLowerCase().includes(filter.toLowerCase())
-            );
-
-            filteredProducts.forEach(product => {
-                const cardHTML = `
-                    <div class="col-6 col-md-4 col-lg-3 mb-4"> <!-- Responsive classes -->
-                        <div class="card">
-                            <img src="${product.image}" class="card-img-top" alt="${product.name}">
-                            <div class="card-body">
-                                <h5 class="card-title">${product.name}</h5>
-                                <p class="card-text">${product.description}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="h5 mb-0 price">$${product.price.toFixed(2)}</span>
-                                    <div>
-                                        <i class="fas fa-star text-warning"></i>
-                                        <i class="fas fa-star text-warning"></i>
-                                        <i class="fas fa-star text-warning"></i>
-                                        <i class="fas fa-star-half-alt text-warning"></i>
-                                        <small class="text-muted">(4.5)</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer d-flex justify-content-center">
-                                <button class="btn btn-primary btn-sm">Add to Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                container.innerHTML += cardHTML;
-            });
-        }
-
-        // Handle search input
-        document.getElementById('search-input').addEventListener('input', function() {
-            const searchTerm = this.value;
-            generateProductCards(searchTerm); // Pass the search term to filter products
-        });
-
-        // Generate cards on page load
-        generateProductCards();
-</script>
 
 
-<!-- Button to see all product -->
+    <!-- First Row of Product Cards -->
+    <div class="container mt-4">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 g-4" id="product-cards-1">
+            <!-- هنا هتظهر الكاردس الأولى -->
+        </div>
+    </div>
+
+<script type="module" src="Views/js/homeProduct.js"></script>
+
+
+
+
+
+<!-- Button 1 to see all product -->
 <div class="container d-flex justify-content-center align-items-center mt-4">
     <div class="row">
         <div class="col-12 text-center">
@@ -276,14 +199,27 @@
 
 <hr class="container w-50 justify-content-center align-items-center mt-4 border-3 ">
 
+
+
 <!-- red rec. Categories -->
-<div class="custom-rectangle mb-3">
-    <span class="custom-rectangle-text">Categories</span>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 d-flex align-items-center">
+            <!-- المستطيل الأحمر -->
+            <div class="custom-rectangle me-2"></div>
+            <!-- النص "Today's" -->
+            <span class="custom-rectangle-text">Categories</span>
+        </div>
+    </div>
+</div>
+
+<!-- Tag Before Category -->
+<div class="container mt-4 ms-0">
+    <h2 class="tagTo">Browse By Category</h2>
 </div>
 
 
-<!-- Tag Before Categorey -->
-<span class="container tagTo ">Browse By Category</span>
+
 
 <!-- Browse by Category -->
 <section class="logo-cloud py-5">
@@ -333,57 +269,163 @@
 
 <hr class="container w-50 justify-content-center align-items-center mt-4 border-3 ">
 
-<!-- red rec. This  Months -->
-<div class="custom-rectangle mb-3">
-    <span class="custom-rectangle-text">This Month</span>
+
+<!-- red rec. This Month -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 d-flex align-items-center">
+            <!-- المستطيل الأحمر -->
+            <div class="custom-rectangle me-2"></div>
+            <!-- النص "This Month" -->
+            <span class="custom-rectangle-text">This Month</span>
+        </div>
+    </div>
 </div>
 
-<!-- Tag Before Categorey -->
-<span class="container tagTo ">Best Selling Products</span>
+<!-- Tag Before Category -->
+<div class="container mt-4 ms-0">
+    <h2 class="tagTo">Best Selling Products</h2>
+</div>
+
+
+
+
+
+    <!-- Second Row of Product Cards -->
+    <div class="container mt-4">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 g-4" id="product-cards-2">
+            <!-- هنا هتظهر الكاردس التانية -->
+        </div>
+    </div>
+    
+<script type="module" src="Views/js/homeProduct.js"></script>
+
+
+
+<!-- Img bg black with button -->
+<section class="hero-section mt-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <!-- النص والزر -->
+            <div class="col-12 col-md-6 order-2 order-md-1 text-center text-md-start">
+                <h1 class="hero-title">Enhance Your Music Experience</h1>
+                <p class="hero-description">Immerse yourself in the ultimate sound journey with our premium audio solutions.</p>
+                <button type="button" class="btn btn-outline-danger btn-animated">View All Products</button>
+            </div>
+
+            <!-- الصورة -->
+            <div class="col-12 col-md-6 order-1 order-md-2 text-center">
+                <img src="Views/images/GeneralHome/speaker.png" alt="Hero Image" class="img-fluid hero-image">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<!-- red rec. Our Products -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 d-flex align-items-center">
+            <!-- المستطيل الأحمر -->
+            <div class="custom-rectangle me-2"></div>
+            <!-- النص "Our Products" -->
+            <span class="custom-rectangle-text">Our Products</span>
+        </div>
+    </div>
+</div>
+
+<!-- Tag Before Category -->
+<div class="container mt-4 ms-0">
+    <h2 class="tagTo">Explore Our Products</h2>
+</div>
 
 
 
 
 
 
+    <!-- Third Row of Product Cards -->
+    <div class="container mt-4">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 g-4" id="product-cards-3">
+            <!-- هنا هتظهر الكاردس التالته -->
+        </div>
+    </div>
+<script type="module" src="Views/js/homeProduct.js"></script>
+
+    
+        <!-- Fourth Row of Product Cards -->
+        <div class="container mt-4">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 g-4" id="product-cards-4">
+                <!-- هنا هتظهر الكاردس الرابعه -->
+            </div>
+        </div>
+<script type="module" src="Views/js/homeProduct.js"></script>
+
+<!-- Button 2 to see all product -->
+<div class="container d-flex justify-content-center align-items-center mt-4">
+    <div class="row">
+        <div class="col-12 text-center">
+            <button type="button" class="btn btn-outline-danger btn-animated">View All Products</button>
+        </div>
+    </div>
+</div>
 
 
 
 
 
 
+<!-- red rec. Featured -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 d-flex align-items-center">
+            <!-- المستطيل الأحمر -->
+            <div class="custom-rectangle me-2"></div>
+            <!-- النص "Featured" -->
+            <span class="custom-rectangle-text">Featured</span>
+        </div>
+    </div>
+</div>
+
+<!-- Tag Before Category -->
+<div class="container mt-4 ms-0">
+    <h2 class="tagTo">New Arrival</h2>
+</div>
 
 
 
 
+<!-- Grid of Photos Section -->
+<div class="container my-4">
+    <div class="photo-grid">
+        <!-- Large item -->
+        <a href="#" class="photo-item photo-large"> <!-- رابط للعنصر الكبير -->
+            <img src="Views/images/GeneralHome/perfum.jpg" alt="Nature" class="img-fluid">
+            <div class="photo-content">
+                <h3>Perfume</h3>
+                <p>GUCCI INTENSE OUD EDP</p>
+            </div>
+        </a>
+        <!-- Two small items -->
+        <a href="#" class="photo-item"> <!-- رابط للعنصر الأول الصغير -->
+            <img src="Views/images/GeneralHome/smartwatch.jpg" alt="Food" class="img-fluid">
+            <div class="photo-content">
+                <h4>Tech Innovations</h4>
+            </div>
+        </a>
+        <a href="#" class="photo-item"> <!-- رابط للعنصر الثاني الصغير -->
+            <img src="Views/images/GeneralHome/clothes.jpg" alt="Technology" class="img-fluid">
+            <div class="photo-content">
+                <h4>Women’s Collections</h4>
+            </div>
+        </a>
+    </div>
+</div>
 
 
-
-
-
-
-
-
-<pre>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</pre>
 
 
 
