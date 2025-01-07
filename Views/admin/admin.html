@@ -12,12 +12,13 @@
     body {
       background-color: #FAFAFA;
     }
-
+  
     #sidebar {
       width: 200px;
       padding-left: 10px;
+      background-color: white; /* Ensure it's explicitly white */
     }
-
+  
     .navbar-logo {
       display: flex;
       justify-content: center;
@@ -25,7 +26,7 @@
       padding: 0.25rem;
       background: none;
     }
-
+  
     .nav-category {
       font-size: 0.75rem;
       color: gray;
@@ -34,87 +35,41 @@
       margin-bottom: 0.25rem;
       padding-left: 0.75rem;
     }
-
+  
     .nav-link {
       font-size: 0.85rem;
       font-weight: 400;
       color: gray;
       padding: 0.25rem 0.75rem;
     }
-
+  
     .nav-link.active {
       color: black !important;
       background-color: #F3F4F8 !important;
       border-radius: 5px;
     }
-
- 
-    #sidebar {
-      width: 180px;
-    }
+  
     .navbar-logo {
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      padding: 0.25rem;  
-      margin-left: 0;  
-      margin-bottom: 0; 
+      padding: 0.25rem;
+      margin-left: 0;
+      margin-bottom: 0;
     }
+  
     .navbar-logo img {
       margin-top: 20px;
       margin-left: 14px;
       height: 50px;
       width: 125px;
-
-    }    
-    
-
- 
-    #sidebar {
-      width: 180px;
     }
-    .navbar-logo {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 0.25rem;  
-      margin-left: 0;  
-      margin-bottom: 0; 
-    }
-    .navbar-logo img {
-      margin-top: 20px;
-      margin-left: 14px;
-      height: 50px;
-      width: 125px;
-
-    }    
-    
-    
-
+  
     /* Right Section: Content area */
-
-    #sidebar {
-      width: 180px;
-    }
-    .navbar-logo {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 0.25rem;  
-      margin-left: 0;  
-      margin-bottom: 0; 
-    }
-    .navbar-logo img {
-      margin-top: 20px;
-      margin-left: 14px;
-      height: 50px;
-      width: 125px;
-    }    
-    
     .content-wrapper {
       display: flex;
     }
-
+  
     /* Header Styling */
     .header {
       display: flex;
@@ -122,17 +77,17 @@
       align-items: center;
       margin-bottom: 1rem;
     }
-
+  
     .header h1 {
       font-size: 1.25rem; /* Reduced size */
       font-weight: bold; /* Made it bold */
       margin: 0;
     }
-
+  
     .profile-icon {
       font-size: 1.5rem; /* Made it bigger but not too much */
     }
-
+  
     .data-container {
       display: flex;
       align-items: center;
@@ -144,14 +99,14 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       font-family: Arial, sans-serif;
     }
-
+  
     /* Dashboards Layout */
     .dashboard-row {
       display: flex;
       gap: 1rem;
       margin-bottom: 1rem;
     }
-
+  
     .dashboard {
       flex: 1;
       min-height: 150px;
@@ -160,97 +115,96 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       padding: 1rem;
     }
-
+  
     .text-section {
       display: flex;
       flex-direction: column;
     }
-
+  
     .title {
       font-size: 16px;
       color: #333;
       margin: 0;
     }
-
+  
     .duration {
       font-size: 12px;
       color: gray;
       margin: 4px 0;
     }
-
+  
     .amount {
       font-size: 24px;
       font-weight: bold;
       color: #000;
       margin: 8px 0;
     }
-
+  
     .change {
       font-size: 14px;
       display: flex;
       align-items: center;
       margin: 4px 0;
     }
-
+  
     .change .arrow {
       font-size: 16px;
       margin-right: 4px;
     }
-
+  
     .change .percentage {
       font-weight: bold;
     }
-
+  
     .change .up {
       color: green;
     }
-
+  
     .change .down {
       color: red;
     }
-
+  
     .graph-section {
       width: 100px;
       height: 60px;
     }
-
+  
     .graph {
       width: 100%;
       height: 100%;
     }
-
+  
     .nav-link {
-  text-decoration: none;
-  color: inherit;
-  padding: 10px;
-  display: block;
-  font-size: 16px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.nav-link:hover {
-  background-color: #f0f0f0;
-  color: #333;
-}
-
-.nav-link:focus {
-  outline: none;
-  background-color: #e0e0e0;
-}
-
-.nav-link.active {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.nav-link:visited,
-.nav-link:active {
-  color: inherit;
-  background-color: inherit;
-}
-
-    
+      text-decoration: none;
+      color: inherit;
+      padding: 10px;
+      display: block;
+      font-size: 16px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+  
+    .nav-link:hover {
+      background-color: #f0f0f0;
+      color: #333;
+    }
+  
+    .nav-link:focus {
+      outline: none;
+      background-color: #e0e0e0;
+    }
+  
+    .nav-link.active {
+      background-color: #007bff;
+      color: #fff;
+    }
+  
+    .nav-link:visited,
+    .nav-link:active {
+      color: inherit;
+      background-color: inherit;
+    }
   </style>
+  
 </head>
 <body>
   <div class="content-wrapper d-flex">
