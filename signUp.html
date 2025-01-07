@@ -37,6 +37,15 @@
           <div class="mb-3">
             <input type="password" class="form-control" placeholder="Password" id="password" required>
           </div>
+          <div class="mb-3 role-group">
+            <label for="role">Role:</label>
+            <input type="radio" id="admin" name="role" value="admin" required>
+            <label for="admin">Admin</label>
+            <input type="radio" id="user" name="role" value="user" required>
+            <label for="user">User</label>
+            <input type="radio" id="seller" name="role" value="seller" required>
+            <label for="seller">Seller</label>
+          </div>
           <button type="submit" class="btn btn-danger w-100 mb-3" onclick="signUp()">Sign Up</button>
           <p class="mt-3">Already have an account? <a href="#">Log in</a></p>
         </form>
