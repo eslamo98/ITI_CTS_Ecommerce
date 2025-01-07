@@ -50,5 +50,12 @@ export class CategoryRepo {
     return false; // Return false if the category was not found
   }
 
+    // Retrieves a product by catagory id.
+  static getProductsByCatId(catId) {
+    return ProductRepo.GetAllProducts().filter(product => product.categoryId === catId)
+  }
+
+
+
   // Additional functionality can be added here in the future (e.g., searching categories).
 }

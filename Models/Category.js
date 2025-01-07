@@ -3,6 +3,7 @@ export class Category {
   // Private attributes
   #id;
   #name;
+  // #imgPath;
   
   // Static property for auto-incrementing category IDs
   static #autoIncrement = 1;
@@ -33,6 +34,18 @@ export class Category {
   set Name(name) {
     this.#name = name;
   }
+
+  //   // Getter for the ImgPath
+  // get ImgPath() {
+  //   return this.#imgPath;
+  // }
+
+  //   // Setter for the ImgPath
+  // set ImgPath(value) {
+  //   this.#imgPath = value;
+  // }
+
+
 
   // Convert the category to a JSON format for easy transfer/storage
   toJSON() {
