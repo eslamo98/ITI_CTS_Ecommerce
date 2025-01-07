@@ -69,30 +69,13 @@ generateProductCards('product-cards-4', getRandomProducts(allProducts, 4));
 
 
 // دالة للبحث عن منتج
-document.getElementById('search-input').addEventListener('input', function() {
-    const searchTerm = this.value; // نجيب الكلمة اللي المستخدم كتبها
-    const products = ProductRepo.GetAllProducts(); // نجيب كل المنتجات
+// document.getElementById('search-input').addEventListener('input', function() {
+//     const searchTerm = this.value; // نجيب الكلمة اللي المستخدم كتبها
+//     const products = ProductRepo.GetAllProducts(); // نجيب كل المنتجات
 
-    // نفلتر المنتجات بناءً على الكلمة المدخلة
-    const filteredProducts = products.filter(product =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.category.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-    // // نعرض المنتجات المفلترة في الصف الأول
-    // generateProductCards('product-cards-1', filteredProducts.slice(0, 4)); // أول 4 منتجات
-
-    // // نعرض المنتجات المفلترة في الصف التاني
-    // generateProductCards('product-cards-2', filteredProducts.slice(4, 8)); // المنتجات من 5 إلى 8
-
-
-    
-    // // نعرض المنتجات المفلترة في الصف الأول
-    // generateProductCards('product-cards-3', filteredProducts.slice(8, 12)); // أول 4 منتجات
-
-    // // نعرض المنتجات المفلترة في الصف التاني
-    // generateProductCards('product-cards-4', filteredProducts.slice(12, 16)); // المنتجات من 5 إلى 8
-
-
-    
-});
+//     // نفلتر المنتجات بناءً على الكلمة المدخلة
+//     const filteredProducts = products.filter(product =>
+//         product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+//         product.category.toLowerCase().includes(searchTerm.toLowerCase())
+//     );    
+// });
