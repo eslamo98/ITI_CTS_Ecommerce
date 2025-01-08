@@ -27,7 +27,9 @@ body {
     height: 2px;
     background-color: #DB4444; /* underline text color  */
 }
-
+.hover-text-red:hover {
+    color: #DB4444 !important; /* تغيير لون النص إلى الأحمر عند hover */
+  }
 
 /* Search Bar */
 
