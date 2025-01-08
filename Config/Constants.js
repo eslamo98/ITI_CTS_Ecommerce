@@ -24,6 +24,7 @@ export let loggedUser = UsersRepo.getLoggedUserDataBySessionKey(
     zipCode: "10001",
     country: "U.S.A",
   },
+  imgPath: "Images/Users/abigailr.jpg",
 };
 
 // A constant API key related to countries (although its usage is not defined in this code)

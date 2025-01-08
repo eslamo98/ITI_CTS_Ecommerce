@@ -4,7 +4,7 @@ import { UsersRepo } from "./UsersRepo.js"; // Importing UsersRepo to fetch user
 export class RoleRepo {
   // Retrieves all roles from localStorage and returns them as a JSON string.
   static getAllRoles() {
-    return JSON.stringify(localStorage.getItem("Roles"));
+    return JSON.parse(localStorage.getItem("Roles"));
   }
 
   // Saves the given roles array to localStorage under the "Roles" key.

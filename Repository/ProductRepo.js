@@ -83,4 +83,15 @@ export class ProductRepo {
       return product.sellerId;
     }
   }
+
+  static updateProductQuantity(productId, qty) {
+    let products = ProductRepo.GetAllProducts();
+    let product = products.find((product) => product.id === productId);
+    if (product) {
+      product.quantity += +qty;
+      ProductRepo.saveProducts(products);
+      return true;
+    }
+    return false;
+  }
 }

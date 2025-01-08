@@ -550,7 +550,7 @@ export class DbRepo {
         index === 0 ? 1 : index <= 2 ? 2 : 3, // Admin for the first, Seller for the next two, Customer for the rest
         "password123",
         new Address("123 Main St", "City", "State", 10001, "Country"),
-        `UsersImages/${firstName.toLowerCase()}.jpg` // Path to the user's image
+        `Images/Users/${firstName.toLowerCase()}.jpg` // Path to the user's image
       ).toJSON();
     });
 

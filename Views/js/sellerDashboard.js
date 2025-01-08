@@ -11,6 +11,8 @@ let mainHeader = document.createElement("header");
 import { Product } from "../../Models/Product.js";
 import { OrderStatus } from "../../Config/OrderStatus.js";
 import { OrderRepo } from "../../Repository/OrderRepo.js";
+import { RoleRepo } from "../../Repository/RoleRepo.js";
+import { CountryRepo } from "../../Repository/CountryRepo.js";
 
 // create form elements
 let createForm = document.getElementById("createForm");
@@ -133,8 +135,15 @@ MainContent.addEventListener("click", async (e) => {
 
     order.status = OrderStatus.CANCELLED;
     OrderRepo.updateOrder(orderId, order);
-    if (OrderRepo.updateOrder(orderId, order))
+    if (OrderRepo.updateOrder(orderId, order)) {
+      for (let i = 0; i < order.cartItems.length; i++) {
+        ProductRepo.updateProductQuantity(
+          order.cartItems[i].productId,
+          order.cartItems[i].quantity
+        );
+      }
       renderOrdersTable(OrderRepo.getAllSellerOrders(loggedUser.id));
+    }
   } else if (
     e.target.nodeName === "BUTTON" &&
     e.target.getAttribute("data-orderId") &&
@@ -444,9 +453,9 @@ function renderOrdersTable(orders) {
          <button class="btn btn-secondary btn-sm cancel_btn"  data-orderId="${
            order.id
          }">Cancel</button>
-        <button class="btn btn-danger btn-sm delete_btn"  data-orderId="${
+        <!--<button class="btn btn-danger btn-sm delete_btn"  data-orderId="${
           order.id
-        }">Delete</button>
+        }">Delete</button>-->
       </td>
     `;
       orderTable.appendChild(row);
@@ -533,4 +542,121 @@ async function saveImg(productId, imageInputId) {
     // alert("Please select an image to upload.");
     return Promise.resolve(); // No file to upload, resolve the promise
   }
+}
+let showProfileBtn = document.getElementById("showProfileBtn");
+showProfileBtn.addEventListener("click", ShowProfile);
+
+async function getUserImgSrc(user) {
+  if (user) {
+    if (user.imgPath) {
+      Helpers.myConsole(user);
+      return user.imgPath; // Use imgPath if available
+    } else {
+      // Fetch the image from IndexedDB
+      const userImg = await IndexedDBRepo.getById(ImgsTables.usersImg, user.id);
+
+      return userImg?.imgBinary || "default-image-path.png"; // Fallback to a default image
+    }
+  }
+}
+async function ShowProfile() {
+  if (!loggedUser) return;
+  let roles = RoleRepo.getAllRoles();
+  console.log(roles);
+  let userSrc = await getUserImgSrc(loggedUser);
+  let rolesOptions = roles.map(
+    (role) => `<option value="${role.id}">${role.name}</option>`
+  );
+
+  let countries = CountryRepo.getAllCountries();
+  let countriesOptions = countries.map(
+    (country) => `<option value="${country.name}">${country.name}</option>`
+  );
+
+  let profileContainer = document.createElement("div");
+  profileContainer.MainContent.innerHTML = `
+        <div class="form-container">
+            <h2 class="form-title">Edit User Profile</h2>
+            <form>
+                <div class="text-center mb-4">
+                    <img id="profileImage" src="${userSrc}" alt="Profile Image" class="profile-image border" style="border-radius: 50%; objict-fit: cover; object-position: center">
+                    <div class="mt-2">
+                        <label for="imgPath" class="form-label">Profile Image</label>
+                        <input type="file" id="imgPath" class="form-control" accept="image/*" onchange="previewImage(event)">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Full Name</label>
+                    <input type="text" id="name" class="form-control" value="${loggedUser.name}">
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" id="firstName" class="form-control" value="${loggedUser.firstName}">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" id="lastName" class="form-control" value="${loggedUser.lastName}">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="text" id="phone" class="form-control" value="${loggedUser.phone}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" class="form-control" value="${loggedUser.email}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="roleId" class="form-label">Role</label>
+                    <select id="roleId" class="form-select">
+                       ${rolesOptions}
+                    </select>
+                </div>
+
+                <h4 class="mt-4">Address</h4>
+                <div class="mb-3">
+                    <label for="street" class="form-label">Street</label>
+                    <input type="text" id="street" class="form-control" value="${loggedUser.address.street}">
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label for="city" class="form-label">City</label>
+                        <input type="text" id="city" class="form-control" value="${loggedUser.address.city}">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="state" class="form-label">State</label>
+                        <input type="text" id="state" class="form-control" value="${loggedUser.address.state}">
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label for="zipCode" class="form-label">Zip Code</label>
+                        <input type="text" id="zipCode" class="form-control" value="${loggedUser.address.zipCode}">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="country" class="form-label">Country</label>
+                        <select  id="country" class="form-control" value="${loggedUser.address.country}">${countriesOptions}</select>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+
+    `;
+}
+
+function previewImage(event) {
+  const output = document.getElementById("profileImage");
+  output.src = URL.createObjectURL(event.target.files[0]);
 }
