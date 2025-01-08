@@ -1,3 +1,4 @@
+import { ProductRepo } from "./ProductRepo.js";
 // This class manages the category data stored in localStorage.
 export class CategoryRepo {
   // Retrieves all categories from localStorage. Returns an empty array if no categories are found.
@@ -50,21 +51,22 @@ export class CategoryRepo {
     return false; // Return false if the category was not found
   }
 
-    // Retrieves a product by catagory id.
+  // Retrieves a product by catagory id.
 
   // static getProductsByCatId(catId) {
   //   return ProductRepo.GetAllProducts().filter(product => product.categoryId === catId)
   // }
 
-//  static getProductsByCatId(catId) {
-//     return this.products.filter(product => product.categoryId === catId);
-// }
+  //  static getProductsByCatId(catId) {
+  //     return this.products.filter(product => product.categoryId === catId);
+  // }
 
-static getProductsByCatId(catId) {
-  const products = JSON.parse(localStorage.getItem("Products")) || [];
-  return products.filter(product => product.categoryId === catId);
-}
-
+  static getProductsByCatId(catId) {
+    console.log(catId);
+    return ProductRepo.GetAllProducts().filter(
+      (product) => product.categoryID === catId
+    );
+  }
 
   // Additional functionality can be added here in the future (e.g., searching categories).
 }
