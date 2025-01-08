@@ -51,10 +51,19 @@ export class CategoryRepo {
   }
 
     // Retrieves a product by catagory id.
-  static getProductsByCatId(catId) {
-    return ProductRepo.GetAllProducts().filter(product => product.categoryId === catId)
-  }
 
+  // static getProductsByCatId(catId) {
+  //   return ProductRepo.GetAllProducts().filter(product => product.categoryId === catId)
+  // }
+
+//  static getProductsByCatId(catId) {
+//     return this.products.filter(product => product.categoryId === catId);
+// }
+
+static getProductsByCatId(catId) {
+  const products = JSON.parse(localStorage.getItem("Products")) || [];
+  return products.filter(product => product.categoryId === catId);
+}
 
 
   // Additional functionality can be added here in the future (e.g., searching categories).
