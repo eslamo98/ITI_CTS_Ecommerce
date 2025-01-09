@@ -1,10 +1,7 @@
+import { ProductRepo } from "../Repository/ProductRepo.js";
 import { Helpers } from "../Utils/Helpers.js";
 
-// Class representing a product with various attributes like ID, name, price, etc.
-
 export class Product {
-
-  // Private attributes for product details
   #id;
   #name;
   #price;
@@ -12,13 +9,14 @@ export class Product {
   #description;
   #categoryId;
   #imgPath;
+  #sellerId;
 
-  // Static auto-increment ID counter for product instances
-  static #autoIncrement = 1;
+  static #autoIncrement =
+    ProductRepo.getNumberOfProductsInLOSt() === 0
+      ? 1
+      : ProductRepo.getNumberOfProductsInLOSt() + 1;
 
-  // Constructor to initialize a product with the provided details
-  constructor(_name, _price, _quantity, _desc, _catId, _imgPath) {
-    // Assign a unique ID to the product and increment the static counter
+  constructor(_name, _price, _quantity, _desc, _catId, _imgPath, _sellerId) {
     this.ID = Product.#autoIncrement++;
     this.Name = _name;
     this.Price = _price;
@@ -26,14 +24,12 @@ export class Product {
     this.Description = _desc;
     this.CategoryID = _catId;
     this.ImgPath = _imgPath;
+    this.SellerId = _sellerId;
   }
-
-  // Getter and setter for the product ID with validation
 
   get ID() {
     return this.#id;
   }
-
   set ID(value) {
     if (value.constructor.name === "Number" && value > 0) {
       this.#id = value;
@@ -42,8 +38,6 @@ export class Product {
     }
   }
 
-  // Getter and setter for the product name with validation
-  
   get Name() {
     return this.#name;
   }
@@ -56,13 +50,9 @@ export class Product {
     }
   }
 
-
-  // Getter and setter for the product price with validation
-
   get Price() {
     return this.#price;
   }
-
 
   set Price(value) {
     if (value.constructor.name === "Number" && value > 0) {
@@ -72,22 +62,19 @@ export class Product {
     }
   }
 
-
-  // Getter and setter for the product quantity with validation
-
   get Quantity() {
     return this.#quantity;
   }
 
   set Quantity(value) {
-    if (value.constructor.name === "Number" && value >= 0) {
+    if (Number(value).constructor.name === "Number" && value >= 0) {
       this.#quantity = value;
     } else {
-      throw new Error("Invalid quantity. Quantity must be a non-negative number.");
+      throw new Error(
+        "Invalid quantity. Quantity must be a non-negative number."
+      );
     }
   }
-
-  // Getter and setter for the product description with validation
 
   get Description() {
     return this.#description;
@@ -97,12 +84,12 @@ export class Product {
     if (value.constructor.name === "String" && value.trim() !== "") {
       this.#description = value;
     } else {
-      throw new Error("Invalid description. Description must be a non-empty string.");
+      throw new Error(
+        "Invalid description. Description must be a non-empty string."
+      );
     }
   }
 
-  // Getter and setter for the category ID with validation
-  
   get CategoryId() {
     return this.#categoryId;
   }
@@ -111,12 +98,12 @@ export class Product {
     if (value.constructor.name === "Number" && value > 0) {
       this.#categoryId = value;
     } else {
-      throw new Error("Invalid category ID. Category ID must be a positive number.");
+      throw new Error(
+        "Invalid category ID. Category ID must be a positive number."
+      );
     }
   }
 
-  // Getter and setter for the image path
-  
   get ImgPath() {
     return this.#imgPath;
   }
@@ -125,17 +112,30 @@ export class Product {
     this.#imgPath = value;
   }
 
-  // Convert the product to a JSON object for easy transfer/storage
-  
+  get SellerId() {
+    return this.#sellerId;
+  }
+
+  set SellerId(value) {
+    if (Helpers.isNumber(value) && Helpers.isPositive(value)) {
+      this.#sellerId = value;
+    } else {
+      throw new Error(
+        "Invalid seller ID. Seller ID must be a positive number."
+      );
+    }
+  }
+
   toJSON() {
     return {
-      ID: this.ID,
-      Name: this.Name,
-      Price: this.Price,
-      Quantity: this.Quantity,
-      Description: this.Description,
-      CategoryID: this.CategoryID,
-      ImgPath: this.ImgPath,
+      id: this.ID,
+      name: this.Name,
+      price: this.Price,
+      quantity: this.Quantity,
+      description: this.Description,
+      categoryID: this.CategoryID,
+      sellerId: this.SellerId,
+      imgPath: this.ImgPath,
     };
   }
 }

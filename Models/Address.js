@@ -1,7 +1,7 @@
 // UserAddress class representing the user's address with street, city, state, zip code, and country.
 import { Helpers } from "../Utils/Helpers.js";
 
-export class UserAddress {
+export class Address {
   // Private fields for address details
   #id;
   #street;

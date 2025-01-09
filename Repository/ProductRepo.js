@@ -1,3 +1,4 @@
+import { Helpers } from "../Utils/Helpers.js";
 import { UsersRepo } from "./UsersRepo.js";
 
 export class ProductRepo {
@@ -19,7 +20,7 @@ export class ProductRepo {
   //this method add a product
   static addProduct(product) {
     let products = ProductRepo.GetAllProducts();
-    products.push(product);
+    products.unshift(product);
     ProductRepo.saveProducts(products);
   }
 
@@ -29,6 +30,7 @@ export class ProductRepo {
     let index = products.findIndex((product) => product.id === productId);
     if (index > -1) {
       products[index] = updatedProduct;
+      console.log(products);
       ProductRepo.saveProducts(products);
       return true;
     }
@@ -39,7 +41,7 @@ export class ProductRepo {
   //this method delete product by id return bool value
   static deleteProduct(productId) {
     let products = ProductRepo.GetAllProducts();
-    let newProducts = products.fillter((product) => product.id !== productId);
+    let newProducts = products.filter((product) => product.id !== productId);
     ProductRepo.saveProducts(newProducts);
   }
 
@@ -66,6 +68,19 @@ export class ProductRepo {
       if (product && product.ImgPath) {
         return product.ImgPath;
       }
+    }
+  }
+
+  static getNumberOfProductsInLOSt() {
+    return this.GetAllProducts().length;
+  }
+
+  static getSellerIdByProductId(productId) {
+    let product = ProductRepo.GetProductById(productId);
+    if (product) {
+      // Helpers.myConsole(product.sellerId, "From get seller id");
+
+      return product.sellerId;
     }
   }
 }

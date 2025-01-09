@@ -1,0 +1,751 @@
+body {
+    border: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Nav Bar */
+
+.navbar {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 1rem; 
+}
+.nav-link {
+    position: relative;
+    color: #000; 
+}
+.nav-link.selected {
+    color: #DB4444; 
+}
+.nav-link:hover::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -5px;
+    height: 2px;
+    background-color: #DB4444; /* underline text color  */
+}
+
+/* Search Bar */
+
+.search-wrapper {
+    max-width: 300px;
+}
+
+.search-box {
+    position: relative;
+    background: white;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+}
+
+.search-box:focus-within {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.search-input {
+    border: 2px solid #eee;
+    border-radius: 30px;
+    padding: 10px 25px;
+    padding-right: 50px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: #DB4444;
+    box-shadow: none;
+}
+
+.search-icon {
+    position: absolute;
+    left: 220px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.search-box:focus-within .search-icon {
+    color: #DB4444;
+}
+
+.suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 15px;
+    margin-top: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 2000;
+}
+
+.search-box:focus-within .suggestions {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.suggestion-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.suggestion-item:hover {
+    background: #f8f9fa;
+}
+
+.recent-searches {
+    color: #666;
+    font-size: 0.8rem;
+    padding: 10px 20px;
+    background: #f8f9fa;
+    border-radius: 15px 15px 0 0;
+}
+
+/* Slider */
+
+.carousel-item img {
+height: 400px;
+object-fit: cover;
+z-index: 1000;
+}
+#imageSlider .carousel-item {
+height: 550px; /* يمكنك تغيير هذا الرقم حسب الطول الذي تريده */
+}
+
+#imageSlider .carousel-item img {
+height: 100%; /* تأكد من أن الصورة تغطي الارتفاع بالكامل */
+object-fit: cover; /* يجعل الصورة تغطي العنصر بشكل جيد */
+}
+
+/* red rec. */
+.custom-rectangle {
+    background-color: #DB4444;
+    width: 20px; /* عرض المستطيل */
+    height: 50px; /* ارتفاع المستطيل */
+    border-radius: 2px;
+}
+
+.custom-rectangle-text {
+    font-weight: 600;
+    color: #DB4444; /* لون النص */
+}
+
+.tagTo {
+    font-size: 1.5rem; /* حجم النص */
+    font-weight: bold; /* سمك النص */
+    color: #000; /* لون النص */
+}
+
+
+
+/* Timer */
+.countdown-item {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    color: #000000;
+}
+
+.countdown-label {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    color: #DB4444;
+}
+
+.social-icon {
+    font-size: 1.5rem;
+    margin: 0 10px;
+    color: #000000;
+    transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+    color: #DB4444;
+}
+
+
+
+/* Product Categorey */
+.card-title {
+    white-space: nowrap; /* eliminate text to jump to new line*/
+    overflow: hidden; /* يخفي النص الزائد */
+    text-overflow: ellipsis; /* يعرض النقاط (...) */
+    cursor: pointer; 
+}
+.card {
+    /* width: 300px; Set card width */
+    height: 350px;
+}
+.card-img-top {
+    height: 150px; /* Set a fixed height */
+    object-fit: cover; /* Maintain aspect ratio */
+}
+.card-footer {
+    background-color: black; /* Change background of button container to black */
+}
+.btn-primary {
+    background-color: white;
+    color: black;
+    border-color: white;
+}
+.btn-primary:hover {
+    background-color: #DB4444; /* Change button color on hover */
+    border-color: #DB4444; /* Change border color on hover */
+}
+.price {
+    color: #DB4444; /* Change price color */
+}
+
+
+
+
+/* Animated Button to see all category */
+.btn-animated {
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s ease-out;
+    background-color: #ffffff; /* Background color */
+    border-color: #DB4444; /* Border color */
+    color: #DB4444; /* Text color */
+}
+
+.btn-animated::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #DB4444; /* Background color on hover */
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.9s ease-out;
+    z-index: -1;
+}
+
+.btn-animated:hover::before {
+    transform: scaleX(1);
+}
+
+.btn-animated:hover {
+    color: #fff; /* Text color on hover */
+}
+
+.tagTo{
+    margin-left: 100px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+
+/* Browse by Category */  
+.logo-item {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+  }
+  
+  .logo-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    color: white;
+  }
+  
+  .logo-item i {
+    font-size: 2.5rem;
+    color: #000000;
+    transition: all 0.3s ease;
+  }
+  
+  .logo-item:hover i {
+    color: white;
+  }
+
+  .square-container {
+    width: 150px; /* Adjust the size as necessary */
+    height: 100px; 
+    margin: auto;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ddd; /* Optional border */
+    border-radius: 8px; /* Optional rounded corners */
+    background-color: #fff; /* Optional background color */
+    text-decoration: none; /* Remove underline from link */
+}
+
+.square-container:hover{
+    background-color: #DB4444;
+}
+
+.square-container p {
+    margin-bottom: 20px;
+    margin-top: 2px; /* Space between icon and text */
+    font-size: 14px; /* Adjust text size as necessary */
+    text-align: center; /* Center the text */
+}
+
+
+
+
+/* Img with button */
+.hero-section {
+    background-color: #000000;
+    color: white;
+    padding: 5rem 0;
+    border-radius: 15px;
+    margin-left: 110px;
+    margin-right: 110px;
+    padding-left: 50px;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.hero-image {
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 767.98px) {
+    .hero-title {
+        font-size: 2rem; /* تصغير حجم العنوان على الشاشات الصغيرة */
+    }
+
+    .hero-description {
+        font-size: 1rem; /* تصغير حجم الوصف على الشاشات الصغيرة */
+    }
+
+    .hero-image {
+        margin: 2rem auto 0; /* تباعد الصورة على الشاشات الصغيرة */
+    }
+}
+
+
+
+
+/* Grid of Photos Section */
+.photo-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* تقسيمة 2:1 */
+    gap: 16px; /* المسافة بين العناصر */
+    height: 400px; /* ارتفاع أقل للسيكشن كله */
+}
+
+.photo-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px; /* زوايا مدورة */
+    height: 100%; /* ارتفاع كامل */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* تأثيرات الحركة */
+    display: block; /* علشان الـ <a> tag تاخد المساحة كاملة */
+    text-decoration: none; /* إزالة الخط اللي تحت الرابط */
+    color: inherit; /* إزالة تغيير لون النص */
+}
+
+.photo-item:hover {
+    cursor: pointer;
+    transform: scale(1.02); /* تكبير العنصر قليلاً عند الـ hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* إضافة ظل خفيف */
+    
+    
+}
+
+.photo-large {
+    grid-row: span 2; /* العنصر الكبير يأخذ صفين */
+}
+
+.photo-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5); /* خلفية شبه شفافة */
+    color: white;
+    padding: 10px;
+    text-align: center;
+    transition: opacity 0.3s ease; /* تأثير ظهور المحتوى */
+}
+
+.photo-item:hover .photo-content {
+    opacity: 1; /* إظهار المحتوى بالكامل عند الـ hover */
+    cursor: pointer;
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* تغطية المساحة دون تشويه */
+    transition: transform 0.3s ease; /* تأثير الحركة للصورة */
+}
+
+.photo-item:hover img {
+    transform: scale(1.05); /* تكبير الصورة قليلاً عند الـ hover */
+    cursor: pointer;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Feature Section */
+.card {
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+}
+
+.card-body .display-4 {
+    transition: all 0.3s ease;
+}
+
+.card:hover .card-body .display-4 {
+    transform: scale(1.1);
+}
+.card-title{
+    font-size: 18px;
+}
+
+
+/* Footer */
+.footer {
+    background: black;
+    color: #ffffff;
+    padding: 70px 0 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(to right, #DB4444, #b13131);
+}
+
+.footer-logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #DB4444, #660000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.footer-about {
+    color: #e1dada;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.footer h5 {
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.footer h5::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 30px;
+    height: 2px;
+    background: #DB4444;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: #DB4444;
+    transform: translateX(5px);
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-icon {
+    width: 35px;
+    height: 35px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background: #DB4444;
+    transform: translateY(-3px);
+    color: #fff;
+}
+
+.footer-newsletter {
+    position: relative;
+    margin-top: 20px;
+}
+
+.footer-newsletter input {
+    padding: 12px 15px;
+    border-radius: 25px;
+    border: none;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    outline: none;
+    padding-right: 50px;
+}
+
+.footer-newsletter input::placeholder {
+    color: #a4b5c6;
+}
+
+.newsletter-btn {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    bottom: 5px;
+    width: 40px;
+    border-radius: 50%;
+    background: #DB4444;
+    border: none;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.newsletter-btn:hover {
+    background: #DB4444;
+}
+
+.footer-bottom {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    color: #a4b5c6;
+}
+
+.footer-bottom-links {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.footer-bottom-links a {
+    color: #a4b5c6;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom-links a:hover {
+    color: #DB4444;
+}
+
+@media (max-width: 768px) {
+    .footer-section {
+        margin-bottom: 40px;
+    }
+}
+
+
+
+
+
+
+
+/* Media Queries for Responsive Design */
+
+@media (max-width: 768px) {
+    /* Navbar */
+    .navbar-brand {
+        margin-left: 0 !important;
+    }
+
+    .navbar-nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .search-wrapper {
+        max-width: 100%;
+        margin-top: 10px;
+    }
+
+    .search-icon {
+        left: 85%;
+    }
+
+    /* Slider */
+    #imageSlider .carousel-item {
+        height: 300px; /* تقليل الارتفاع في الشاشات الصغيرة */
+    }
+
+    .carousel-caption h5 {
+        font-size: 1.2rem;
+    }
+
+    .carousel-caption p {
+        font-size: 0.9rem;
+    }
+
+    /* Grid of Photos */
+    .photo-grid {
+        grid-template-columns: 1fr; /* جعل التقسيمة عمودية في الشاشات الصغيرة */
+        height: auto; /* إزالة الارتفاع الثابت */
+    }
+
+    .photo-large {
+        grid-row: span 1; /* إزالة span 2 في الشاشات الصغيرة */
+    }
+
+    /* Cards */
+    .card {
+        width: 100%; /* جعل الكروت تأخذ العرض الكامل */
+        height: auto; /* إزالة الارتفاع الثابت */
+    }
+
+    .card-img-top {
+        height: 200px; /* تقليل ارتفاع الصور في الشاشات الصغيرة */
+    }
+
+    /* Footer */
+    .footer-section {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .footer-links {
+        justify-content: center;
+    }
+
+    .footer-newsletter input {
+        width: 80%; /* تقليل عرض حقل الإيميل */
+    }
+
+    .newsletter-btn {
+        right: 15%;
+    }
+
+    /* Features Section */
+    .card-title {
+        font-size: 1rem; /* تقليل حجم النص في الشاشات الصغيرة */
+    }
+
+    .card-text {
+        font-size: 0.9rem;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        padding: 2rem 0; /* تقليل الحشو في الشاشات الصغيرة */
+    }
+
+    .hero-title {
+        font-size: 2rem; /* تقليل حجم العنوان */
+    }
+
+    .hero-description {
+        font-size: 1rem; /* تقليل حجم الوصف */
+    }
+
+    .hero-image {
+        margin-top: 1rem; /* تقليل المسافة بين الصورة والنص */
+    }
+
+    /* Browse by Category */
+    .square-container {
+        width: 100%; /* جعل العناصر تأخذ العرض الكامل */
+        height: auto; /* إزالة الارتفاع الثابت */
+        margin-bottom: 10px; /* إضافة مسافة بين العناصر */
+    }
+
+    .square-container p {
+        font-size: 0.9rem; /* تقليل حجم النص */
+    }
+
+    /* Countdown Timer */
+    .countdown-item {
+        font-size: 1.5rem; /* تقليل حجم الأرقام */
+        margin-left: 0; /* إزالة الهوامش */
+    }
+
+    .countdown-label {
+        font-size: 0.7rem; /* تقليل حجم النص */
+        margin-left: 0;
+    }
+
+    /* Buttons */
+    .btn-animated {
+        font-size: 0.9rem; /* تقليل حجم النص في الأزرار */
+        padding: 8px 16px; /* تقليل الحشو */
+    }
+}

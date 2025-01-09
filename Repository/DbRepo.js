@@ -13,6 +13,9 @@ import { ShoppingCart } from "../Models/ShoppingCart.js";
 import { ShoppingCartItem } from "../Models/ShoppingCartItem.js";
 import { Address } from "../Models/Address.js";
 import { Country } from "../Models/Country.js";
+import { Order } from "../Models/Order.js";
+import { PaymentMethod } from "../Models/PaymentMethod.js";
+import { PaymentMethodRepo } from "./PaymentMethodRepo.js";
 
 export class DbRepo {
   static saveIndex(index) {
@@ -314,18 +317,187 @@ export class DbRepo {
         2
       ).toJSON(),
     ];
-    console.log(
-      new Product(
-        "Annibale Colombo Bed",
-        1199.99,
-        50,
-        "A luxurious bed designed for ultimate comfort.",
-        1,
-        "Images/Products/Annibale Colombo Bed.jpg",
-        3
-      ).toJSON()
-    );
+
     ProductRepo.saveProducts(productsData);
+
+    const ordersData = [
+      new Order(
+        4, // User ID
+        "2025-01-01", // Order Date
+        "Pending", // Status
+        [
+          new ShoppingCartItem(1, "Annibale Colombo Bed", 1, 1199.99),
+          new ShoppingCartItem(2, "Annibale Colombo Sofa", 1, 799.99),
+        ], // Cart Items
+        new Address("123 Main St", "New York", "NY", "10001", "USA"), // Shipping Address
+        PaymentMethodRepo.getPaymentByName("Credit Card") // Payment Method
+      ),
+      new Order(
+        4,
+        "2025-01-02",
+        "Shipped",
+        [
+          new ShoppingCartItem(3, "Apple", 5, 1.99),
+          new ShoppingCartItem(4, "Beef Steak", 2, 15.99),
+        ],
+        new Address("456 Elm St", "Los Angeles", "CA", "90001", "USA"),
+        PaymentMethodRepo.getPaymentByName("PayPal")
+      ),
+      new Order(
+        5,
+        "2025-01-03",
+        "Delivered",
+        [
+          new ShoppingCartItem(5, "Bedside Table African Cherry", 1, 199.99),
+          new ShoppingCartItem(6, "Calvin Klein CK One", 1, 39.99),
+        ],
+        new Address("789 Oak St", "Chicago", "IL", "60601", "USA"),
+        PaymentMethodRepo.getPaymentByName("Bank Transfer")
+      ),
+      new Order(
+        4,
+        "2025-01-04",
+        "Pending",
+        [
+          new ShoppingCartItem(7, "Camera", 1, 499.99),
+          new ShoppingCartItem(8, "Cat Food", 3, 19.99),
+        ],
+        new Address("321 Pine St", "Houston", "TX", "77001", "USA"),
+        PaymentMethodRepo.getPaymentByName("Cash on Delivery")
+      ),
+      new Order(
+        5,
+        "2025-01-05",
+        "Cancelled",
+        [
+          new ShoppingCartItem(9, "Chicken Meat", 2, 8.99),
+          new ShoppingCartItem(10, "Cooking Oil", 1, 5.99),
+        ],
+        new Address("654 Maple St", "Phoenix", "AZ", "85001", "USA"),
+        PaymentMethodRepo.getPaymentByName("Credit Card")
+      ),
+      new Order(
+        6,
+        "2025-01-06",
+        "Shipped",
+        [
+          new ShoppingCartItem(11, "Cucumber", 10, 1.49),
+          new ShoppingCartItem(12, "Dog Food", 2, 24.99),
+        ],
+        new Address("987 Cedar St", "Philadelphia", "PA", "19101", "USA"),
+        PaymentMethodRepo.getPaymentByName("PayPal")
+      ),
+      new Order(
+        7,
+        "2025-01-07",
+        "Delivered",
+        [
+          new ShoppingCartItem(13, "Dolce Shine Eau de Parfum", 1, 59.99),
+          new ShoppingCartItem(14, "Dior J'adore", 1, 89.99),
+        ],
+        new Address("159 Birch St", "San Antonio", "TX", "78201", "USA"),
+        PaymentMethodRepo.getPaymentByName("Credit Card")
+      ),
+      new Order(
+        8,
+        "2025-01-08",
+        "Pending",
+        [
+          new ShoppingCartItem(15, "Eggs", 12, 3.99),
+          new ShoppingCartItem(16, "Essence Mascara Lash Princess", 1, 9.99),
+        ],
+        new Address("753 Spruce St", "San Diego", "CA", "92101", "USA"),
+        PaymentMethodRepo.getPaymentByName("Bank Transfer")
+      ),
+      new Order(
+        9,
+        "2025-01-09",
+        "Shipped",
+        [
+          new ShoppingCartItem(17, "Eyeshadow Palette with Mirror", 1, 29.99),
+          new ShoppingCartItem(18, "Fish Steak", 1, 12.99),
+        ],
+        new Address("159 Redwood St", "Dallas", "TX", "75201", "USA"),
+        PaymentMethodRepo.getPaymentByName("Credit Card")
+      ),
+      new Order(
+        10,
+        "2025-01-10",
+        "Delivered",
+        [
+          new ShoppingCartItem(19, "Green Bell Pepper", 6, 2.49),
+          new ShoppingCartItem(20, "Green Chili Pepper", 8, 1.99),
+        ],
+        new Address("456 Cypress St", "San Jose", "CA", "95101", "USA"),
+        PaymentMethodRepo.getPaymentByName("PayPal")
+      ),
+      new Order(
+        10,
+        "2025-01-11",
+        "Cancelled",
+        [
+          new ShoppingCartItem(21, "Gucci Bloom Eau de Parfum", 1, 69.99),
+          new ShoppingCartItem(22, "Honey Jar", 2, 6.99),
+        ],
+        new Address("321 Dogwood St", "Austin", "TX", "73301", "USA"),
+        PaymentMethodRepo.getPaymentByName("Cash on Delivery")
+      ),
+      new Order(
+        5,
+        "2025-01-12",
+        "Pending",
+        [
+          new ShoppingCartItem(23, "Ice Cream", 3, 4.99),
+          new ShoppingCartItem(24, "Juice", 5, 3.49),
+        ],
+        new Address("654 Palm St", "Fort Worth", "TX", "76101", "USA"),
+        PaymentMethodRepo.getPaymentByName("Credit Card")
+      ),
+      new Order(
+        5,
+        "2025-01-13",
+        "Shipped",
+        [
+          new ShoppingCartItem(25, "Knoll Saarinen Executive Chair", 1, 349.99),
+          new ShoppingCartItem(26, "Mobile", 1, 299.99),
+        ],
+        new Address("159 Walnut St", "Jacksonville", "FL", "32099", "USA"),
+        PaymentMethodRepo.getPaymentByName("Bank Transfer")
+      ),
+      new Order(
+        7,
+        "2025-01-14",
+        "Delivered",
+        [
+          new ShoppingCartItem(27, "Powder Canister", 1, 14.99),
+          new ShoppingCartItem(28, "Red Lipstick", 1, 12.99),
+        ],
+        new Address("753 Chestnut St", "Columbus", "OH", "43004", "USA"),
+        PaymentMethodRepo.getPaymentByName("PayPal")
+      ),
+      new Order(
+        8,
+        "2025-01-15",
+        "Cancelled",
+        [
+          new ShoppingCartItem(29, "Red Nail Polish", 2, 7.99),
+          new ShoppingCartItem(30, "TV", 1, 899.99),
+        ],
+        new Address("987 Elmwood St", "Charlotte", "NC", "28201", "USA"),
+        PaymentMethodRepo.getPaymentByName("Credit Card")
+      ),
+
+      new Order(
+        5,
+        "2025-01-05",
+        "Cancelled",
+        [new ShoppingCartItem(1, "Annibale Colombo Bed", 1, 1199.99)],
+        new Address("654 Maple St", "Phoenix", "AZ", "85001", "USA"),
+        PaymentMethodRepo.getPaymentByName("Credit Card")
+      ),
+    ];
+
+    OrderRepo.saveOrders(ordersData);
 
     RoleRepo.saveRoles([
       new Role("Admin").toJSON(),

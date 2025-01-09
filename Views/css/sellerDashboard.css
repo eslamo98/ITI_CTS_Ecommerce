@@ -5,6 +5,14 @@ body {
   background-color: #fafafa;
 }
 
+/* general */
+.truncated-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* general */
+
 .content-wrapper {
   display: grid;
   grid-template-areas: "sidebar main";
@@ -59,7 +67,11 @@ main {
   align-items: center;
   margin-bottom: 1rem;
 }
-
+.create_new_product {
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
 .header h1 {
   font-size: 1.25rem; /* Reduced size */
   font-weight: bold; /* Made it bold */
