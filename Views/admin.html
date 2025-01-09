@@ -241,7 +241,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
+            border-radius: 5px; /* Changed to square */
             padding: 0;
             transition: opacity 0.3s;
         }
@@ -269,6 +269,9 @@
     }
     .status-cancelled {
       background-color: #DB4444;
+    }
+    .btn-profile {
+      display: none; /* Hide profile button */
     }
   </style>
 </head>
@@ -309,6 +312,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#" data-section="home"><i class="bi bi-house-door"></i> Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" id="signOutLink"><i class="bi bi-box-arrow-right"></i> Sign Out</a>
         </li>
       </ul>
     </nav>
