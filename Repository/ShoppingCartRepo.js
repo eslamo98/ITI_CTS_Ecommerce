@@ -10,6 +10,11 @@ export class ShoppingCartRepo {
     return shoppingCarts.find((cart) => cart.cartId === cartId);
   }
 
+  static getCartByUserId(userId) {
+    let shoppingCarts = this.getAllCarts();
+    return shoppingCarts.find((cart) => cart.userId === userId);
+  }
+
   // Save all shopping carts in localstorage after any modification
   static saveShopingCarts(shoppingCarts) {
     localStorage.setItem("shoppingCarts", JSON.stringify(shoppingCarts));

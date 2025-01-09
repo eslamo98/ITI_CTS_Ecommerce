@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
   loadContent("admin_dashboard.html");
 
   // Add event listeners to all nav links
-  document.querySelectorAll(".nav-link").forEach(link => {
-    link.addEventListener("click", event => {
+  document.querySelectorAll(".nav-link").forEach((link) => {
+    link.addEventListener("click", (event) => {
       event.preventDefault(); // Prevent page reload
       const sectionFile = event.currentTarget.dataset.section;
 
@@ -26,23 +26,23 @@ function loadContent(file) {
 
   // Fetch the HTML file and load it into the content area
   fetch(file)
-    .then(response => {
+    .then((response) => {
       if (!response.ok) {
         throw new Error(`Error loading ${file}: ${response.statusText}`);
       }
       return response.text();
     })
-    .then(html => {
+    .then((html) => {
       content.innerHTML = html; // Update content with fetched HTML
     })
-    .catch(error => {
+    .catch((error) => {
       content.innerHTML = `<h1>Error</h1><p>${error.message}</p>`;
     });
 }
 
 // Update Active Link
 function updateActiveLink(activeLink) {
-  document.querySelectorAll(".nav-link").forEach(link => {
+  document.querySelectorAll(".nav-link").forEach((link) => {
     link.classList.remove("active");
   });
   activeLink.classList.add("active");

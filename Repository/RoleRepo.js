@@ -27,8 +27,10 @@ export class RoleRepo {
 
   // Checks if a user with a given ID is a seller.
   // Fetches the user's role using UsersRepo and compares it with the 'SELLER' role.
-  static isSeller(id) {
-    const userRole = UsersRepo.getRoleByUserId(id); // Get the user's role from UsersRepo
+  static isSeller(roleId) {
+    console.log(roleId);
+    const userRole = this.getAllRoles().find((role) => role.id === roleId);
+    // Get the user's role from UsersRepo
     console.log(userRole); // Log the user role (for debugging purposes)
     return userRole && userRole.name === Roles.SELLER; // Return true if the role is 'SELLER'
   }

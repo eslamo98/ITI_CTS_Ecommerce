@@ -7,28 +7,28 @@ export const userLoggedSessionKey = "loggedUserData";
 
 /* Try to retrieve the logged user data from localStorage using the session key.
    If no data is found, use the default user object instead.*/
-export let loggedUser = 
-// UsersRepo.getLoggedUserDataBySessionKey(
-//   userLoggedSessionKey
-// ) ||
- {
-  id: 2,
-  name: "John Doe",
-  firstName: "first name",
-  lastName: "last name",
-  phone: 1234567,
-  email: "john.doe@example.com",
-  roleId: 1,
-  password: "645yuyub",
-  address: {
-    street: "123 Main St",
-    city: "New York",
-    state: "NY",
-    zipCode: "10001",
-    country: "U.S.A",
-  },
-  imgPath: "Images/Users/abigailr.jpg",
-};
+export let loggedUser =
+  // UsersRepo.getLoggedUserDataBySessionKey(
+  //   userLoggedSessionKey
+  // ) ||
+  {
+    id: 2,
+    name: "John Doe",
+    firstName: "first name",
+    lastName: "last name",
+    phone: 1234567,
+    email: "john.doe@example.com",
+    roleId: 2,
+    password: "645yuyub",
+    address: {
+      street: "123 Main St",
+      city: "New York",
+      state: "NY",
+      zipCode: "10001",
+      country: "U.S.A",
+    },
+    imgPath: "Images/Users/abigailr.jpg",
+  };
 
 // A constant API key related to countries (although its usage is not defined in this code)
 export const countriesApiKey = "4JsaxIpiYmkgpGmHxmRgXIR1t4n8Du84Wq6WSWdU";
