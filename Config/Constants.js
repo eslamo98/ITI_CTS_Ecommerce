@@ -18,7 +18,7 @@ export let loggedUser =
     lastName: "last name",
     phone: 1234567,
     email: "john.doe@example.com",
-    roleId: 2,
+    roleId: 3,
     password: "645yuyub",
     address: {
       street: "123 Main St",

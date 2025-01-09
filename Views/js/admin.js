@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 document.addEventListener("DOMContentLoaded", () => {
   // Load default content (Dashboard)
   loadContent("admin_dashboard.html");
@@ -48,5 +47,3 @@ function updateActiveLink(activeLink) {
   });
   activeLink.classList.add("active");
 }
-=======
->>>>>>> 76b869f7a58e5eb4c7d7ef11df282edda31d0571
