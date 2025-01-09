@@ -50,7 +50,11 @@
 }
 
 
+<<<<<<< HEAD
 /* Animated Button to go home */
+=======
+/* Animated Button to see all category */
+>>>>>>> 9ef3e2d (Add Error Page html&css)
 .btn-animated {
     position: relative;
     overflow: hidden;
