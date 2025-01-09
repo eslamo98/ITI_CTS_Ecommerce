@@ -262,8 +262,8 @@ let dashboardlink = document.getElementById("dashboardlink");
 dashboardlink.addEventListener("click", async function (event) {
   // headerTitle.innerHTML = "Dashboard";
   mainHeader.innerHTML = `
-  <h2 class="m-0">Dashboard</h2>
-  <div class="header-icons">
+  <h2 class="m-0 mt-5 ms-3">Dashboard</h2>
+  <div class="header-icons mt-5 me-3">
     <button class="btn btn-light"><i class="bi bi-bell"></i></button>
     <button class="btn btn-light">
       <i class="bi bi-person-circle"></i>
@@ -283,7 +283,7 @@ dashboardlink.addEventListener("click", async function (event) {
                       <p class="amount">25.7K</p>
                       <p class="change">
                         <span class="arrow up">↑</span>
-                        <span class="percentage up">6%</span> vs last 7 days
+                        <span class="percentage up me-1">6%</span> vs last 7 days
                       </p>
                     </div>
                     <div class="graph-section">
@@ -294,7 +294,7 @@ dashboardlink.addEventListener("click", async function (event) {
                       >
                         <path
                           d="M0,40 Q25,20 50,30 T100,20"
-                          stroke="green"
+                          stroke="#DB4444"
                           fill="none"
                           stroke-width="2"
                         />
@@ -314,7 +314,7 @@ dashboardlink.addEventListener("click", async function (event) {
                       <p class="amount">25.7K</p>
                       <p class="change">
                         <span class="arrow up">↑</span>
-                        <span class="percentage up">6%</span> vs last 7 days
+                        <span class="percentage up me-1">6%</span> vs last 7 days
                       </p>
                     </div>
                     <div class="graph-section">
@@ -325,7 +325,7 @@ dashboardlink.addEventListener("click", async function (event) {
                       >
                         <path
                           d="M0,40 Q25,20 50,30 T100,20"
-                          stroke="green"
+                          stroke="#DB4444"
                           fill="none"
                           stroke-width="2"
                         />
@@ -401,12 +401,12 @@ async function renderLowProductsTable(products) {
 
 let orderslink = document.getElementById("orderslink");
 
-orderslink.addEventListener("click", function (event) {
+orderslink.addEventListener("click", function (event) { 
   mainHeader.innerHTML = `
-          <h2 class="m-0">Dashboard</h2>
-          <button class="btn btn-success create_order" >Order</button>
-          <input type="text" class="form-control" style="width: 150px; height: 30px" id="ordersearch" placeholder="Search...">
-          <div class="header-icons">
+          <h2 class="m-0 mt-5 ms-3">Dashboard</h2>
+          <button class="btn btn-outline-danger btn-animated create_order mt-5" >Order</button> 
+          <input type="text" class="form-control mt-5" style="width: 150px; height: 30px" id="ordersearch" placeholder="Search...">
+          <div class="header-icons mt-5 me-3">
             <button class="btn btn-light"><i class="bi bi-bell"></i></button>
             <button class="btn btn-light">
               <i class="bi bi-person-circle"></i>
@@ -460,10 +460,10 @@ let productslink = document.getElementById("productslink");
 
 productslink.addEventListener("click", function (event) {
   mainHeader.innerHTML = `
-          <h2 class="m-0">Dashboard</h2>
-          <button class="btn btn-success create_new_product" >Add Product</button>
-          <input type="text" class="form-control" style="width: 150px; height: 30px" id="productsearch" placeholder="Search...">
-          <div class="header-icons">
+          <h2 class="m-0 mt-5 ms-3">Dashboard</h2>
+          <button class="btn btn-outline-danger btn-animated create_new_product mt-5" >Add Product</button>
+          <input type="text" class="form-control mt-5" style="width: 150px; height: 30px" id="productsearch" placeholder="Search...">
+          <div class="header-icons mt-5 me-3">
             <button class="btn btn-light"><i class="bi bi-bell"></i></button>
             <button class="btn btn-light">
               <i class="bi bi-person-circle"></i>
@@ -799,7 +799,7 @@ async function ShowProfile() {
                 </div>
 
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary" id="saveProfileData">Save Changes</button>
+                    <button type="submit" class="btn btn-outline-danger btn-animated mb-5 mt-4" id="saveProfileData">Save Changes</button>
                 </div>
             </form>
         </div>
