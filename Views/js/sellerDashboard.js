@@ -62,7 +62,7 @@ logoutBtn.addEventListener("click", (e) => {
 });
 
 sellerName.innerText = loggedUser.firstName;
-userProfileImage.src = await getUserImgSrc(loggedUser);
+userProfileImage.src = await UsersRepo.getUserImgSrcByUserId(loggedUser.id);
 
 function initCategories() {
   let allCategories = CategoryRepo.getAllCategories();
@@ -124,7 +124,9 @@ MainContent.addEventListener("click", async (e) => {
     editProductCategory.value = product.categoryID;
     editProductImage.value = "";
     editProductQty.value = product.quantity;
-    displayProductImg(await getProductImgSrc(product));
+    displayProductImg(
+      await ProductRepo.getProductImgSrcByProductId(product.id)
+    );
     ////console.log(product);
     launchBtn.click();
     // Populate edit form with product details
@@ -383,7 +385,7 @@ async function renderLowProductsTable(products) {
 
   for (const product of products) {
     const row = document.createElement("tr");
-    let imgSrc = await getProductImgSrc(product);
+    let imgSrc = await ProductRepo.getProductImgSrcByProductId(product.id);
 
     row.innerHTML = `
       <td>${product.id}</td>
@@ -515,27 +517,13 @@ function editProduct(id) {
   launchBtn.click();
 }
 
-async function getProductImgSrc(product) {
-  if (product.imgPath) {
-    return product.imgPath; // Use imgPath if available
-  } else {
-    // Fetch the image from IndexedDB
-    const productImg = await IndexedDBRepo.getById(
-      ImgsTables.productImg,
-      product.id
-    );
-
-    return productImg?.imgBinary || "default-image-path.png"; // Fallback to a default image
-  }
-}
-
 async function renderProductsTable(products) {
   let productTable = document.getElementById("productTable");
   productTable.innerHTML = ""; // Clear the table
 
   for (const product of products) {
     const row = document.createElement("tr");
-    let imgSrc = await getProductImgSrc(product);
+    let imgSrc = await ProductRepo.getProductImgSrcByProductId(product.id);
 
     row.innerHTML = `
       <td>${product.id}</td>
@@ -709,24 +697,11 @@ async function saveImg(tableKey, imageInputId, tableName) {
 let showProfileBtn = document.getElementById("showProfileBtn");
 showProfileBtn.addEventListener("click", ShowProfile);
 
-async function getUserImgSrc(user) {
-  if (user) {
-    if (user.imgPath) {
-      Helpers.myConsole(user);
-      return user.imgPath; // Use imgPath if available
-    } else {
-      // Fetch the image from IndexedDB
-      const userImg = await IndexedDBRepo.getById(ImgsTables.usersImg, user.id);
-
-      return userImg?.imgBinary || "default-image-path.png"; // Fallback to a default image
-    }
-  }
-}
 async function ShowProfile() {
   if (!loggedUser) return;
   let roles = RoleRepo.getAllRoles();
   //console.log(roles);
-  let userSrc = await getUserImgSrc(loggedUser);
+  let userSrc = await UsersRepo.getUserImgSrcByUserId(loggedUser.id);
   let rolesOptions = roles.map(
     (role) => `<option value="${role.id}">${role.name}</option>`
   );
