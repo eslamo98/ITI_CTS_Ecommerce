@@ -14,8 +14,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./Cart.css" />
-    <script type="module" src="./Config/Constants.js"></script>
+    <link rel="stylesheet" href="./css/Cart.css" />
   </head>
   <body>
     <!-- Nav Bar -->
@@ -27,7 +26,7 @@
         <a class="navbar-brand ms-5" href="#">
           <img
             id="logo"
-            src="Views/Images/logo.png"
+            src="Images/logo.png"
             alt="Logo"
             width="140"
             height="50"
@@ -71,12 +70,15 @@
       </div>
     </nav>
     <div class="container py-5">
-      <h1 class="mb-5">Your Shopping Cart</h1>
+      <div class="d-flex justify-content-between align-items-center mb-5">
+        <h1>Your Shopping Cart</h1>
+        <button class="btn btn-danger" id="emptyCartBtn">Empty Cart</button>
+      </div>
       <div class="row">
         <div class="col-lg-8">
           <!-- Cart Items -->
           <div class="card mb-4">
-            <div class="card-body">
+            <div class="card-body" id="shoppingCartItemsContainer">
               <div class="row cart-item mb-3">
                 <div class="col-md-3">
                   <img
@@ -176,20 +178,20 @@
               <h5 class="card-title mb-4">Order Summary</h5>
               <div class="d-flex justify-content-between mb-3">
                 <span>Subtotal</span>
-                <span>10,800 EGP</span>
+                <span id="subtotal">0 EGP</span>
               </div>
               <div class="d-flex justify-content-between mb-3">
                 <span>Shipping</span>
-                <span>80 EGP</span>
+                <span>Free</span>
               </div>
               <div class="d-flex justify-content-between mb-3">
                 <span>Tax</span>
-                <span>20 EGP</span>
+                <span>0 EGP</span>
               </div>
               <hr />
               <div class="d-flex justify-content-between mb-4">
                 <strong>Total</strong>
-                <strong>10,900 EGP</strong>
+                <strong id="total">10,900 EGP</strong>
               </div>
               <button class="btn btn-danger w-100">Proceed to Checkout</button>
             </div>
@@ -289,6 +291,6 @@
     </footer>
 
     <!-- <script src="./Cart.js" type="module"></script> -->
-    <script src="./Cart1.js" type="module"></script>
+    <script src="./js/cart.js" type="module"></script>
   </body>
 </html>

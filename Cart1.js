@@ -5,11 +5,11 @@ import { DbRepo } from "./Repository/DbRepo.js";
 import { loggedUser } from "./Config/Constants.js";
 import { Helpers } from "./Utils/Helpers.js";
 
- localStorage.clear();
+localStorage.clear();
 DbRepo.setUpLocalStorage();
 // check if user logged
 if (loggedUser) {
-  const cart = ShoppingCartRepo.getCartByUserID(loggedUser.id);
+  const cart = ShoppingCartRepo.getCartByUserId(loggedUser.id);
   Helpers.myConsole(cart, "cart");
   renderCartItem(cart);
   UpdateCartSummary(cart);
@@ -25,9 +25,9 @@ function renderCartItem(cart) {
   const cartItemsContainer = document.querySelector(".card-body");
   cartItemsContainer.innerHTML = "";
   //   if (cart) {
-  Helpers.myConsole(cart);
 
-  cart.items.forEach((item) => {
+  cart.items.forEach(async (item) => {
+    let imgSrc = await ProductRepo.getProductImgSrcByProductId(item.productId);
     Helpers.myConsole(item, "item");
     const product = ProductRepo.GetProductById(item.productId);
     Helpers.myConsole(product, "jhggj");
@@ -36,32 +36,30 @@ function renderCartItem(cart) {
     productElement.classList.add("row", "cart-item", "mb-3");
 
     productElement.innerHTML = `<div class="col-md-3">
-                                <img src="${product.imgPath}" alt="${
+                                <img src="${imgSrc}" alt="${
       product.name
     }" class="img-fluid rounded">
-                            </div>
-                            <div class="col-md-5">
-                                <h5 class="card-title">${product.name}</h5>
-                                <p class="text-muted">Category: ${
-                                  product.category
-                                }</p>
-                                </div> 
-                                <div class="col-md-2">
-                                <div class="input-group">
-                                <button class="btn btn-outline-secondary btn-sm minusQuantity" type="button">-</button>
-                                    <input style="max-width:100px" type="text" class="form-control  form-control-sm text-center quantity-input" value="1">
-                                    <button class="btn btn-outline-secondary btn-sm addQuantity" type="button">+</button>
-                                </div>
-                            </div>
-                            <div class="col-md-2 text-end">
-                                <p class="fw-bold">${(
-                                  product.price * item.quantity
-                                ).toFixed(2)}</p>
-                                <button class="btn btn-sm btn-outline-danger remove-item">
-                                        <i class="bi bi-trash"></i>
-                                        </button>
-                                        </div>
-                                        </div>`;
+            </div>
+            <div class="col-md-5">
+                <h5 class="card-title">${product.name}</h5>
+                <p class="text-muted">Category: ${product.category}</p>
+                </div> 
+                <div class="col-md-2">
+                <div class="input-group">
+                <button class="btn btn-outline-secondary btn-sm minusQuantity" type="button">-</button>
+                    <input style="max-width:100px" type="text" class="form-control  form-control-sm text-center quantity-input" value="1">
+                    <button class="btn btn-outline-secondary btn-sm addQuantity" type="button">+</button>
+                </div>
+            </div>
+            <div class="col-md-2 text-end">
+                <p class="fw-bold">${(product.price * item.quantity).toFixed(
+                  2
+                )}</p>
+                <button class="btn btn-sm btn-outline-danger remove-item">
+                        <i class="bi bi-trash"></i>
+                        </button>
+                        </div>
+                        </div>`;
 
     Helpers.myConsole(productElement, "JJJJJJJJJJJ");
     // to add or minus the quantity
@@ -71,8 +69,8 @@ function renderCartItem(cart) {
         if (item.quantity > 1) {
           item.quantity -= 1;
           ShoppingCartRepo.saveShopingCarts(ShoppingCartRepo.getAllCarts());
-          renderCartItem(ShoppingCartRepo.getCartByUserID(loggedUser.id));
-          UpdateCartSummary(ShoppingCartRepo.getCartByUserID(loggedUser.id));
+          renderCartItem(ShoppingCartRepo.getCartByUserId(loggedUser.id));
+          UpdateCartSummary(ShoppingCartRepo.getCartByUserId(loggedUser.id));
         }
       });
     productElement
@@ -80,8 +78,8 @@ function renderCartItem(cart) {
       .addEventListener("click", function () {
         item.quantity += 1;
         ShoppingCartRepo.saveShopingCarts(ShoppingCartRepo.getAllCarts());
-        renderCartItem(ShoppingCartRepo.getCartByUserID(loggedUser.id));
-        UpdateCartSummary(ShoppingCartRepo.getCartByUserID(loggedUser.id));
+        renderCartItem(ShoppingCartRepo.getCartByUserId(loggedUser.id));
+        UpdateCartSummary(ShoppingCartRepo.getCartByUserId(loggedUser.id));
       });
     // to remove item
     productElement
