@@ -7,9 +7,11 @@ export const userLoggedSessionKey = "loggedUserData";
 
 /* Try to retrieve the logged user data from localStorage using the session key.
    If no data is found, use the default user object instead.*/
-export let loggedUser = UsersRepo.getLoggedUserDataBySessionKey(
-  userLoggedSessionKey
-) || {
+export let loggedUser = 
+// UsersRepo.getLoggedUserDataBySessionKey(
+//   userLoggedSessionKey
+// ) ||
+ {
   id: 2,
   name: "John Doe",
   firstName: "first name",
