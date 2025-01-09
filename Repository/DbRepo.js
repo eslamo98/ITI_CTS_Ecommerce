@@ -836,6 +836,8 @@ export class DbRepo {
     let index = this.getIndex() || 0;
     if (index == 0) {
       console.log("Hi i am supposed to be called only one time");
+      localStorage.clear();
+      indexedDB.deleteDatabase("AppDB");
       this.SeedLocalStorage();
       this.saveIndex(1);
     }

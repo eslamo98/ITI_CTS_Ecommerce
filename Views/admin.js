@@ -1,18 +1,18 @@
-import { DbRepo } from "../../Repository/DbRepo.js"; // Adjust the path if necessary
-import { ProductRepo } from "../../Repository/ProductRepo.js";
-import { OrderRepo } from "../../Repository/OrderRepo.js";
-import { RoleRepo } from "../../Repository/RoleRepo.js";
-import { CountryRepo } from "../../Repository/CountryRepo.js";
-import { UsersRepo } from "../../Repository/UsersRepo.js";
-import { CategoryRepo } from "../../Repository/CategoryRepo.js";
-import { IndexedDBRepo } from "../../Repository/IndexedDBRepo.js";
+import { DbRepo } from "../Repository/DbRepo.js"; // Adjust the path if necessary
+import { ProductRepo } from "../Repository/ProductRepo.js";
+import { OrderRepo } from "../Repository/OrderRepo.js";
+import { RoleRepo } from "../Repository/RoleRepo.js";
+import { CountryRepo } from "../Repository/CountryRepo.js";
+import { UsersRepo } from "../Repository/UsersRepo.js";
+import { CategoryRepo } from "../Repository/CategoryRepo.js";
+import { IndexedDBRepo } from "../Repository/IndexedDBRepo.js";
 
-import { loggedUser } from "../../Config/Constants.js";
-import { OrderStatus } from "../../Config/OrderStatus.js";
-import { ImgsTables } from "../../Config/ImgsTables.js";
+import { loggedUser } from "../Config/Constants.js";
+import { OrderStatus } from "../Config/OrderStatus.js";
+import { ImgsTables } from "../Config/ImgsTables.js";
 
-import { Helpers } from "../../Utils/Helpers.js";
-import { Product } from "../../Models/Product.js";
+import { Helpers } from "../Utils/Helpers.js";
+import { Product } from "../Models/Product.js";
 
 // Define saveProduct function
 function saveProduct() {
@@ -22,14 +22,12 @@ function saveProduct() {
 
 // Load content function
 function loadContent(section) {
-  const contentArea = document.getElementById('content');
+  const contentArea = document.getElementById("content");
   if (!contentArea) return; // Ensure contentArea exists
 
-  if (section === 'dashboard') {
+  if (section === "dashboard") {
     contentArea.innerHTML = ``;
-  }
-
-  else if (section === 'products') {
+  } else if (section === "products") {
     contentArea.innerHTML = `
       <div class="container my-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -224,39 +222,24 @@ function loadContent(section) {
     if (saveProductBtn) {
       saveProductBtn.addEventListener("click", saveProduct);
     }
-  }
-
-  else if (section === 'orders') {
+  } else if (section === "orders") {
     contentArea.innerHTML = ``;
-  }
-
-  else if (section === 'transactions') {
+  } else if (section === "transactions") {
     contentArea.innerHTML = ``;
-  }
-
-
-  else if (section === 'users') {
+  } else if (section === "users") {
     contentArea.innerHTML = ``;
-  }
-
- 
-  else if (section === 'profile') {
+  } else if (section === "profile") {
     contentArea.innerHTML = ``;
+  } else if (section === "home") {
+    window.location.href = "../../index.html";
   }
-
-  else if (section === 'home') {
-    window.location.href = '../../index.html';
-  }
-
-
 }
-
 
 //--------------------------------------------------------------------------------------------------------
 
 // Update active link
 function updateActiveLink(activeLink) {
-  document.querySelectorAll(".nav-link").forEach(link => {
+  document.querySelectorAll(".nav-link").forEach((link) => {
     link.classList.remove("active");
   });
   activeLink.classList.add("active");
@@ -271,7 +254,10 @@ async function getProductImgSrc(product) {
     return product.imgPath; // Use imgPath if available
   } else {
     // Fetch the image from IndexedDB
-    const productImg = await IndexedDBRepo.getById(ImgsTables.productImg, product.id);
+    const productImg = await IndexedDBRepo.getById(
+      ImgsTables.productImg,
+      product.id
+    );
     return productImg?.imgBinary || "../images/default-image.png"; // Fallback to a default image
   }
 }
@@ -279,32 +265,32 @@ async function getProductImgSrc(product) {
 // --------------------------------------------------------------------------------------------------------
 
 // Searching for products
-  let searchProductInput = document.getElementById("productsearch");
-  if (searchProductInput) {
-    searchProductInput.addEventListener("input", function (event) {
-      const searchTerm = event.target.value.toLowerCase();
-      const filteredProducts = ProductRepo.filterProductsByName(
-        searchTerm,
-        loggedUser.id
-      );
-      renderProductsTable(filteredProducts);
-    });
-  }
+let searchProductInput = document.getElementById("productsearch");
+if (searchProductInput) {
+  searchProductInput.addEventListener("input", function (event) {
+    const searchTerm = event.target.value.toLowerCase();
+    const filteredProducts = ProductRepo.filterProductsByName(
+      searchTerm,
+      loggedUser.id
+    );
+    renderProductsTable(filteredProducts);
+  });
+}
 
 // --------------------------------------------------------------------------------------------------------
 
-  // Render products table
+// Render products table
 
-  async function renderProductsTable(products) {
-    let productTable = document.getElementById("productTable");
-    if (!productTable) return; // Ensure productTable exists
-    productTable.innerHTML = ""; // Clear the table
-  
-    for (const product of products) {
-      const row = document.createElement("tr");
-      let imgSrc = await getProductImgSrc(product);
-  
-      row.innerHTML = `
+async function renderProductsTable(products) {
+  let productTable = document.getElementById("productTable");
+  if (!productTable) return; // Ensure productTable exists
+  productTable.innerHTML = ""; // Clear the table
+
+  for (const product of products) {
+    const row = document.createElement("tr");
+    let imgSrc = await ProductRepo.getProductImgSrcByProductId(product.id);
+
+    row.innerHTML = `
         <td>${product.id}</td>
         <td>${product.name}</td>
         <td>$${product.price.toFixed(2)}</td>
@@ -312,32 +298,35 @@ async function getProductImgSrc(product) {
         <td><img src="${imgSrc}" width="50" alt="${product.name}"></td>
          <td style="min-width: 150px">
           <div class="d-flex">
-            <button class="btn btn-primary btn-sm me-2 edit_btn" data-productid="${product.id}">Edit</button>
-            <button class="btn btn-danger btn-sm delete_btn" data-productid="${product.id}">Delete</button>
+            <button class="btn btn-primary btn-sm me-2 edit_btn" data-productid="${
+              product.id
+            }">Edit</button>
+            <button class="btn btn-danger btn-sm delete_btn" data-productid="${
+              product.id
+            }">Delete</button>
           </div>
         </td>
       `;
-      productTable.appendChild(row);
-    }
+    productTable.appendChild(row);
+  }
 
-    // Add event listeners for edit and delete buttons
-    document.querySelectorAll(".edit_btn").forEach((button) => {
-        button.addEventListener("click", (event) => {
-            const productId = event.currentTarget.getAttribute("data-productid");
-            console.log(`Edit button clicked for product ID: ${productId}`);
-            showEditModal(productId);
-        });
+  // Add event listeners for edit and delete buttons
+  document.querySelectorAll(".edit_btn").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      const productId = event.currentTarget.getAttribute("data-productid");
+      console.log(`Edit button clicked for product ID: ${productId}`);
+      showEditModal(productId);
     });
+  });
 
-    document.querySelectorAll(".delete_btn").forEach((button) => {
-        button.addEventListener("click", (event) => {
-            const productId = event.currentTarget.getAttribute("data-productid");
-            console.log(`Delete button clicked for product ID: ${productId}`);
-            showDeleteModal(productId);
-        });
+  document.querySelectorAll(".delete_btn").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      const productId = event.currentTarget.getAttribute("data-productid");
+      console.log(`Delete button clicked for product ID: ${productId}`);
+      showDeleteModal(productId);
     });
+  });
 }
-
 
 // --------------------------------------------------------------------------------------------------------
 
@@ -363,17 +352,20 @@ document.addEventListener("DOMContentLoaded", () => {
   renderProductsTable(products);
 
   // Check if the user is logged in and if their roleId is 1
-  protectRoute();
+  // protectRoute();
 
   // Add event listener for the confirm delete button
   const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+
   if (confirmDeleteBtn) {
     confirmDeleteBtn.addEventListener("click", (event) => {
       const productId = event.currentTarget.getAttribute("data-productid");
       ProductRepo.deleteProduct(productId);
       renderProductsTable(ProductRepo.GetAllProducts());
       // Hide the delete modal
-      const deleteModal = bootstrap.Modal.getInstance(document.getElementById("deleteProductModal"));
+      const deleteModal = bootstrap.Modal.getInstance(
+        document.getElementById("deleteProductModal")
+      );
       deleteModal.hide();
     });
   }
@@ -394,49 +386,54 @@ function showEditModal(productId) {
   document.getElementById("editProductQuantity").value = product.quantity;
   document.getElementById("editProductImage").value = ""; // Clear the image input
   // Show the edit modal
-  const editModal = new bootstrap.Modal(document.getElementById("editProductModal"), {
-    backdrop: 'static',
-    keyboard: false
-  });
+  const editModal = new bootstrap.Modal(
+    document.getElementById("editProductModal"),
+    {
+      backdrop: "static",
+      keyboard: false,
+    }
+  );
   editModal.show();
 }
-
-
 
 // Add event listener for the save edit product button
 
 function showDeleteModal(productId) {
-    // Set the product ID to a hidden input or data attribute
-    document.getElementById("confirmDeleteBtn").setAttribute("data-productid", productId);
-    // Show the delete modal
-    const deleteModal = new bootstrap.Modal(document.getElementById("deleteProductModal"));
-    deleteModal.show();
+  // Set the product ID to a hidden input or data attribute
+  document
+    .getElementById("confirmDeleteBtn")
+    .setAttribute("data-productid", productId);
+  // Show the delete modal
+  const deleteModal = new bootstrap.Modal(
+    document.getElementById("deleteProductModal")
+  );
+  deleteModal.show();
 }
 
-
-
 // Add event listener for the confirm delete button
-document.getElementById("confirmDeleteBtn").addEventListener("click", (event) => {
+document
+  .getElementById("confirmDeleteBtn")
+  .addEventListener("click", (event) => {
     const productId = event.currentTarget.getAttribute("data-productid");
     ProductRepo.deleteProduct(productId);
     renderProductsTable(ProductRepo.GetAllProducts());
     // Hide the delete modal
-    const deleteModal = bootstrap.Modal.getInstance(document.getElementById("deleteProductModal"));
+    const deleteModal = bootstrap.Modal.getInstance(
+      document.getElementById("deleteProductModal")
+    );
     deleteModal.hide();
-});
-
-
+  });
 
 //--------------------------------------------------------------------------------------------------------
 
 // Check if the user is logged in and if their roleId is 1
-function protectRoute() {
-  
-    if (!loggedUser || loggedUser.roleId !== 1) {
-      // Redirect to the Unauthorized page if not logged in or roleId isn't 1
-      window.location.href = '../../index.html';
-    }
-  }
-  
-  // Protect the admin page by calling protectRoute when the page loads
-  protectRoute();
+// function protectRoute() {
+
+//     if (!loggedUser || loggedUser.roleId !== 1) {
+//       // Redirect to the Unauthorized page if not logged in or roleId isn't 1
+//       window.location.href = '../../index.html';
+//     }
+//   }
+
+//   // Protect the admin page by calling protectRoute when the page loads
+//   protectRoute();

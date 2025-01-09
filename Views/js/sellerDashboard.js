@@ -64,21 +64,20 @@ logoutBtn.addEventListener("click", (e) => {
 sellerName.innerText = loggedUser.firstName;
 userProfileImage.src = await UsersRepo.getUserImgSrcByUserId(loggedUser.id);
 
-function initCategories() {
+function initCategories(categorySelectElement) {
   let allCategories = CategoryRepo.getAllCategories();
   ////console.log(allCategories);
-  editProductCategory.innerHTML = "";
-  createProductCategory.innerHTML = "";
+  categorySelectElement.innerHTML = "";
   for (let i = 0; i < allCategories.length; i++) {
     let option = document.createElement("option");
     option.value = allCategories[i].id;
     option.text = allCategories[i].name;
-    editProductCategory.appendChild(option);
-    createProductCategory.appendChild(option);
+    categorySelectElement.appendChild(option);
   }
 }
 
-initCategories();
+initCategories(editProductCategory);
+initCategories(createProductCategory);
 
 mainHeader.classList.add(
   "d-flex",
@@ -139,9 +138,9 @@ MainContent.addEventListener("click", async (e) => {
     //console.log(productId);
 
     deleteConfirmBtn.click();
-    confirmDeleteBtn.addEventListener("click", (e) => {
+    confirmDeleteBtn.addEventListener("click", async (e) => {
       ProductRepo.deleteProduct(productId);
-      renderProductsTable(UsersRepo.getAllSellerProducts(loggedUser.id));
+      await renderProductsTable(UsersRepo.getAllSellerProducts(loggedUser));
       IndexedDBRepo.delete(ImgsTables.productImg, productId);
       noDeleteBtn.click();
     });
@@ -214,7 +213,7 @@ editSaveBtn.addEventListener("click", async (e) => {
 
   editCloseBtn.click();
   // Re-render the products table after updates
-  const products = UsersRepo.getAllSellerProducts(loggedUser.id);
+  const products = UsersRepo.getAllSellerProducts(loggedUser);
   await renderProductsTable(products);
 });
 
@@ -247,7 +246,7 @@ createSaveBtn.addEventListener("click", async (e) => {
 
   createCloseBtn.click();
   // Re-render the products table after updates
-  const products = UsersRepo.getAllSellerProducts(loggedUser.id);
+  const products = UsersRepo.getAllSellerProducts(loggedUser);
   await renderProductsTable(products);
 });
 
@@ -458,7 +457,7 @@ orderslink.addEventListener("click", function (event) {
 
 let productslink = document.getElementById("productslink");
 
-productslink.addEventListener("click", function (event) {
+productslink.addEventListener("click", async function (event) {
   mainHeader.innerHTML = `
           <h2 class="m-0">Dashboard</h2>
           <button class="btn btn-success create_new_product" >Add Product</button>
@@ -492,21 +491,21 @@ productslink.addEventListener("click", function (event) {
     </table>
   `;
 
-  const sellerProducts = UsersRepo.getAllSellerProducts(loggedUser.id);
+  const sellerProducts = UsersRepo.getAllSellerProducts(loggedUser);
   //create table of products using bootstrap table
-  ////console.log(sellerProducts);
-  renderProductsTable(sellerProducts);
+  Helpers.myConsole(loggedUser, "Seller Products");
+  await renderProductsTable(sellerProducts);
   // populate table with sellerProducts data
 
   let searchProductInput = document.getElementById("productsearch");
   if (searchProductInput) {
-    searchProductInput.addEventListener("input", function (event) {
+    searchProductInput.addEventListener("input", async function (event) {
       const searchTerm = event.target.value.toLowerCase();
       const filteredProducts = ProductRepo.filterProductsByName(
         searchTerm,
         loggedUser.id
       );
-      renderProductsTable(filteredProducts);
+      await renderProductsTable(filteredProducts);
     });
   }
 });
@@ -518,6 +517,7 @@ function editProduct(id) {
 }
 
 async function renderProductsTable(products) {
+  Helpers.myConsole(products, "from render table");
   let productTable = document.getElementById("productTable");
   productTable.innerHTML = ""; // Clear the table
 
