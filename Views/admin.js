@@ -38,8 +38,6 @@ function loadContent(section) {
             <button class="btn btn-add-product me-2" data-bs-toggle="modal" data-bs-target="#addProductModal">
               <i class="bi bi-plus"></i>
             </button>
-            <button class="btn btn-light me-2"><i class="bi bi-bell"></i></button>
-            <button class="btn btn-light"><i class="bi bi-person-circle"></i></button>
           </div>
         </div>
 
@@ -90,11 +88,9 @@ function loadContent(section) {
         <div class="d-flex justify-content-between align-items-center mb-4">
           <h2 class="mb-0 me-3">Orders</h2>
           <div class="d-flex align-items-center">
-            <button class="btn btn-add-order me-2" data-bs-toggle="modal" data-bs-target="#addOrderModal">
+            <button class="btn btn-add-product me-2" data-bs-toggle="modal" data-bs-target="#addOrderModal" style="background-color: #DB4444;">
               <i class="bi bi-plus"></i>
             </button>
-            <button class="btn btn-light me-2"><i class="bi bi-bell"></i></button>
-            <button class="btn btn-light"><i class="bi bi-person-circle"></i></button>
           </div>
         </div>
 
@@ -145,11 +141,9 @@ function loadContent(section) {
         <div class="d-flex justify-content-between align-items-center mb-4">
           <h2 class="mb-0 me-3">Accounts</h2>
           <div class="d-flex align-items-center">
-            <button class="btn btn-add-order me-2" data-bs-toggle="modal" data-bs-target="#addOrderModal">
+            <button class="btn btn-add-product me-2" data-bs-toggle="modal" data-bs-target="#addUserModal" style="background-color: #DB4444;">
               <i class="bi bi-plus"></i>
             </button>
-            <button class="btn btn-light me-2"><i class="bi bi-bell"></i></button>
-            <button class="btn btn-light"><i class="bi bi-person-circle"></i></button>
           </div>
         </div>
 
