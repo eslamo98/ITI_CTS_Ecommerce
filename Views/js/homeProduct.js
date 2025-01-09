@@ -26,20 +26,13 @@ function generateProductCards(containerId, products) {
 
         const cardHTML = `
             <div class="col">
-                <div class="card h-100">
+                <div class="card h-100" data-product-id="${product.id}">
                     <img src="${product.imgPath}" class="card-img-top img-fluid" alt="${product.name}">
                     <div class="card-body">
                         <h5 class="card-title text-truncate" title="${product.name}">${truncatedName}</h5>
                         <p class="card-text">${product.description}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <span class="h5 mb-0 price">$${product.price.toFixed(2)}</span>
-                          <!--  <div>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star-half-alt text-warning"></i>
-                                <small class="text-muted">(4.5)</small>
-                            </div> -->
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-center">
@@ -50,6 +43,16 @@ function generateProductCards(containerId, products) {
         `;
         container.innerHTML += cardHTML; // نضيف الكاردس إلى الـ container
     });
+
+
+    // Add click event to each product card
+  const productCards = document.querySelectorAll(".card[data-product-id]");
+  productCards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const productId = card.getAttribute("data-product-id");
+      window.location.href = `productDetails.html?id=${productId}`; // Redirect to product details page
+    });
+  });
 }
 
 // نجيب كل المنتجات
@@ -66,16 +69,3 @@ generateProductCards('product-cards-3', getRandomProducts(allProducts, 4));
 
 // نستخدم الفانكشن لصف كاردس رابع مع 4 منتجات عشوائية
 generateProductCards('product-cards-4', getRandomProducts(allProducts, 4));
-
-
-// دالة للبحث عن منتج
-// document.getElementById('search-input').addEventListener('input', function() {
-//     const searchTerm = this.value; // نجيب الكلمة اللي المستخدم كتبها
-//     const products = ProductRepo.GetAllProducts(); // نجيب كل المنتجات
-
-//     // نفلتر المنتجات بناءً على الكلمة المدخلة
-//     const filteredProducts = products.filter(product =>
-//         product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-//         product.category.toLowerCase().includes(searchTerm.toLowerCase())
-//     );    
-// });
