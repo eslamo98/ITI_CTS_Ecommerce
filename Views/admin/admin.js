@@ -278,6 +278,21 @@ async function getProductImgSrc(product) {
 
 // --------------------------------------------------------------------------------------------------------
 
+// Searching for products
+  let searchProductInput = document.getElementById("productsearch");
+  if (searchProductInput) {
+    searchProductInput.addEventListener("input", function (event) {
+      const searchTerm = event.target.value.toLowerCase();
+      const filteredProducts = ProductRepo.filterProductsByName(
+        searchTerm,
+        loggedUser.id
+      );
+      renderProductsTable(filteredProducts);
+    });
+  }
+
+// --------------------------------------------------------------------------------------------------------
+
   // Render products table
 
   async function renderProductsTable(products) {
