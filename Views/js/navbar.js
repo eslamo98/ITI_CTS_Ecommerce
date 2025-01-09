@@ -7,7 +7,7 @@ const navbar = document.querySelector(".navbar");
 // create icon and dropdown list
 const createUserDropdown = () => {
   return `
-    <div class="dropdown me-5">
+    <div class="dropdown me-5 ">
       <a href="#" class="btn dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         <i class="fa-duotone fa-solid fa-user"></i> 
       </a>
