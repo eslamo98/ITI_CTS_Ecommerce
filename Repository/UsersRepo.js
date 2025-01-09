@@ -4,6 +4,8 @@ import { CategoryRepo } from "./CategoryRepo.js";
 import { ProductRepo } from "./ProductRepo.js";
 import { RoleRepo } from "./RoleRepo.js";
 import { userLoggedSessionKey } from "../Config/Constants.js";
+import { IndexedDBRepo } from "./IndexedDBRepo.js";
+import { ImgsTables } from "../Config/ImgsTables.js";
 
 export class UsersRepo {
   /* This method retrieves the logged user data from localStorage by the given session key.
@@ -81,5 +83,22 @@ export class UsersRepo {
   static logout() {
     localStorage.removeItem(userLoggedSessionKey);
     window.location.href = "/index.html";
+  }
+
+  static async getUserImgSrcByUserId(userId) {
+    const user = UsersRepo.getUserById(userId);
+    if (user) {
+      if (user.imgPath) {
+        return user.imgPath; // Use imgPath if available
+      } else {
+        // Fetch the image from IndexedDB
+        const userImg = await IndexedDBRepo.getById(
+          ImgsTables.usersImg,
+          user.id
+        );
+
+        return userImg?.imgBinary || "default-image-path.png"; // Fallback to a default image
+      }
+    }
   }
 }
