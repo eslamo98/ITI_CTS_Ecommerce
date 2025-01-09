@@ -52,6 +52,12 @@ export class UsersRepo {
     }
   }
 
+  static deleteUser(userId) {
+    const users = this.getUsers();
+    const updatedUsers = users.filter(user => user.id !== userId);
+    this.saveUsers(updatedUsers);
+  }
+
   static getAllSellerProducts(sellerId) {
     console.log(RoleRepo.isSeller(sellerId), sellerId);
     if (RoleRepo.isSeller(sellerId)) {
@@ -100,5 +106,10 @@ export class UsersRepo {
         return userImg?.imgBinary || "default-image-path.png"; // Fallback to a default image
       }
     }
+  }
+
+  static getAllUsers() {
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    return users;
   }
 }
