@@ -139,6 +139,57 @@ function loadContent(section) {
     }
   }
 
+  else if (section === 'accounts') {
+    contentArea.innerHTML = `
+      <div class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="mb-0 me-3">Accounts</h2>
+          <div class="d-flex align-items-center">
+            <button class="btn btn-add-order me-2" data-bs-toggle="modal" data-bs-target="#addOrderModal">
+              <i class="bi bi-plus"></i>
+            </button>
+            <button class="btn btn-light me-2"><i class="bi bi-bell"></i></button>
+            <button class="btn btn-light"><i class="bi bi-person-circle"></i></button>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between mb-3">
+          <div class="input-group w-25">
+            <input type="text" class="form-control" placeholder="Search...">
+          </div>
+          <div>
+            <select class="form-select w-auto">
+              <option selected>Status: All</option>
+              <option value="pending">Pending</option>
+              <option value="completed">Completed</option>
+            </select>
+          </div>
+        </div>
+
+        <table class="table table-hover align-middle bg-white table-rounded">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Password</th>
+              <th>Role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="accountTable">
+            <!-- Rows will be added dynamically -->
+          </tbody>
+        </table>
+      </div>
+    `;
+
+    // Now fetch and render the accounts after content is loaded
+    const users = UsersRepo.getAllUsers();
+    renderAccountsTable(users);
+  }
+
   else if (section === 'transactions') {
     contentArea.innerHTML = ``;
   }
@@ -309,7 +360,8 @@ function getStatusClass(status) {
 // Show order details modal
 function showOrderDetailsModal(orderId) {
   console.log(`Showing details modal for order ID: ${orderId}`);
-  const order = OrderRepo.getOrderById(orderId);
+  const orders = JSON.parse(localStorage.getItem('Orders')) || [];
+  const order = orders.find(order => order.id === parseInt(orderId));
   if (!order) return; // Ensure order exists
 
   document.getElementById('orderDate').textContent = order.orderDate;
@@ -401,7 +453,51 @@ function validateAddOrderForm() {
   return true;
 }
 
-// --------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------
+
+// Render accounts table
+function renderAccountsTable(users) {
+  let accountTable = document.getElementById("accountTable");
+  if (!accountTable) return; // Ensure accountTable exists
+  accountTable.innerHTML = ""; // Clear the table
+
+  for (const user of users) {
+    const row = document.createElement("tr");
+
+    const role = user.roleId === 1 ? "Admin" : user.roleId === 2 ? "Seller" : "Customer";
+
+    row.innerHTML = `
+      <td>${user.id}</td>
+      <td>${user.name}</td>
+      <td>${user.email}</td>
+      <td>${user.phone}</td>
+      <td>${user.password}</td>
+      <td>${role}</td>
+      <td style="min-width: 150px">
+        <button class="btn btn-primary btn-sm me-2 edit-user-btn" data-userid="${user.id}">Edit</button>
+        <button class="btn btn-danger btn-sm delete-user-btn" data-userid="${user.id}">Delete</button>
+      </td>
+    `;
+    accountTable.appendChild(row);
+  }
+
+  // Add event listeners for edit and delete buttons
+  document.querySelectorAll(".edit-user-btn").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      const userId = event.currentTarget.getAttribute("data-userid");
+      showEditUserModal(userId);
+    });
+  });
+
+  document.querySelectorAll(".delete-user-btn").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      const userId = event.currentTarget.getAttribute("data-userid");
+      showDeleteUserModal(userId);
+    });
+  });
+}
+
+//--------------------------------------------------------------------------------------------------------
 
 // Event Listeners for clicking on nav links or on the Add Product Modal
 
@@ -423,6 +519,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Fetch and render products dynamically
   const products = ProductRepo.GetAllProducts();
   renderProductsTable(products);
+
+  // Fetch and render users dynamically
+  const users = UsersRepo.getAllUsers();
+  renderAccountsTable(users);
 
   // Check if the user is logged in and if their roleId is 1
   protectRoute();
@@ -614,3 +714,61 @@ function validateAddProductForm() {
 
   return true;
 }
+
+// Show edit user modal
+function showEditUserModal(userId) {
+  const user = UsersRepo.getUserById(userId);
+  if (!user) return; // Ensure user exists
+
+  document.getElementById('editUserId').value = user.id;
+  document.getElementById('editUserName').value = user.name;
+  document.getElementById('editUserEmail').value = user.email;
+  document.getElementById('editUserPhone').value = user.phone;
+  document.getElementById('editUserPassword').value = user.password;
+  document.getElementById('editUserRole').value = user.roleId;
+
+  const editUserModal = new bootstrap.Modal(document.getElementById('editUserModal'));
+  editUserModal.show();
+}
+
+// Show delete user modal
+function showDeleteUserModal(userId) {
+  document.getElementById('confirmDeleteUserBtn').setAttribute('data-userid', userId);
+  const deleteUserModal = new bootstrap.Modal(document.getElementById('deleteUserModal'));
+  document.getElementById('deleteUserModal').removeAttribute('aria-hidden'); // Remove aria-hidden attribute
+  deleteUserModal.show();
+}
+
+// Add event listener for the save edit user button
+document.getElementById('saveEditUserBtn').addEventListener('click', () => {
+  const userId = document.getElementById('editUserId').value;
+  const updatedUser = {
+    id: userId,
+    name: document.getElementById('editUserName').value,
+    email: document.getElementById('editUserEmail').value,
+    phone: document.getElementById('editUserPhone').value,
+    password: document.getElementById('editUserPassword').value,
+    roleId: document.getElementById('editUserRole').value
+  };
+
+  UsersRepo.updateUser(updatedUser);
+  renderAccountsTable(UsersRepo.getAllUsers());
+  const editUserModal = bootstrap.Modal.getInstance(document.getElementById('editUserModal'));
+  editUserModal.hide();
+});
+
+// Add event listener for the confirm delete user button
+document.getElementById('confirmDeleteUserBtn').addEventListener('click', () => {
+  const userId = parseInt(document.getElementById('confirmDeleteUserBtn').getAttribute('data-userid'));
+  UsersRepo.deleteUser(userId);
+  renderAccountsTable(UsersRepo.getAllUsers());
+  const deleteUserModal = bootstrap.Modal.getInstance(document.getElementById('deleteUserModal'));
+  deleteUserModal.hide();
+});
+
+// Ensure UsersRepo.deleteUser is correctly implemented
+UsersRepo.deleteUser = function(userId) {
+  const users = JSON.parse(localStorage.getItem('Users')) || [];
+  const updatedUsers = users.filter(user => user.id !== userId);
+  localStorage.setItem('Users', JSON.stringify(updatedUsers));
+};
