@@ -199,7 +199,103 @@ function loadContent(section) {
   }
 
   else if (section === 'profile') {
-    contentArea.innerHTML = ``;
+    contentArea.innerHTML = `
+      <div class="container my-5">
+        <h2 class="text-center mb-4">Profile</h2>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                <form id="profileForm">
+                  <div class="mb-3 text-center">
+                    <img src="${loggedUser.imgPath || '../images/default-profile.png'}" class="rounded-circle mb-3" alt="Profile Picture" width="150">
+                    <input type="file" class="form-control" id="profileImage">
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label for="profileFirstName" class="form-label">First Name</label>
+                      <input type="text" class="form-control" id="profileFirstName" value="${loggedUser.firstName || ''}">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="profileLastName" class="form-label">Last Name</label>
+                      <input type="text" class="form-control" id="profileLastName" value="${loggedUser.lastName || ''}">
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="profilePhone" class="form-label">Phone</label>
+                    <input type="text" class="form-control" id="profilePhone" value="${loggedUser.phone}">
+                  </div>
+                  <div class="mb-3">
+                    <label for="profileEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="profileEmail" value="${loggedUser.email}">
+                  </div>
+                  <div class="mb-3">
+                    <label for="profileStreet" class="form-label">Street</label>
+                    <input type="text" class="form-control" id="profileStreet" value="${loggedUser.address?.street || ''}">
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label for="profileCity" class="form-label">City</label>
+                      <input type="text" class="form-control" id="profileCity" value="${loggedUser.address?.city || ''}">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="profileState" class="form-label">State</label>
+                      <input type="text" class="form-control" id="profileState" value="${loggedUser.address?.state || ''}">
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label for="profileZipCode" class="form-label">Zip Code</label>
+                      <input type="text" class="form-control" id="profileZipCode" value="${loggedUser.address?.zipCode || ''}">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="profileCountry" class="form-label">Country</label>
+                      <input type="text" class="form-control" id="profileCountry" value="${loggedUser.address?.country || ''}">
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-primary w-100" id="saveProfileBtn">Save Changes</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.getElementById('saveProfileBtn').addEventListener('click', async () => {
+      const updatedUser = {
+        ...loggedUser,
+        firstName: document.getElementById('profileFirstName').value,
+        lastName: document.getElementById('profileLastName').value,
+        phone: document.getElementById('profilePhone').value,
+        email: document.getElementById('profileEmail').value,
+        address: {
+          street: document.getElementById('profileStreet').value,
+          city: document.getElementById('profileCity').value,
+          state: document.getElementById('profileState').value,
+          zipCode: document.getElementById('profileZipCode').value,
+          country: document.getElementById('profileCountry').value
+        }
+      };
+
+      const profileImageInput = document.getElementById('profileImage');
+      if (profileImageInput.files.length > 0) {
+        updatedUser.imgPath = await saveImg(loggedUser.id, 'profileImage', ImgsTables.usersImg);
+      }
+
+      UsersRepo.updateUser(loggedUser.id, updatedUser);
+      UsersRepo.updateLoggedUserData(updatedUser);
+
+      // Update the user in the users object in local storage
+      const users = UsersRepo.getAllUsers();
+      const userIndex = users.findIndex(user => user.id === loggedUser.id);
+      if (userIndex !== -1) {
+        users[userIndex] = updatedUser;
+        UsersRepo.saveUsers(users);
+      }
+
+      alert('Profile updated successfully!');
+    });
   }
 
   else if (section === 'home') {
@@ -513,6 +609,13 @@ document.addEventListener("DOMContentLoaded", () => {
       loadContent(section);
       updateActiveLink(event.currentTarget);
     });
+  });
+
+  // Add event listener for the sign out link
+  document.getElementById("signOutLink").addEventListener("click", (event) => {
+    event.preventDefault();
+    UsersRepo.logout();
+    window.location.href = "../../index.html";
   });
 
   DbRepo.setUpLocalStorage();
