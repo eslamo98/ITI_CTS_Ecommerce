@@ -14,7 +14,7 @@ import { ShoppingCartItem } from "../Models/ShoppingCartItem.js";
 import { Address } from "../Models/Address.js";
 import { Country } from "../Models/Country.js";
 import { Order } from "../Models/Order.js";
-import { PaymentMethod } from "../Models/PaymentMethod.js";
+import { Roles } from "../Config/Roles.js";
 import { PaymentMethodRepo } from "./PaymentMethodRepo.js";
 
 export class DbRepo {
@@ -500,9 +500,9 @@ export class DbRepo {
     OrderRepo.saveOrders(ordersData);
 
     RoleRepo.saveRoles([
-      new Role("Admin").toJSON(),
-      new Role("Seller").toJSON(),
-      new Role("Customer").toJSON(),
+      new Role(Roles.ADMIN).toJSON(),
+      new Role(Roles.SELLER).toJSON(),
+      new Role(Roles.CUSTOMER).toJSON(),
     ]);
 
     // List of first names from the images in the screenshot
@@ -803,8 +803,8 @@ export class DbRepo {
       { name: "Zimbabwe", code: "ZW" },
     ];
     // Convert countries data to an array of Country instances
-    const countriesArray = countriesJson.map(
-      (data) => new Country(data["name"], data["code"])
+    const countriesArray = countriesJson.map((data) =>
+      new Country(data.name, data.code).toJSON()
     );
 
     // Save the array of Country instances

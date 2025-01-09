@@ -1,4 +1,5 @@
 import { Helpers } from "../Utils/Helpers.js";
+import { CategoryRepo } from "./CategoryRepo.js";
 import { UsersRepo } from "./UsersRepo.js";
 
 export class ProductRepo {
@@ -38,6 +39,13 @@ export class ProductRepo {
     return false;
   }
 
+  static getCategoryNameByProductId(productId) {
+    let product = ProductRepo.GetProductById(productId);
+    let categories = CategoryRepo.getAllCategories();
+    let category = categories.find((cat) => cat.id === product.categoryID);
+    return category ? category.name : null;
+  }
+
   //this method delete product by id return bool value
   static deleteProduct(productId) {
     let products = ProductRepo.GetAllProducts();
@@ -61,7 +69,7 @@ export class ProductRepo {
   //This method return product img path if it exist and null if not
   static getProductImgPathById(productId) {
     let allProducts = ProductRepo.GetAllProducts();
-    console.log(allProducts);
+
     if (allProducts) {
       let product = allProducts.find((product) => product.ID === productId);
       console.log(productId);

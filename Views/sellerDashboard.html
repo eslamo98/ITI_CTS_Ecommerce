@@ -86,229 +86,33 @@
             aria-expanded="false"
           >
             <img
-              src="https://github.com/mdo.png"
+              src="../Images/Users/default.png"
               alt=""
               width="32"
               height="32"
               class="rounded-circle me-2"
+              id="userProfileImage"
             />
-            <strong>mdo</strong>
+            <strong id="sellerName">mdo</strong>
           </a>
           <ul
             class="dropdown-menu text-small shadow"
             aria-labelledby="dropdownUser2"
           >
-            <li><a class="dropdown-item" href="#">New project...</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
             <li>
               <button class="dropdown-item" id="showProfileBtn">Profile</button>
             </li>
             <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
+            <li>
+              <button class="dropdown-item" id="logoutBtn">Sign out</button>
+            </li>
           </ul>
         </div>
       </nav>
 
       <!-- Content Area -->
       <main class="px-4" id="content">
-        <div class="container-fluid" id="MainContent">
-          <h2>Home</h2>
-          <!-- First Row -->
-          <!-- <div class="row mb-4">
-            <div class="col-md-6">
-              <div class="card">
-                <div class="card-body">
-                  <div class="data-container">
-                    <div class="text-section">
-                      <p class="title">Total Orders</p>
-                      <p class="duration">Last 7 days</p>
-                      <p class="amount">25.7K</p>
-                      <p class="change">
-                        <span class="arrow up">↑</span>
-                        <span class="percentage up">6%</span> vs last 7 days
-                      </p>
-                    </div>
-                    <div class="graph-section">
-                      <svg
-                        class="graph"
-                        viewBox="0 0 100 60"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M0,40 Q25,20 50,30 T100,20"
-                          stroke="green"
-                          fill="none"
-                          stroke-width="2"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="card">
-                <div class="card-body">
-                  <div class="data-container">
-                    <div class="text-section">
-                      <p class="title">Total Orders</p>
-                      <p class="duration">Last 7 days</p>
-                      <p class="amount">25.7K</p>
-                      <p class="change">
-                        <span class="arrow up">↑</span>
-                        <span class="percentage up">6%</span> vs last 7 days
-                      </p>
-                    </div>
-                    <div class="graph-section">
-                      <svg
-                        class="graph"
-                        viewBox="0 0 100 60"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M0,40 Q25,20 50,30 T100,20"
-                          stroke="green"
-                          fill="none"
-                          stroke-width="2"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
-          <!-- Second Row -->
-          <!-- <div class="row mb-4">
-            <div class="col-md-4">
-              <div class="card">
-                <div class="card-body">
-                  <div class="data-container">
-                    <div class="text-section">
-                      <p class="title">Total Orders</p>
-                      <p class="duration">Last 7 days</p>
-                      <p class="amount">25.7K</p>
-                      <p class="change">
-                        <span class="arrow up">↑</span>
-                        <span class="percentage up">6%</span> vs last 7 days
-                      </p>
-                    </div>
-                    <div class="graph-section">
-                      <svg
-                        class="graph"
-                        viewBox="0 0 100 60"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M0,40 Q25,20 50,30 T100,20"
-                          stroke="green"
-                          fill="none"
-                          stroke-width="2"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card">
-                <div class="card-body">
-                  <div class="data-container">
-                    <div class="text-section">
-                      <p class="title">Total Orders</p>
-                      <p class="duration">Last 7 days</p>
-                      <p class="amount">25.7K</p>
-                      <p class="change">
-                        <span class="arrow up">↑</span>
-                        <span class="percentage up">6%</span> vs last 7 days
-                      </p>
-                    </div>
-                    <div class="graph-section">
-                      <svg
-                        class="graph"
-                        viewBox="0 0 100 60"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M0,40 Q25,20 50,30 T100,20"
-                          stroke="green"
-                          fill="none"
-                          stroke-width="2"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card">
-                <div class="card-body">
-                  <div class="data-container">
-                    <div class="text-section">
-                      <p class="title">Total Orders</p>
-                      <p class="duration">Last 7 days</p>
-                      <p class="amount">25.7K</p>
-                      <p class="change">
-                        <span class="arrow up">↑</span>
-                        <span class="percentage up">6%</span> vs last 7 days
-                      </p>
-                    </div>
-                    <div class="graph-section">
-                      <svg
-                        class="graph"
-                        viewBox="0 0 100 60"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M0,40 Q25,20 50,30 T100,20"
-                          stroke="green"
-                          fill="none"
-                          stroke-width="2"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
-          <!-- Third Row -->
-          <!-- <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-body">
-                  <div class="data-container">
-                    <div class="text-section">
-                      <p class="title">Total Orders</p>
-                      <p class="duration">Last 7 days</p>
-                      <p class="amount">25.7K</p>
-                      <p class="change">
-                        <span class="arrow up">↑</span>
-                        <span class="percentage up">6%</span> vs last 7 days
-                      </p>
-                    </div>
-                    <div class="graph-section">
-                      <svg
-                        class="graph"
-                        viewBox="0 0 100 60"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M0,40 Q25,20 50,30 T100,20"
-                          stroke="green"
-                          fill="none"
-                          stroke-width="2"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
-        </div>
+        <div class="container-fluid" id="MainContent"></div>
       </main>
     </div>
     <!-- Confirmation Modal -->

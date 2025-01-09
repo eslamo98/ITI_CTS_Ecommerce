@@ -6,8 +6,8 @@ export class Country {
 
   // Constructor to initialize a country with a name and code
   constructor(_name, _code) {
-    this.#name = _name;  // Set the country name
-    this.#code = _code;  // Set the country code
+    this.#name = _name; // Set the country name
+    this.#code = _code; // Set the country code
   }
 
   // Getter for the country name
@@ -28,5 +28,12 @@ export class Country {
   // Setter for the country code
   set Code(value) {
     this.#code = value;
+  }
+
+  toJSON() {
+    return {
+      name: this.Name,
+      code: this.Code,
+    };
   }
 }

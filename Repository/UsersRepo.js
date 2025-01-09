@@ -3,6 +3,7 @@ import { User } from "../Models/User.js";
 import { CategoryRepo } from "./CategoryRepo.js";
 import { ProductRepo } from "./ProductRepo.js";
 import { RoleRepo } from "./RoleRepo.js";
+import { userLoggedSessionKey } from "../Config/Constants.js";
 
 export class UsersRepo {
   /* This method retrieves the logged user data from localStorage by the given session key.
@@ -37,6 +38,18 @@ export class UsersRepo {
     return users.find((user) => user.id === userId);
   }
 
+  static updateUser(userId, updatedUser) {
+    const users = this.getUsers();
+    const index = users.findIndex((user) => user.id === userId);
+    if (index !== -1) {
+      users[index] = updatedUser;
+      this.saveUsers(users);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   static getAllSellerProducts(sellerId) {
     console.log(RoleRepo.isSeller(sellerId), sellerId);
     if (RoleRepo.isSeller(sellerId)) {
@@ -47,13 +60,26 @@ export class UsersRepo {
     }
   }
 
+  static getSellerLowQtyProducts(sellerId, qty) {
+    const sellerProducts = this.getAllSellerProducts(sellerId);
+    return sellerProducts.filter((product) => product.quantity <= qty);
+  }
+
   static getRoleByUserId(id) {
     const user = UsersRepo.getUserById(id);
-    console.log(user, id, "KKKKKKKKKKK");
     if (user) {
       return RoleRepo.getRoleById(user.roleId);
     } else {
       return null;
     }
+  }
+
+  static updateLoggedUserData(user) {
+    localStorage.setItem(userLoggedSessionKey, JSON.stringify(user));
+  }
+
+  static logout() {
+    localStorage.removeItem(userLoggedSessionKey);
+    window.location.href = "/index.html";
   }
 }

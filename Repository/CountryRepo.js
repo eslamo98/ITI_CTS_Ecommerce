@@ -1,9 +1,8 @@
 // This class manages the country data stored in localStorage.
 export class CountryRepo {
-
   // Retrieves all countries from localStorage.
   static getAllCountries() {
-    return JSON.parse(localStorage.getItem("Countries"));
+    return JSON.parse(localStorage.getItem("Countries")) || [];
   }
 
   // Saves an array of countries to localStorage.

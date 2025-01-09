@@ -21,9 +21,10 @@ export class User {
     _roleId,
     _password,
     _address,
-    _imgPath
+    _imgPath,
+    _id = User.#autoIncrement++
   ) {
-    this.#id = User.#autoIncrement++;
+    this.#id = _id;
     this.Name = _name;
     this.FirstName = _firstName;
     this.LastName = _lastName;
@@ -39,14 +40,18 @@ export class User {
     return this.#id;
   }
   set ID(value) {
-    throw new Error("You can't set user Id.");
+    if (Number.isInteger(value)) {
+      this.#id = value;
+    } else {
+      throw new Error("Invalid ID. ID must be a positive integer.");
+    }
   }
 
   get Name() {
     return this.#name;
   }
   set Name(value) {
-    if (value.constructor.name === "String" && value.trim() !== "") {
+    if (value.trim() !== "") {
       this.#name = value;
     } else {
       throw new Error("Invalid name. Name must be a non-empty string.");
@@ -57,7 +62,7 @@ export class User {
     return this.#firstName;
   }
   set FirstName(value) {
-    if (value.constructor.name === "String" && value.trim() !== "") {
+    if (value.trim() !== "") {
       this.#firstName = value;
     } else {
       throw new Error(
@@ -70,7 +75,7 @@ export class User {
     return this.#lastName;
   }
   set LastName(value) {
-    if (value.constructor.name === "String" && value.trim() !== "") {
+    if (value.trim() !== "") {
       this.#lastName = value;
     } else {
       throw new Error(
@@ -83,13 +88,7 @@ export class User {
     return this.#phone;
   }
   set Phone(value) {
-    if (value.constructor.name === "Number" && value > 0) {
-      this.#phone = value;
-    } else {
-      throw new Error(
-        "Invalid phone number. Phone number must be a positive number."
-      );
-    }
+    this.#phone = value;
   }
 
   get Email() {
@@ -158,6 +157,7 @@ export class User {
       phone: this.Phone,
       email: this.Email,
       roleId: this.RoleId,
+      password: this.#password,
       address: this.Address,
       imgPath: this.ImgPath,
     };
