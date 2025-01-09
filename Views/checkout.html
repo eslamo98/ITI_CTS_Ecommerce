@@ -10,72 +10,10 @@
       import { DbRepo } from "../Repository/DbRepo.js";
       DbRepo.setUpLocalStorage();
     </script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="css/home.css" > -->
-    <link rel="stylesheet" href="css/footer.css" >
-    <link rel="stylesheet" href="css/bootstrap-icons.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-
   </head>
   <body>
-    <!-- Nav Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div
-        class="container-fluid d-flex align-items-center justify-content-between"
-      >
-        <!-- Logo -->
-        <a class="navbar-brand ms-5" href="#">
-          <img
-            id="logo"
-            src="Images/logo.png"
-            alt="Logo"
-            width="140"
-            height="50"
-          />
-        </a>
-
-        <!-- Toggle button for mobile view -->
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- Navigation Links -->
-        <div
-          class="collapse navbar-collapse justify-content-center"
-          id="navbarNav"
-        >
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a href="/index.html" class="nav-link ">Home</a>
-            </li>
-            <li class="nav-item">
-              <a href="contact.html" class="nav-link">Contact</a>
-            </li>
-            <li class="nav-item">
-              <a href="#about" class="nav-link">About</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-
-
-
-    <script type="module" src="js/checkoutNavbar.js"></script>
     <div class="container checkout-container" id="checkoutContainer">
-      <div class="container p-5 Steps-bar mb-5">
+      <div class="container p-5 Steps-bar">
         <div
           class="progress"
           role="progressbar"
@@ -100,13 +38,9 @@
           <div class="progress-bar bg-success" style="width: 33.3333%"></div>
         </div>
       </div>
-      <form
-        class="row g-3 needs-validation checkout-form"
-        novalidate
-        id="checkoutForm"
-      >
+      <form class="row g-3 needs-validation checkout-form" novalidate>
         <!-- Deviding the checkout into two rows -->
-        <div class="col-12 col-md-6 pe-md-3">
+        <div class="col-12 col-md-6">
           <!-- billing row -->
           <div class="part1 part d-block">
             <h3>Billing Details</h3>
@@ -192,7 +126,7 @@
               </div>
               <div class="col-12">
                 <label for="country" class="form-label">Country</label>
-                <select class="form-select" id="country" required>
+                <select class="form-select" id="country2" required>
                   <option selected value="Egypt">Egypt</option>
                   <option selected value="Iraq">Iraq</option>
                   <option selected value="Iran">Iran</option>
@@ -337,30 +271,9 @@
           <!-- End of part 3 -->
         </div>
         <!-- End of billing col -->
-        <div class="col-12 col-md-6 ps-md-3">
+        <div class="col-12 col-md-6">
           <div class="row">
-            <div class="col-12" id="checkoutProducts">
-              <div
-                class="d-flex justify-content-between py-3 border-bottom"
-                id="subTotalRow"
-              >
-                <span>Subtotal</span>
-                <span>$0</span>
-              </div>
-
-              <div class="d-flex justify-content-between py-3 border-bottom">
-                <span>Shipping</span>
-                <span>Free</span>
-              </div>
-
-              <div
-                class="d-flex justify-content-between py-3 border-bottom"
-                id="totalRow"
-              >
-                <span>Total</span>
-                <span>$0</span>
-              </div>
-            </div>
+            <div class="col-12" id="checkoutProducts"></div>
             <button class="btn btn-success col-12" type="submit">
               Submit form
             </button>
@@ -396,75 +309,122 @@
       })();
     </script>
     <script src="js/stepsBar.js"></script>
+    <script>
+      let allCheckoutParts = document.querySelectorAll(".part");
+      let activeStep = document.querySelector(".step .bg-success");
+      let stepsBar = document.querySelector(".Steps-bar");
+      document.querySelector("form").addEventListener("click", (e) => {
+        if (e.target.classList.contains("traverse-btn")) {
+          let moveTo = +e.target.dataset.moveTo;
+          allCheckoutParts.forEach((part, index) => {
+            if (part.classList.contains(`part${moveTo}`)) {
+              part.classList.remove("d-md-none");
+            } else {
+              part.classList.add("d-md-none");
+            }
+          });
 
-    <script type="module" src="js/checkout.js"></script>
+          document.getElementById(`step${moveTo}`).click();
+        }
+      });
+      stepsBar.addEventListener("click", (e) => {
+        if (e.target.classList.contains("stepNumber")) {
+          let clickedStep = +e.target.innerText;
+          allCheckoutParts.forEach((part, index) => {
+            if (part.classList.contains(`part${clickedStep}`)) {
+              part.classList.remove("d-md-none");
+            } else {
+              part.classList.add("d-md-none");
+            }
+          });
+        }
+      });
+    </script>
+    <script type="module">
+      import { ProductRepo } from "../Repository/ProductRepo.js";
+      import { ShoppingCartRepo } from "../Repository/ShoppingCartRepo.js";
 
+      let checkoutProducts = document.getElementById("checkoutProducts");
 
-
-
-
-
-
-    <!-- Footer -->
-<footer class="footer mt-5" id="about">
-  <div class="container">
-      <div class="row">
-          <div class="col-lg-4 footer-section">
-              <div class="footer-logo">SwiftCart</div>
-              <p class="footer-about">We are dedicated to providing the best service to our customers. Our mission
-                  is to create innovative solutions that make a difference in people's lives.</p>
-              <div class="social-links">
-                  <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                  <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                  <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                  <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+      let cartItems = ShoppingCartRepo.getCartById(2).items;
+      console.log(cartItems);
+      let productsRows = cartItems
+        .map((item) => {
+          return `
+            <div class="checkout-product d-flex align-items-center mb-3">
+              <img src="${ProductRepo.getProductImgPathById(
+                item.productId
+              )}" alt="${
+            item.name
+          }" class="img-thumbnail" style="width: 100px;" />
+              <div class="ms-3">
+                <h5>${item.name}</h5>
+                <p>Quantity: ${item.quantity}</p>
+                <p>Price: $${item.price.toFixed(2)}</p>
               </div>
-          </div>
+            </div>
+          `;
+        })
+        .join("");
 
-          <div class="col-lg-2 col-md-6 footer-section">
-              <h5>Quick Links</h5>
-              <ul class="footer-links">
-                  <li><a href="#about">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="views/catalog.html">Products</a></li>
-                  <li><a href="Views/contact.html">Contact</a></li>
-                  <li><a href="#">Careers</a></li>
-              </ul>
-          </div>
+      checkoutProducts.innerHTML = productsRows;
+    </script>
+    <script type="module">
+      import { Helpers } from "../Utils/helpers.js";
+      function CheckValidationStep1() {
+        let firstName = document.getElementById("firstName");
+        let lastName = document.getElementById("lastName");
+        let email = document.getElementById("email");
+        let phone = document.getElementById("phone");
+        let part1Next = document.getElementById("part1Next");
 
-          <div class="col-lg-2 col-md-6 footer-section">
-              <h5>Support</h5>
-              <ul class="footer-links">
-                  <li><a href="#">FAQ</a></li>
-                  <li><a href="#">Help Center</a></li>
-                  <li><a href="#">Privacy Policy</a></li>
-                  <li><a href="#">Terms of Service</a></li>
-                  <li><a href="#">Contact Support</a></li>
-              </ul>
-          </div>
+        function checkNameInput(value) {
+          if (Helpers.isNotNullOrEmpty(value)) {
+            return {
+              result: false,
+              message: "Name is required it can't be empty string.",
+            };
+          } else if (Helpers.isOnlyText(value)) {
+            return { result: false, message: "Name can't contain numbers" };
+          } else if (!Helpers.stringLengthGOrEqual(value, 3)) {
+            return {
+              result: false,
+              message: "Name should be at least 3 characters long.",
+            };
+          } else {
+            return { result: true, message: "Name is valid" };
+          }
+        }
 
-          <div class="col-lg-4 footer-section">
-              <h5>Newsletter</h5>
-              <p class="footer-about">Subscribe to our newsletter for updates, news, and exclusive offers.</p>
-              <form class="footer-newsletter" action="#" method="">
-                  <input type="email" name="email" placeholder="Enter your email" required>
-                  <button type="submit" class="newsletter-btn">
-                      <i class="fas fa-paper-plane"></i>
-                  </button>
-              </form>
-          </div>
+        function checkPhoneInput(value) {
+          if (Helpers.isPhoneNumber(value)) {
+            return { result: true, message: "Phone number is valid" };
+          } else {
+            return { result: false, message: "Phone number is not valid" };
+          }
+        }
 
-      <div class="footer-bottom">
-          <ul class="footer-bottom-links">
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Terms of Service</a></li>
-              <li><a href="#">Cookie Policy</a></li>
-          </ul>
-          <p>© 2024 CompanyName. All rights reserved.</p>
-      </div>
-  </div>
-</footer>
+        function checkEmailInput(value) {
+          if (Helpers.isEmail(value)) {
+            return { result: true, message: "Email is valid" };
+          } else {
+            return { result: false, message: "Email is not valid" };
+          }
+        }
 
+        let firstNameResult = checkNameInput(firstName.value);
+        let lastNameResult = checkNameInput(lastName.value);
+        let emailResult = checkEmailInput(email.value);
+        let phoneResult = checkPhoneInput(phone.value);
+      }
 
+      function CheckValidationStep2() {}
+      function CheckValidationStep3() {
+        let paymentMethod = document.querySelector(
+          'input[name="paymentMethod"]:checked'
+        );
+        let part3Next = document.getElementById("part3Next");
+      }
+    </script>
   </body>
 </html>

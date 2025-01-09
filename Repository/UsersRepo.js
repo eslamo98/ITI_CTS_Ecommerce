@@ -52,11 +52,11 @@ export class UsersRepo {
     }
   }
 
-  static getAllSellerProducts(user) {
-    console.log(RoleRepo.isSeller(user.roleId));
-    if (RoleRepo.isSeller(user.roleId)) {
+  static getAllSellerProducts(sellerId) {
+    console.log(RoleRepo.isSeller(sellerId), sellerId);
+    if (RoleRepo.isSeller(sellerId)) {
       let allProducts = ProductRepo.GetAllProducts();
-      return allProducts.filter((product) => product.sellerId === user.id);
+      return allProducts.filter((product) => product.sellerId === sellerId);
     } else {
       return [];
     }

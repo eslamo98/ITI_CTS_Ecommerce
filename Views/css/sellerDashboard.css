@@ -1,8 +1,6 @@
 :root {
   --sidebar-width: 200px;
-  --primaryColor: #db4444;
 }
-
 body {
   border: 0;
   margin: 0;
@@ -22,115 +20,6 @@ body {
   text-overflow: ellipsis;
 }
 /* general */
-
-/* Nav Bar */
-
-.navbar {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 0.5rem 1rem;
-}
-.nav-link {
-  position: relative;
-  color: #000;
-}
-.nav-link.selected {
-  color: #db4444;
-}
-.nav-link:hover::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -5px;
-  height: 2px;
-  background-color: #db4444; /* underline text color  */
-}
-.hover-text-red:hover {
-  color: #db4444 !important; /* تغيير لون النص إلى الأحمر عند hover */
-}
-
-/* Search Bar */
-
-.search-wrapper {
-  max-width: 300px;
-}
-
-.search-box {
-  position: relative;
-  background: white;
-  border-radius: 30px;
-  transition: all 0.3s ease;
-}
-
-.search-box:focus-within {
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
-}
-
-.search-input {
-  border: 2px solid #eee;
-  border-radius: 30px;
-  padding: 10px 25px;
-  padding-right: 50px;
-  width: 100%;
-  transition: all 0.3s ease;
-}
-
-.search-input:focus {
-  border-color: #db4444;
-  box-shadow: none;
-}
-
-.search-icon {
-  position: absolute;
-  left: 220px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #666;
-  transition: all 0.3s ease;
-}
-
-.search-box:focus-within .search-icon {
-  color: #db4444;
-}
-
-.suggestions {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: white;
-  border-radius: 15px;
-  margin-top: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
-  z-index: 2000;
-}
-
-.search-box:focus-within .suggestions {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.suggestion-item {
-  padding: 12px 20px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.suggestion-item:hover {
-  background: #f8f9fa;
-}
-
-.recent-searches {
-  color: #666;
-  font-size: 0.8rem;
-  padding: 10px 20px;
-  background: #f8f9fa;
-  border-radius: 15px 15px 0 0;
-}
 
 .content-wrapper {
   display: grid;
