@@ -26,7 +26,34 @@ function loadContent(section) {
   if (!contentArea) return; // Ensure contentArea exists
 
   if (section === 'dashboard') {
-    contentArea.innerHTML = ``;
+    contentArea.innerHTML = `
+      <div class="container my-5">
+        <h2 class="mb-4">Admin Dashboard</h2>
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Product Categories</h5>
+                <canvas id="doughnutChart" style="max-height: 400px;"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Users by Role</h5>
+                <canvas id="barChart" style="max-height: 400px;"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // Load the charts after the content is loaded
+    loadCharts();
   }
 
   else if (section === 'products') {
@@ -54,21 +81,23 @@ function loadContent(section) {
           </div>
         </div>
 
-        <table class="table table-hover align-middle bg-white table-rounded">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Product</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Image</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="productTable">
-            <!-- Rows will be added dynamically -->
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle bg-white table-rounded">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Image</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="productTable">
+              <!-- Rows will be added dynamically -->
+            </tbody>
+          </table>
+        </div>
       </div>
     `;
 
@@ -107,21 +136,23 @@ function loadContent(section) {
           </div>
         </div>
 
-        <table class="table table-hover align-middle bg-white table-rounded">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Customer</th>
-              <th>Items</th>
-              <th>Total Price</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="orderTable">
-            <!-- Rows will be added dynamically -->
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle bg-white table-rounded">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Customer</th>
+                <th>Items</th>
+                <th>Total Price</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="orderTable">
+              <!-- Rows will be added dynamically -->
+            </tbody>
+          </table>
+        </div>
       </div>
     `;
 
@@ -160,32 +191,30 @@ function loadContent(section) {
           </div>
         </div>
 
-        <table class="table table-hover align-middle bg-white table-rounded">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Password</th>
-              <th>Role</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="accountTable">
-            <!-- Rows will be added dynamically -->
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle bg-white table-rounded">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Password</th>
+                <th>Role</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="accountTable">
+              <!-- Rows will be added dynamically -->
+            </tbody>
+          </table>
+        </div>
       </div>
     `;
 
     // Now fetch and render the accounts after content is loaded
     const users = UsersRepo.getAllUsers();
     renderAccountsTable(users);
-  }
-
-  else if (section === 'transactions') {
-    contentArea.innerHTML = ``;
   }
 
   else if (section === 'users') {
@@ -295,6 +324,95 @@ function loadContent(section) {
   else if (section === 'home') {
     window.location.href = '../../index.html';
   }
+}
+
+//--------------------------------------------------------------------------------------------------------
+
+// Function to load the charts
+async function loadCharts() {
+  const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
+  const barCtx = document.getElementById('barChart').getContext('2d');
+
+  // Get product categories data
+  const products = ProductRepo.GetAllProducts();
+  const categories = products.reduce((acc, product) => {
+    const categoryName = CategoryRepo.getCategoryById(product.categoryID).name;
+    acc[categoryName] = (acc[categoryName] || 0) + 1;
+    return acc;
+  }, {});
+
+  // Get users data by role
+  const users = UsersRepo.getAllUsers();
+  const roles = users.reduce((acc, user) => {
+    const roleName = RoleRepo.getRoleById(user.roleId).name;
+    acc[roleName] = (acc[roleName] || 0) + 1;
+    return acc;
+  }, {});
+
+  // Doughnut Chart
+  new Chart(doughnutCtx, {
+    type: 'doughnut',
+    data: {
+      labels: Object.keys(categories),
+      datasets: [{
+        label: 'Category Products',
+        data: Object.values(categories),
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false
+    }
+  });
+
+  // Bar Chart
+  new Chart(barCtx, {
+    type: 'bar',
+    data: {
+      labels: Object.keys(roles),
+      datasets: [{
+        data: Object.values(roles),
+        backgroundColor: [
+          'rgba(54, 162, 235, 0.2)', // Admin - Blue
+          'rgba(255, 206, 86, 0.2)', // Seller - Yellow
+          'rgba(75, 192, 192, 0.2)'  // Customer - Green
+        ],
+        borderColor: [
+          'rgba(54, 162, 235, 1)', // Admin - Blue
+          'rgba(255, 206, 86, 1)', // Seller - Yellow
+          'rgba(75, 192, 192, 1)'  // Customer - Green
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          beginAtZero: true
+        },
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
 }
 
 //--------------------------------------------------------------------------------------------------------
@@ -603,6 +721,12 @@ document.addEventListener("DOMContentLoaded", () => {
       loadContent(section);
       updateActiveLink(event.currentTarget);
     });
+  });
+
+  // Add event listener for the home link
+  document.getElementById("homeLink").addEventListener("click", (event) => {
+    event.preventDefault();
+    loadContent("home");
   });
 
   // Add event listener for the sign out link
