@@ -6,6 +6,7 @@
 /*   Steps bar styles  starts */
 .Steps-bar {
   position: relative;
+  color: #db4444;
 }
 
 .Steps-bar .progress {

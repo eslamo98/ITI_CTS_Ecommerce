@@ -2,7 +2,15 @@
   --sidebar-width: 200px;
 }
 body {
+  border: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
   background-color: #fafafa;
+}
+
+.headerm{
+  margin-top: 0px;
 }
 
 /* general */
@@ -19,6 +27,7 @@ body {
   grid-template-columns: var(--sidebar-width) 1fr;
   height: 100vh;
   overflow: hidden;
+  
 }
 
 #sidebar {
@@ -94,6 +103,8 @@ main {
   font-family: Arial, sans-serif;
 }
 
+
+
 /* Dashboards Layout */
 .dashboard-row {
   display: flex;
@@ -139,6 +150,7 @@ main {
   display: flex;
   align-items: center;
   margin: 4px 0;
+  color: #db4444;
 }
 
 .change .arrow {
@@ -155,7 +167,7 @@ main {
 }
 
 .change .down {
-  color: red;
+  color: #db4444;
 }
 
 .graph-section {
@@ -175,3 +187,101 @@ main {
   align-items: center;
   line-height: 16px;
 }
+
+
+/* Animated Button  */
+.btn-animated {
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s ease-out;
+  background-color: #ffffff; /* Background color */
+  border-color: #DB4444; /* Border color */
+  color: #DB4444; /* Text color */
+}
+
+.btn-animated::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #DB4444; /* Background color on hover */
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.9s ease-out;
+  z-index: -1;
+}
+
+.btn-animated:hover::before {
+  transform: scaleX(1);
+}
+
+.btn-animated:hover {
+  color: #fff; /* Text color on hover */
+}
+
+/* Input Style */
+.form-control {
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  padding: 10px;
+  transition: all 0.3s ease; 
+}
+
+.form-control:hover {
+  background-color: #e0e0e0; 
+  border-color: #999; 
+}
+
+
+.form-control:focus {
+  background-color: #fff; 
+  border-color: #db4444; 
+  box-shadow: 0 0 5px rgba(255, 0, 21, 0.621); 
+  outline: none; 
+}
+
+/* Label Style */
+.form-label {
+  color: #333; 
+  font-weight: bold; 
+  transition: all 0.3s ease; 
+}
+
+/* Title Style */
+.form-title {
+  color: #333; 
+  font-size: 24px; 
+  font-weight: bold; 
+  margin-bottom: 20px; 
+}
+
+.form-title:hover {
+  color: #DB4444; 
+  cursor: pointer; 
+}
+
+
+
+
+
+/* Drop Down Style */
+.dropdown-menu{
+  background-color: #333;
+  color: white;
+  opacity: 75%;
+}
+
+.dropdown-item{
+  color: white;
+}
+.dropdown-item:focus{
+background-color: #DB4444;
+}
+
+.dropdown-item:hover{
+  background-color: white;
+  color: #DB4444;
+  }
+
